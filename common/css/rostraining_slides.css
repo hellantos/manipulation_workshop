@@ -1,0 +1,141 @@
+@import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+@import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+@import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+
+body { font-family: 'Droid Serif'; color: black;}
+
+h1 {
+  font-family: 'Poppins';
+  font-weight: normal;
+  opacity: 90%;
+  color: rgb(196, 39, 0);
+}
+
+h2 {
+  font-family: 'Yanone Kaffeesatz';
+  font-weight: normal;
+  color: rgb(0, 53, 99);
+}
+
+h3 {
+  font-family: 'Yanone Kaffeesatz';
+  font-weight: normal;
+  opacity: 60%;
+  color: rgb(0, 53, 99);
+}
+
+h4 {
+  font-family: 'Yanone Kaffeesatz';
+  font-weight: normal;
+  color: rgb(0, 53, 99);
+  font-size: 23px;
+}
+
+.remark-code{ 
+  font-family: 'Ubuntu Mono';
+  background: solid grey; 
+  opacity: 90%;
+  color: rgb(13, 53, 95);
+} 
+.remark-inline-code { 
+  font-family: 'Ubuntu Mono';
+  background: solid grey; 
+  opacity: 90%;
+  color: rgb(13, 53, 95);
+}
+
+.cols {
+  display: flex;
+}
+.thirty {
+  flex: 30%;
+}
+
+.forty {
+  flex: 40%;
+}
+.fifty {
+  flex: 50%;
+}
+.sixty {
+  flex: 60%;
+}
+.seventy {
+  flex: 70%;
+}
+
+div.header {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  height: 40px;
+  width: 100%;
+  text-align: left;
+}
+div.header img{
+  height: 40px;
+  top: 5px;
+  right: 50px;
+  position: fixed;
+}
+
+div.footer {
+  border-top: 1px solid rgb(13, 53, 95);
+  font-size: 10pt;
+  text-align: center;
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  height: 40px;
+  width: 100%;
+}
+
+div.footer p {
+    margin-top: 10px;
+    height: 30px;
+}
+
+div.footer img {
+  height: 30px;
+  bottom: 5px;
+  left: 50px;
+  position: fixed;
+}
+
+.triangle {
+position: absolute;
+bottom: 0px;
+right: 0px;
+width: 110px;
+height: 110px;
+background: linear-gradient(to bottom right,white 0%, white 50%, rgb(13, 53, 95) 50%, rgb(13, 53, 95) 100%);
+opacity: 30%;
+}
+.remark-slide-number {
+margin-right: 10px;
+}
+
+.image-center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.image-right {
+  float: right;
+  margin-left: 10px;
+}
+
+.image-left {
+  float: left;
+  margin-right: 10px;
+}
+
+td, th {
+  padding: 4px;
+  border: 1px solid grey;
+  border-style: solid;
+}
