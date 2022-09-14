@@ -2,6 +2,7 @@ export:
   - Day: 1
     slides:
       1: robot_description/slides/1.urdf.html    
+      2: robot_description/slides/2.robot_cell_urdf.html    
     workshops:
       1: robot_description/workshops/1.Setup_assistant.md
       2: robot_description/workshops/2.Exploring_Moveit.md

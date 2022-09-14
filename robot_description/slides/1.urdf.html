@@ -35,41 +35,83 @@ layout: true
 3. **Setting up a Workcell**
 
 ---
+<!-- Page 3 -->
 # Motivation
-- When we create a robotic system, there may be many different software components that need to know about the physical characteristics of the robot. All of this information needs to be in one common location, where any software component can reference it.
-- This creates a need to formally describe the robotic system in a human readable and platform independent way. 
+
+### The need to formally describe the robotic system in a human readable and platform independent way. 
 
 ### The formal description of the world is called as robot description and is stored in a URDF file.
 
+
+<!-- When we create a robotic system, there may be many different software components that need to know about the physical characteristics of the robot. All of this information needs to be in one common location, where any software component can reference it. -->
+
 ---
+<!-- Page 4 -->
 # Unified Robot Description Format(URDF)
 
-- URDF provides a human readable and platform independent way to define robots, sensors, and scene objects 
-- URDF describes a robot as a tree of links, that are connected by joints. 
-- The links represent the physical components of the robot, and the joints represent how one link moves relative to another link, 
-  effectively defining the location of the links in space.
+- URDF - human readable and platform independent way to define robots, sensors, and scene objects 
 
-  * Collission properties 
+- Robot is described as a tree of `links`, that are connected by `joints`.
+
+- **Links** -  represent the physical components of the robot
+- **Joints** -represent how one link moves relative to another link
+
+Things that can be described in a URDF file includes
+  * Collision properties 
   * Visual properties  
   * Joints and Links   
-  * Joint dynamics
-      - Friction
-      - Damping
-  * Physical properties
-      - Inertia 
+  * Joint dynamics - Friction and Damping
+  * Physical properties - Inertia 
 
 ---
+<!-- Page 5 -->
 ## Joint Types in URDF
 
 URDF supports the following types of joints:   
-- **Revolute** - rotates along an axis, has limited range 
-- **Continuous** - rotates around an axis, has no limits
-- **Prismatic** - slides along an axis, has limited range 
-- **Fixed** - simplest, constant, not really a "joint"
-- **Floating** - allows motion for all 6 DoF.
-- **Planar** - allows motion in a plane perpendicular to an axis
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Motion</th>
+      <th>Range</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Revolute</td>
+      <td> Rotates along an axis,</td>
+      <td>Limited range</td>
+    </tr>
+    <tr>
+      <td>Continuous</td>
+      <td>Rotates around an axis,</td>
+      <td>No limits</td>
+    </tr>
+    <tr>
+      <td> Prismatic</td>
+      <td>Slides along an axis,</td>
+      <td>Limited range</td>
+    </tr>
+    <tr>
+      <td>Fixed</td>
+      <td>Simplest, constant, not really a "joint"</td>
+      <td>Limited</td>
+    </tr>
+    <tr>
+      <td>Floating</td>
+      <td>Allows motion for all 6 DoF.</td>
+      <td>No limits</td>
+    </tr>
+    <tr>
+      <td>Planar</td>
+      <td>Allows motion in a plane perpendicular to an axis</td>
+      <td>No limits</td>
+    </tr>
+  </tbody>
+  </table>
 
 ---
+<!-- Page 6 -->
 # URDF Syntax
 ## Robot tag and XML declaration
 
@@ -86,50 +128,54 @@ XML  files usually have a xml declaration followed by a single root tag.
 For URDF files the root tag will be `<robot> </robot>` tag and the name attribute lets us specify the name of the component.
 
 ---
+<!-- Page 7 -->
 ## URDF Syntax 
 ### Link Tag
 
 A link tag lets us specify the name of a link, as well as some additional characteristics: visual, collision, and inertial properties
 1. **Visual** - This is what we see in RViz and Gazebo.
-  - **Geometry** - box/ cylinder / sphere with size parameters, or a mesh in the form of .stl or .dae 
-  - **Origin** - an offset for the geometry so it doesn’t need to be centred around the link origin
-  - **Material** -  We can specify the name of a declared material, or describe the colour directly.
-2. **Collision** - This is used for physics collision calculations.
-  - **Geometry** - Same options as for visual
-  - **Origin** - Same options as for visual. 
-3. **Inertial** - This is also used for physics calculations, but determines how the link responds to forces.
+  - **Geometry** - Box/ cylinder / sphere with size parameters, or a mesh in the form of .stl or .dae 
+  - **Origin** - An offset for the geometry from the origin
+  - **Material** -  We can specify the colour
+2. **Collision** - This is used for physics collision calculations
+  - **Geometry** - Same as for visual
+  - **Origin** - Same as for visual
+3. **Inertial** - This is also used for physics calculations, but determines how the link responds to forces
   - **Mass** - Mass of the link
-  - **Origin** - The centre of mass (a.k.a centre of gravity). 
-  - **Inertia** - The rotational inertia matrix. It describes how the distribution of the mass will affect rotation.
+  - **Origin** - The centre of mass
+  - **Inertia** - The rotational inertia matrix. 
+  <!-- It describes how the distribution of the mass will affect rotation -->
 ---
 
-## URDF Syntax
-### Link Tag 
+<!-- Page 8 -->
+## URDF Syntax - Link tags
 
-This image shows the overall structure of a link tag
 <div>
   <center>
-    <img src="resources/link_tag.png" width="300px">
+    <img src="resources/link_tag.png" width="800px"> 
   </center>
 </div>
+Figure 1: visual representation of link tags 
 
 ---
+<!-- Page 9 -->
 ## URDF Syntax 
 ### Joint Tag
 
 Each joint will have the following 
-- **Name** - A name for the joint.
-- **Type** - The joint type (fixed, prismatic, revolute, and continuous).
+- **Name** - A name for the joint
+- **Type** - The joint type
 - **Parent and child links** - Which links this joint defines a relationship between
 - **Origin** - The relationship between the two links, before any motion is applied
 - **Axis** - Which axis to move along or around
-- **Limits** - Physical actuation limits, which may be expected by other parts of the system. These can include:
-  - Upper and Lower position limits - in metres/radians
-  - Velocity limits - in m/s or rad/s
-  - Effort limits - in N or Nm
+- **Limits** - Physical actuation limits.
+  - **Upper and Lower position limits** - in metres/radians
+  - **Velocity limits** - in m/s or rad/s
+  - **Effort limits** - in N or Nm
 
 ---
 
+<!-- Page 10 -->
 ## URDF example :Setting up a 3 DOF robot
 
 <div>
@@ -139,7 +185,7 @@ Each joint will have the following
 </div>
 
 ---
-
+<!-- Page 11 -->
 ## URDF example :Adding dimensions
 
 ```xml
@@ -148,7 +194,6 @@ Each joint will have the following
   <link name="link2" />
   <link name="link3" />
   <link name="link4" />
-
 
   <joint name="joint1" type="continuous">
     <parent link="link1"/>
@@ -171,6 +216,7 @@ Each joint will have the following
 ```
 ---
 
+<!-- Page 12 -->
 ## URDF example :Completing kinematics
 
 
@@ -187,14 +233,12 @@ Each joint will have the following
     <origin xyz="5 3 0" rpy="0 0 0" />
     <axis xyz="-0.9 0.15 0" />
   </joint>
-
   <joint name="joint2" type="continuous">
     <parent link="link1"/>
     <child link="link3"/>
     <origin xyz="-2 5 0" rpy="0 0 1.57" />
     <axis xyz="-0.707 0.707 0" />
   </joint>
-
   <joint name="joint3" type="continuous">
     <parent link="link3"/>
     <child link="link4"/>
@@ -205,6 +249,7 @@ Each joint will have the following
 ```
 ---
 
+<!-- Page 13 -->
 ## The Created Kinematic Chain
 
 By making use of `tf2_tools/view_frames` one could display the created kinematic chain:
@@ -220,6 +265,7 @@ ros2 run tf2_tools view_frames
 </div>
 
 ---
+<!-- Page 14 -->
 # Best Practices
 ## Naming Conventions
 
@@ -228,9 +274,10 @@ ros2 run tf2_tools view_frames
 - Follow the ROS conventions for [mobile platforms](https://ros.org/reps/rep-0105.html)
 
 ---
+<!-- Page 15 -->
 # XACRO
 
-### Until now:
+### URDF:
 - Manual calculation of joints dimensions
 - Manual copying of URDF if a second robot is to be used
 - No constant definition available
@@ -242,15 +289,16 @@ ros2 run tf2_tools view_frames
 - Macros (repeatibility)
 
 ---
+<!-- Page 16 -->
 ## Introducing XACRO 
 
-#### xacro - short for XML macro
+#### XACRO - short for XML macro
 - To enable the use of `xacro` in our file, add robot tag
 ```xml
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro"></robot>
 ```
-- When we want a `URDF` we need to run the `xacro` software over the files first, 
-which will process them into a single, complete `URDF file`. 
+- When we want a `URDF` we need to run the `xacro` parser first, 
+which will process multiple files into a single, complete `URDF file`. 
 
 <div>
   <center>
@@ -259,10 +307,9 @@ which will process them into a single, complete `URDF file`.
 </div>
 - Even if we had multiple files going in, it would publish as one message to the `robot_description` topic.
 ---
-
-## XACRO
-### Adding constants
-
+<!-- Page 17 -->
+### XACRO: Adding constants
+#### XACRO definition
 ```xml
 <xacro:property name=" width " value=" 0.2 " />
 <xacro:property name="bodylen" value=" 0.6 " />
@@ -271,40 +318,24 @@ which will process them into a single, complete `URDF file`.
 		<geometry>
 			<cylinder radius="${width}" length="${bodylen}" />
 		</geometry>
-		<material name=" blue " />
 	</visual>
 </ link>
 ```
-Will generate
+#### generated URDF
 ```xml
 <link name=" base_link ">
 	<visual>
 		<geometry>
 			<cylinder radius="0.6" length="0.2" />
 		</geometry>
-		<material name=" blue " />
 	</visual>
 </ link>
 ```
 
 ---
-## XACRO
-### Adding constants
+### XACRO: Conditional blocks
 
-
-```xml
-<xacro:property name=”robotname” value=”marvin” />
-<link name=”${robotname}s_leg” />
-```
-Will generate
-```xml
-<link name=”marvins_leg” />
-```
-
-
----
-## XACRO
-### Conditional blocks
+#### Syntax
 ```xml
 <xacro : if value="<expression>">
   < . . . some xml code here . . .>
@@ -313,7 +344,7 @@ Will generate
   < . . . some xml code here . . .>
 </xacro:unless>
 ```
-
+#### XACRO definition
 ```xml
 <xacro:property name=" var " value=" useit " />
 <xacro : if value="${var==’useit’} " />
@@ -324,68 +355,78 @@ Will generate
 ```
 
 ---
-## XACRO 
-### Math
+<!-- page 18 -->
+### XACRO: Math
+
+#### XACRO definition
 ```xml
 <xacro:property name="wheel_diameter" value="0.5" />
 <xacro:property name="reflect" value="-1" />
+<xacro:property name="width" value="0.4" />
   <cylinder radius="${wheel_diameterm/2} " length=" 0.1 " />
   <origin xyz="${ reflect*(width+.02)} 0 0.25" />
 ```
-
+#### Generated URDF
 ```xml
-<xacro:property name=" pi " value="3.1415926535897931" />
-<circle circumference="${2.5*pi}" />
-```
+<cylinder radius="0.25" length=" 0.1 " />
+<origin xyz="-0.42 0 0.25" />
 
+```
 - All of the math is done using floats
-```xml
-<link name="${5/6}"/>
-```
-- evaluates to
-```xml
-<link name="0.833333333333"/>
-```
 
 ---
-## XACRO
-### Macros
-### [Using Xacro to Clean Up a URDF File](http://wiki.ros.org/urdf/Tutorials/Using%20Xacro%20to%20Clean%20Up%20a%20URDF%20File)
+<!-- page 19 -->
+### XACRO: Macros
+#### [Using XACRO to Clean Up a URDF File](http://wiki.ros.org/urdf/Tutorials/Using%20Xacro%20to%20Clean%20Up%20a%20URDF%20File)
+#### macro definition
 ```xml
 <xacro:macro name=" default_origin ">
       <origin xyz="0 0 0" rpy="0 0 0" />
 </xacro:macro>
+```
+#### macro instantiation
+```xml
 <xacro:default_origin />
 ```
-Will generate
+#### Generated URDF
 ```xml
 <origin rpy="0 0 0" xyz="0 0 0" />
 ```
 ---
-## XACRO
-### Parametrized Macros
+<!-- page 20 -->
+### XACRO: Parametrized Macros
 
-- You can also parameterize macros so that they don’t 
-generate the same exact text every time. When combined with the math functionality, this is even more powerful.
+<!-- - You can also parameterize macros so that they don’t 
+generate the same exact text every time. When combined with the math functionality, this is even more powerful. -->
 
+- XACRO definition
 ```xml
-<xacro:macro name="inertial_box" params="mass x y z *origin">
+<xacro:macro name=" " params="mass x y z *origin">
   <inertial>
       <xacro:insert_block name="origin"/>
       <mass value="${mass}" />
-      <inertia ixx="${(1/12) * mass * (y*y+z*z)}" ixy="0.0" ixz="0.0"
-              iyy="${(1/12) * mass * (x*x+z*z)}" iyz="0.0"
+      <inertia ixx="${(1/12) * mass * (y*y+z*z)}" ixy="0.0" ixz="0.0" iyy="${(1/12) * mass * (x*x+z*z)}" iyz="0.0"
               izz="${(1/12) * mass * (x*x+y*y)}" />
   </inertial>
 </xacro:macro>
 ```
-This can be used as,
+- XACRO instantiation 
 ```xml
 <xacro:inertial_box mass="5" x="${robotcell_length}" y="${shield_thickness}" z="${robotcell_height}">
   <origin rpy="0 0 0" xyz="0 0 0" />
 </xacro:inertial_box>
 ```
+- Generated URDF
+```xml
+<inertial>
+  <origin rpy="0 0 0" xyz="0 0 0"/>
+  <mass value="5"/>
+  <inertia ixx="0.5610416666666665" ixy="0.0" ixz="0.0" iyy="1.4246666666666665" iyz="0.0" izz="0.8643749999999999"/>
+</inertial>
+```
+
 ---
+<!-- page 21 -->
 ## Executing XACRO
 - Change directory to the urdf directory of the ROS package and then export urdf files
 ```shell
@@ -395,79 +436,34 @@ ros2 run xacro xacro robot_model.urdf.xacro > robot.urdf
 ```shell
 check_urdf <(xacro workcell.urdf.xacro)
 ``` 
+- To generate URDF from XACRO 
+```shell
+xacro workcell.urdf.xacro > workcell.urdf
+```
 
 ---
-# Setting up Robot Workcell
-
-The setup for today's demonstration has 4 static components described in URDF *(XACRO)*:
-* **Web Camera** - to detect AR tags
-* **Workcell** - workcell of the robot
-* **UR5e** - robotic arm
-* **ShunkEGP50** - robot gripper
-
-It also includes an AR Tag that is dynamically placed in simulation - This is why the tag is not described in URDF
-
----
-
-## UR5e Robot
-
-<div>
-  <center>
-    <img src="resources/robot.png" width="800px">
-  </center>
+<!-- page 28 -->
+<div class="centered">
+  <h2> 
+    <center>  
+      End of Presentation
+    </center> 
+  </h2> 
+  <h1> 
+    <center>  
+      Questions
+    </center> 
+  </h1> 
 </div>
 
 ---
-
-## ShunkEGP50 Gripper
-
-<div>
-  <center>
-    <img src="resources/gripper.png" width="700px">
-  </center>
+<div class="centered">
+  <h2> 
+    <center>  
+      Let us setup a complete Robot cell now
+    </center> 
+  </h2> 
 </div>
-
----
-
-## Camera sensor
-<div>
-  <center>
-    <img src="resources/camera.png" width="500px" height="400px">
-  </center>
-</div>
-
----
-
-## AR Tags 
-<div>
-  <center>
-    <img src="resources/ar-tags.png" width="500px" height="500px">
-  </center>
-</div>
-
----
-
-## Result: Complete Workcell 
-
-<div>
-  <center>
-    <img src="resources/full.png" width="900px" height="450px">
-  </center>
-</div>
-
----
-
-<h1> 
-  <center>  
-    End of Presentation
-  </center> 
-</h1> 
-
-<h2> 
-  <center>  
-    Questions ?
-  </center> 
-</h2> 
 
 
 </textarea>
