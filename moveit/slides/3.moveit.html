@@ -170,6 +170,45 @@ https://ros-planning.github.io/moveit_tutorials/doc/planning_scene_monitor/plann
 
 ---
 
+## Key Concepts
+
+### Planning Scene Monitor
+
+The `PlanningSceneMonitor` wraps a `PlanningScene` with ROS interfaces for keeping the `PlanningScene` up to date.  
+
+<div>
+    <center>
+      <img src="resources/planning_scene_monitor.png" width="400px">
+    </center>
+</div>
+
+**Note**: `PlanningSceneMonitor` is the recommended interface for maintaining an up-to-date planning scene.
+
+---
+
+## Key Concepts
+
+### Planning Scene Monitor
+
+```c++
+/* initialize planning scene monitor */
+auto psm_ = std::make_shared<planning_scene_monitor::PlanningSceneMonitor>(node, robot_model_loader));
+
+// listen for planning scene messages on topic /XXX and apply them to the internal planning scene
+// the internal planning scene accordingly
+psm_->startSceneMonitor();
+
+// listens to changes of world geometry, collision objects, and (optionally) octomaps
+// world geometry, collision objects and optionally octomaps
+psm_->startWorldGeometryMonitor();
+
+// listen to joint state updates as well as changes in attached collision objects
+// and update the internal planning scene accordingly
+psm_->startStateMonitor();
+```
+
+---
+
 ## MoveIt configurations
 
 #### URDF - Universal Robot Decsription Format
