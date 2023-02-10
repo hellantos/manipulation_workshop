@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Advanced Manipulation Applications with ROS</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="../../common/css/rostraining_slides.css">
+</head>
+
+<body>
+  <textarea id="source">
+
+layout: true
+<div class="header"><img src="https://rosin-project.eu/wp-content/uploads/rosin_ack_logo_wide.png" style="background-color:transparent"/></div>
+<div class="footer"><img src="https://www.ipa.fraunhofer.de/content/dam/ipa/ipa.svg" /><p>&copy; Fraunhofer IPA</p></div>
+<div class="triangle"></div>
+
+---
+
+# Advanced Manipulation Applications with ROS
+
+## Examples from the ROS-Industrial Consortium
+<div>
+  <center>
+    <img src="resources/0_robot_looking.png" width="500px">
+  </center>
+</div>
+
+---
+
+# Contents
+
+1. **Introduction**
+1. **Welding** - Fraunhofer IPA
+1. **Packing** - Fraunhofer IPA
+1. **Scan & Plan** - Southwest Research Institute
+1. **Assembly** - Fraunhofer IPA
+
+---
+<!-- Page 3 -->
+# Introduction
+
+### When should you use ROS in industrial applications for manipulation? 
+
+### What are the challenges?
+
+### How should your applications look like?
+
+
+<!-- When we create a robotic system, there may be many different software components that need to know about the physical characteristics of the robot. All of this information needs to be in one common location, where any software component can reference it. -->
+
+---
+<!-- Page 4 -->
+# Introduction
+
+### When should you use ROS in industrial applications for manipulation?  
+
+**If your application can be solved to satisfaction with existing OEM software, do not use ROS. Here are some 
+indicators that usually push you towards ROS.**
+
+<table>
+    <thead>
+      <tr>
+        <th>Indicator</th>
+        <th>Description</th>
+        <th>Decision for ROS</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Application Complexity</td>
+        <td>How complex is your application? Do you need frequent <br/> replanning of trajectories?</td>
+        <td>High</td>
+      </tr>
+      <tr>
+        <td>Scalability</td>
+        <td>How often will you deploy your automation solution? <br/> Will you deploy on robots from different manufacturers?</td>
+        <td>High</td>
+      </tr>
+      <tr>
+        <td>Cycle Times</td>
+        <td>What kind of cycle-times are you looking at?</td>
+        <td> > 5s </td>
+      </tr>
+      <tr>
+        <td>AI Integration</td>
+        <td>Do you want to integrate AI algorithms which need large <br/> amounts of sensor data from the robot cell?</td>
+        <td> Yes </td>
+      </tr>
+    </tbody>
+</table>
+
+---
+<!-- Page 5 -->
+# Introduction
+
+### What are the typical challenges?
+
+- **Liability**  
+  You are not only liable for the software you write, but also for the open-source software you use in your solution.
+
+- **Safety**  
+  Open source code is hardly ever certified for safety-critical applications. You need to make sure that your application is safe using traditional means.
+
+- **Reliability**  
+  Making a Linux system work fulfil reliability requirements requires experts. You need to make sure that your application meats reliability requirements.
+---
+<!-- Page 6 -->
+# Introduction
+
+### How should your ROS applications look like?
+
+- **Reusable**  
+    Your applications should be deployed in numbers. This will ensure that you
+    will be able to maintain and improve them in the future.
+
+- **Adaptable**  
+    Your application should solve one process and be adaptable to different
+    environmental conditions as possible.
+
+- **Modular**  
+    Your application should be modular. This will allow you to easily add new
+    functionality and to replace existing functionality.
+
+---
+<!-- Page 7 -->
+# Welding with ROS
+
+### Motivation
+
+**Welding** is a common industrial process. Robot automation solutions exist and are widely used in
+industry. However, existing solutions require reprogramming and specific jiggs for each new work piece.
+<br/>
+
+Programming requires experts, effort and time.
+<br/><br/><br/>
+### <center> The Goal</center>
+### <center> "Make robot welding effortless for single batch production."</center>
+
+
+  <!-- It describes how the distribution of the mass will affect rotation -->
+---
+<!-- Page 8 -->
+# Welding with ROS
+### Problems
+
+* **Detecting the position of the work piece in the workcell**  
+    In traditional welding cells the work piece is placed manually into a jigg, the position of the
+    Jigg is known to the robot. In a single batch production environment the work piece is placed
+    into to the workcell without a jigg. The robot needs to detect the position of the work piece.
+
+* **Detecting the weld seam on the work piece**  
+    In tradition welding cells the worker has programmed each seam manually either by teach points
+    on the seam or by offline programming. In a single batch production environment the robot needs
+    to detect the seam on the work piece to reduce programing time.
+
+* **Calculating a collision free and process optimal trajectory for the welding process**  
+    In traditional welding cells the robot is programmed to follow a predefined trajectory. In a
+    single batch production environment the robot needs to calculate a collision free and process
+    optimal trajectory for the welding process.
+
+
+---
+<!-- Page 9 -->
+# Welding with ROS
+### Solution
+
+* **Detecting the position of the work piece in the workcell**  
+    The robot is lead to the work piece by a human operator in free drive mode.
+
+* **Detecting the weld seam on the work piece**
+    The robot uses a line laser to detect the seam on the work piece in real-time.
+
+* **Calculating a collision free and process optimal trajectory for the welding process**  
+    The operator simply has to configure direction, length and process parameters.
+    The robot automatically calculates a collision free and process optimal trajectory for the welding process.
+
+---
+<!-- Page 10 -->
+# Welding with ROS
+### Video
+
+
+
+---
+<!-- Page 11 -->
+# Welding with ROS
+### Sources
+
+
+
+---
+<!-- Page 12 -->
+# Packing with ROS
+### Motivation
+
+---
+
+<!-- Page 13 -->
+# Packing with ROS
+### Problems
+
+
+---
+<!-- Page 13 -->
+# Packing with ROS
+### Solution
+
+---
+<!-- Page 14 -->
+# Packing with ROS
+### Video
+
+---
+<!-- Page 15 -->
+# Polishing with ROS
+### Motivation
+
+---
+
+<!-- Page 16 -->
+# Polishing with ROS
+### Problems
+
+
+---
+<!-- Page 17 -->
+# Polishing with ROS
+### Solution
+
+---
+<!-- Page 18 -->
+# Polishing with ROS
+### Video
+
+---
+<!-- Page 18 -->
+# Polishing with ROS
+### Sources
+
+---
+
+<!-- Page 15 -->
+# Force-controlled Assembly with ROS
+### Motivation
+
+---
+
+<!-- Page 16 -->
+# Force-controlled Assembly with ROS
+### Problems
+
+
+---
+<!-- Page 17 -->
+# Force-controlled Assembly with ROS
+### Solution
+
+---
+<!-- Page 18 -->
+# Force-controlled Assembly with ROS
+### Video
+
+
+</textarea>
+  <script src="https://remarkjs.com/downloads/remark-latest.min.js">
+  </script>
+  <script>
+    var slideshow = remark.create({ ratio: "16:9" });
+  </script>
+</body>
+
+</html>
