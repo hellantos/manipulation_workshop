@@ -284,9 +284,10 @@ RViz should start and the UR5 should be visualized.</p>
 <p>Under the <em>Context</em> tab ind the <em>MotionPlanning</em> pane, you can select which planner from OMPL (or your custom choice of planning library) you want to use. Note that every planner has strengths and weaknesses, and you might use different planners for different scenarios. You can leave it to <em>unspecified</em> and the default of <code class="docutils literal notranslate"><span class="pre">RRTConnectkConfigDefault</span></code> will be chosen, which is usually a good generic choice. If any of your goal states fail to be planned for or plans poorly, you could change the planner to see if that works better.</p>
 <p>When ready with a valid goal state, select the <em>Planning</em> tab under the <em>MotionPlanning</em> pane in RVIZ, and click on <strong>Plan</strong>. If the goal state is valid (no collissions, plannable goal etc…), the planner calculates a plan for you and displays the trajectory. You can now click <strong>Execute</strong> to execute this plan.</p>
 <p>Feel free to plan more goals and play around with any of the parameters to observe the changes they effect. When you are satisfied, you can move on to the next workshop.</p>
-<blockquote>
-<div><p>HINT: You could use the RQT Graph tool to see what the computational graph looks like now, consider if everyting looks fine, and compare to the next workshop. Command: <code class="docutils literal notranslate"><span class="pre">rqt_graph</span></code>. You can save this as an image for later reference.</p>
-</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>HINT: You could use the RQT Graph tool to see what the computational graph looks like now, consider if everyting looks fine, and compare to the next workshop. Command: <code class="docutils literal notranslate"><span class="pre">rqt_graph</span></code>. You can save this as an image for later reference.</p>
+</div>
 </section>
 <hr class="docutils" />
 <section id="scene-objects">

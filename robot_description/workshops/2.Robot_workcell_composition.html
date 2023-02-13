@@ -116,9 +116,10 @@ git<span class="w"> </span>checkout<span class="w"> </span>tags/workshop_2
 <span class="nt">&lt;/robot&gt;</span>
 </pre></div>
 </div>
-<blockquote>
-<div><p><strong>Hint</strong>: You can use the ROS plugin of VS Code to visualize the URDF from the start. To do so press <code class="docutils literal notranslate"><span class="pre">Ctrl+Shift+P</span></code> and type <code class="docutils literal notranslate"><span class="pre">ROS:</span> <span class="pre">Preview</span> <span class="pre">URDF</span></code>.</p>
-</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can use the ´´view_ur_cell.launch.py´´ launch file to visualise the urdf file from the beginning.</p>
+</div>
 </section>
 <hr class="docutils" />
 <section id="include-the-components-the-components">
@@ -194,9 +195,10 @@ git<span class="w"> </span>checkout<span class="w"> </span>tags/workshop_2
 <span class="s">    script_command_port:=50004&quot;</span><span class="nt">&gt;</span>
 </pre></div>
 </div>
-<blockquote>
-<div><p><strong>Note:</strong> The <code class="docutils literal notranslate"><span class="pre">*</span></code> in front of the <code class="docutils literal notranslate"><span class="pre">origin</span></code> parameter means that the parameter is a block parameter which goes the brackets of the <code class="docutils literal notranslate"><span class="pre">&lt;xacro::ur_robot&gt;&lt;/xacro::ur_robot&gt;</span></code> tag.</p>
-</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">*</span></code> in front of the <code class="docutils literal notranslate"><span class="pre">origin</span></code> parameter means that the parameter is a block parameter which goes the brackets of the <code class="docutils literal notranslate"><span class="pre">&lt;xacro::ur_robot&gt;&lt;/xacro::ur_robot&gt;</span></code> tag.</p>
+</div>
 <p>Now add the following lines to the <code class="docutils literal notranslate"><span class="pre">workcell.urdf.xacro</span></code> file:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;xacro:arg</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;name&quot;</span><span class="w"> </span><span class="na">default=</span><span class="s">&quot;ur5e&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
 <span class="nt">&lt;xacro:arg</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;ur_type&quot;</span><span class="w"> </span><span class="na">default=</span><span class="s">&quot;ur5e&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>

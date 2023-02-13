@@ -192,7 +192,9 @@ When ready with a valid goal state, select the *Planning* tab under the *MotionP
 
 Feel free to plan more goals and play around with any of the parameters to observe the changes they effect. When you are satisfied, you can move on to the next workshop.
 
-> HINT: You could use the RQT Graph tool to see what the computational graph looks like now, consider if everyting looks fine, and compare to the next workshop. Command: `rqt_graph`. You can save this as an image for later reference.
+```{note}
+HINT: You could use the RQT Graph tool to see what the computational graph looks like now, consider if everyting looks fine, and compare to the next workshop. Command: `rqt_graph`. You can save this as an image for later reference.
+```
 
 ---
 
