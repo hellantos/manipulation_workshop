@@ -35,7 +35,6 @@ jobs:
             mkdir -p gh-pages/
             touch gh-pages/.nojekyll
             cp -r ./_build/html/* gh-pages/
-            cp -r ./tech_setup/workshops/ gh-pages/tech_setup/workshops/
             cp -r --parents ./tech_setup/workshops/ gh-pages/tech_setup/workshops/
             cp -r --parents ./robot_description/workshops/ gh-pages/robot_description/workshops/
             cp -r --parents ./moveit/workshops/ gh-pages/moveit/workshops/
