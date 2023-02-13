@@ -18,7 +18,7 @@ layout: true
 ---
 
 <!-- page 1 -->
-# Setting up the Robot Cell
+# Creating ur5e_cell_description package
 
 ## Composing the xacro components to create the robot cell
 <div>
@@ -29,179 +29,94 @@ layout: true
 ---
 
 <!-- page 2 -->
-# Robot Cell
+## Creating the ur5e_cell_description package
+.image-right[<img src="resources/components_overview.png" width="500px">]
 
-- The setup for today's demonstration has 3 static components described in URDF *(XACRO)*:
-    - **Workcell** - workcell of the robot
-    - **UR5e** - robotic arm
-    - **ShunkEGP50** - robot gripper
-- The setup also consists of a camera component which will be added later via a `static_transform_publisher`. 
+- The setup for today's demonstration has 4 static components described in URDF *(XACRO)*:
+    
+  - **Robot Cell**  
+      The cell around the robot
 
-- Aruco Markers are used to detect the pick and place posed dynamically : Not described in URDF
+  - **Robot**  
+      The robotic arm in our case a UR5e
 
----
+  - **Endeffector**  
+      The endeffector in our case a robot gripper of type Schunk EGP50
 
-<!-- page 3 -->
-## Basic steps
+  - **Camera**  
+      The camera that is mounted on the robot arm of type Realsense D435
 
-- Identify the components used for the ur5e_cell project
-- Locate the ROS2 description packages for the components 
-- Find data sheet of components without description files
-- Start composing the components.
 ---
 
 <!-- page 4 -->
-## Creating ur5e_cell_description package
+## Creating the ur5e_cell_description package
 
-#### ROS2:rolling 
-- Create a ROS2 package 
-```shell
-ros2 pkg create --build-type ament_cmake ur5e_cell_description
+The best practice is to structure a description package as follows:
+
+.image-right[
 ```
-- Create `urdf` and `meshes` directory within the package
-    - **`urdf`** - contains the components`.xacro` files
-    - **`meshes`**- contains .stl or .dae files of the components 
-- Create a `workcell.urdf.xacro` in urdf directory
 
-    ```xml
-    <?xml version="1.0"?>
-    <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="ur5e_workcell">
-        <!-- include other components here -->
-    </robot>
-    ```
+
+ur5e_cell_description                  
+├── config
+├── launch
+├── meshes
+├── rviz
+├── urdf
+├── CMakeLists.txt
+└── package.xml
+```
+]
+
+
+* **config/**:  
+  Configuration files for the robot description
+
+* **launch/**:  
+  Launch files for viewing the robot description
+
+* **meshes/**:  
+  Meshes used in the robot description
+
+* **rviz/**:  
+  Rviz configuration files
+
+* **urdf/**:  
+  URDF and XACRO files for the robot cell
+
 
 ---
-<!-- page 5 -->
-## UR5e Robot
-- URDF of the UR5e robot is available in [ur_description](https://github.com/UniversalRobots/Universal_Robots_ROS2_Description.git) package
-- Include the UR5e robot component in `workcell.urdf.xacro`
-```xml
-<xacro:include filename="$(find ur_description)/urdf/ur_macro.xacro" />
-```
-- Initialize the parameters
-```xml
-<xacro:arg name="name" default="ur5e" />
-```
+## Creating the ur5e_cell_description package
 
-- Instantiate the macro
-```xml
-<xacro:ur_robot
-    name="$(arg name)"
-    prefix="$(arg prefix)"
-    parent="robotcell_base_link"
-    . . . . . . . . . . . . . . . .
+### How to get the component's description files?
+  
+  - **Robot Cell**  
+      Created by us using simple primitives
 
-    script_filename="$(arg script_filename)">
-<origin xyz="${robot_center_offset_length} ${robot_center_offset_width} ${robot_base_height}" rpy="0 0 ${pi/2}" />
-</xacro:ur_robot>
-```
+  - **Robot**  
+      Imported automatically from the ur_description package
 
----
-<!-- page 6 -->
+  - **Endeffector**  
+      Created by us based on STL files
 
-## ShunkEGP50 Gripper
-
-- URDF of the ShunkEGP50 Gripper is composed in [ur5e_cell](https://github.com/ipa-rar/ur5e_cell/blob/main/ur5e_cell_description/urdf/shunk_egp50.xacro)
-- Include the  ShunkEGP50 Gripper component in `workcell.urdf.xacro`
-```xml
-<xacro:include filename="$(find ur5e_cell_description)/urdf/shunk_egp50.xacro" />
-```
-- Initialize the parameters
-```xml
-<xacro:property name="gripper_name" value="shunk_egp50" />
-```
-
-- Instantiate the macro
-```xml
-<xacro:schunk_egp50 />
-```
----
-<!-- page 7 -->
-## Robot cell
-- URDF of the robot cell is composed in [ur5e_cell](https://github.com/ipa-rar/ur5e_cell/blob/main/ur5e_cell_description/urdf/robot_cell.xacro)
-- include the  robot cell component in `workcell.urdf.xacro`
-```xml
-<xacro:include filename="$(find ur5e_cell_description)/urdf/robot_cell_clone.xacro" />
-```
-- No need to instantiate as it is not a macro
+  - **Camera**  
+      Imported automatically from the realsense2_description package
 
 ---
 
-<!-- page 8 -->
-## Creating joints
+## Creating the ur5e_cell_description package
 
-- Create the joints between the components
+### How to combine the different components?
 
-    ```xml
-    <link name="world" />
+1. Create a worcell.urdf.xacro
 
-    <joint name="world_to_robot_cell_joint" type="fixed">
-        <parent link="world" />
-        <child link="robotcell_base_link" />
-        <origin xyz="0 0 0" rpy="0 0 0" />
-    </joint>
+2. Include the components the components
 
-    <joint name="robot_to_gripper_joint" type="fixed">
-        <parent link="tool0" />
-        <child link="${gripper_name}_base_link" />
-        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
-    </joint>
-    ```
+3. Get all necessary arguments for the components
 
-- [Complete description of the robot cell](https://github.com/ipa-rar/ur5e_cell/blob/main/ur5e_cell_description/urdf/workcell.urdf.xacro)
+4. Instantiate the components
 
----
-
-<!-- page 9 -->
-## Aruco Markers 
-<div>
-  <center>
-    <img src="resources/ar-tags.png" width="440px" height="440px">
-  </center>
-</div>
-Figure 1: Aruco markers 
-
----
-<!-- page 10 -->
-
-## Launch files for viewing the URDF
-
-- Nodes to be launched
-    - `robot_state_publisher` 
-    - `rviz2` 
-    - `joint_state_publisher_gui`
-
-- Conversion of XACRO to URDF
-```python
-robot_urdf = os.path.join(get_package_share_directory('workcell_description'), 'urdf', 'workcell.urdf.xacro')
-robot_urdf = xacro.process_file(robot_urdf)
-robot_description = robot_urdf.toxml()
-```
-- `robot_description` is passed as parameter to the `robot_state_publisher` 
-    ```python
-    robot_state_pub_node = Node(
-        package='robot_state_publisher',
-        executable='robot_state_publisher',
-        parameters=[
-            {"robot_description": robot_description},
-        ],
-    )
-```
-[Complete launch file](https://github.com/ipa-rar/ur5e_cell/blob/main/ur5e_cell_description/launch/view_ur_cell.launch.py)
-
-<!-- - `robot_state_publisher` takes in the urdf file as parameter and visualize the description in the rviz -->
-<!-- - `joint_state_publisher_gui` brings up the GUI to change the joint values -->
-
----
-
-<!-- page 11 -->
-## Result: Complete Workcell 
-
-<div>
-  <center>
-    <img src="resources/full.png" width="900px" height="500px">
-  </center>
-</div>
+5. Create the joints between the components and the world frame
 
 ---
 <!-- page 12 -->
