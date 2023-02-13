@@ -3,3 +3,4 @@ logs
 *.pdf
 export
 .json
+_build/
