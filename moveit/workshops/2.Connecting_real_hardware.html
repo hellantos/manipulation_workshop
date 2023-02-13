@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CONNECTING REAL HARDWARE &mdash; ROS2 Manipulation Workshop  documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="SIMPLE PICK &amp; PLACE" href="3.Simple_pick_n_place.html" />
+    <link rel="prev" title="MOVEIT SETUP ASSISTANT" href="1.Setup_assistant.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            ROS2 Manipulation Workshop
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../tech_setup/workshops/0.Setup_Environment.html">DEVELOPMENT ENVIRONEMNT SETUP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../robot_description/workshops/2.Robot_workcell_composition.html">ROBOT WORKCELL COMPOSITION</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1.Setup_assistant.html">MOVEIT SETUP ASSISTANT</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">CONNECTING REAL HARDWARE</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#creating-the-real-hardware-launchfile-for-ur5e-robot-cell">1. Creating the real hardware launchfile for ur5e_robot_cell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#connecting-to-the-robot">2. Connecting to the robot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#introspection">3. Introspection</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="3.Simple_pick_n_place.html">SIMPLE PICK &amp; PLACE</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ROS2 Manipulation Workshop</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">CONNECTING REAL HARDWARE</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/moveit/workshops/2.Connecting_real_hardware.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="connecting-real-hardware">
+<h1>CONNECTING REAL HARDWARE<a class="headerlink" href="#connecting-real-hardware" title="Permalink to this heading"></a></h1>
+<p>You have created a new moveit config package for the custom UR5 URDF and used the <code class="docutils literal notranslate"><span class="pre">demo.launch.py</span></code> to get a quick feel for how it works with RVIZ. This method is useful for quickly verifying the setup assistant process and the validity of the URDF. Unfortunately, what it executes is just fake controllers for this reason. Further configuration is necessary to fully connect Moveit and the real controllers. This tutorial will show you how to do this for the ur_robot_driver.</p>
+<hr class="docutils" />
+<section id="creating-the-real-hardware-launchfile-for-ur5e-robot-cell">
+<h2>1. Creating the real hardware launchfile for ur5e_robot_cell<a class="headerlink" href="#creating-the-real-hardware-launchfile-for-ur5e-robot-cell" title="Permalink to this heading"></a></h2>
+<p>The ur_robot_driver package provides us with a highly configurable launch file to connect to the real robot hardware. We are now going to create a launchfile for our application, that uses launchfiles provided by ur_robot_driver and by moveit setup assistant to launch our robot cell.</p>
+<ol class="arabic simple">
+<li><p>Create a file called <code class="docutils literal notranslate"><span class="pre">robot.launch.py</span></code> in the <code class="docutils literal notranslate"><span class="pre">ur5e_cell_moveit_config/launch</span></code> folder.</p></li>
+<li><p>The first step is to import the dependencies we need for this launch file. We are going to use standard items from the launch and launch_ros library. Furthermore, we are using som functions from moveit_configs_utils and launch_ros_extras packages (see below).</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">launch</span> <span class="kn">import</span> <span class="n">LaunchDescription</span>
+<span class="kn">from</span> <span class="nn">launch.actions</span> <span class="kn">import</span> <span class="n">DeclareLaunchArgument</span><span class="p">,</span> <span class="n">IncludeLaunchDescription</span>
+<span class="kn">from</span> <span class="nn">launch.conditions</span> <span class="kn">import</span> <span class="n">IfCondition</span>
+<span class="kn">from</span> <span class="nn">launch.launch_description_sources</span> <span class="kn">import</span> <span class="n">PythonLaunchDescriptionSource</span>
+<span class="kn">from</span> <span class="nn">launch.substitutions</span> <span class="kn">import</span> <span class="n">LaunchConfiguration</span><span class="p">,</span> <span class="n">PathJoinSubstitution</span>
+
+<span class="kn">from</span> <span class="nn">launch_ros.substitutions</span> <span class="kn">import</span> <span class="n">FindPackageShare</span>
+
+<span class="kn">from</span> <span class="nn">launch_ros_extras.actions</span> <span class="kn">import</span> <span class="n">LoadMoveitConfig</span><span class="p">,</span> <span class="n">GenerateMoveitLaunch</span>
+
+<span class="kn">from</span> <span class="nn">moveit_configs_utils.launch_utils</span> <span class="kn">import</span> <span class="n">DeclareBooleanLaunchArg</span>
+
+<span class="kn">from</span> <span class="nn">moveit_configs_utils.launches</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">generate_move_group_launch</span><span class="p">,</span>
+    <span class="n">generate_moveit_rviz_launch</span><span class="p">,</span>
+<span class="p">)</span>
+
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Every launch file has <code class="docutils literal notranslate"><span class="pre">generate_launch_description</span></code> function, which returns the <code class="docutils literal notranslate"><span class="pre">LaunchDescription</span></code>with all entities we want to launch.</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">generate_launch_description</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">LaunchDescription</span><span class="p">:</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li><p>Add the launch arguments we need as input from the user (e.g. the IP of the robot).</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="n">database_config</span> <span class="o">=</span> <span class="n">DeclareBooleanLaunchArg</span><span class="p">(</span>
+            <span class="s2">&quot;db&quot;</span><span class="p">,</span>
+            <span class="n">default_value</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;By default, we do not start a database (it can be large)&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+
+
+    <span class="n">debug_config</span> <span class="o">=</span> <span class="n">DeclareBooleanLaunchArg</span><span class="p">(</span>
+            <span class="s2">&quot;debug&quot;</span><span class="p">,</span>
+            <span class="n">default_value</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;By default, we are not in debug mode&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+    
+    <span class="n">rviz_config</span> <span class="o">=</span> <span class="n">DeclareBooleanLaunchArg</span><span class="p">(</span>
+            <span class="s2">&quot;use_rviz&quot;</span><span class="p">,</span> 
+            <span class="n">default_value</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Whether to use RVIZ or not.&quot;</span>    
+        <span class="p">)</span>
+    
+    <span class="n">robot_ip_config</span> <span class="o">=</span> <span class="n">DeclareLaunchArgument</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;robot_ip&quot;</span><span class="p">,</span>
+            <span class="n">default_value</span><span class="o">=</span><span class="s2">&quot;192.168.56.2&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The IP address of the robot to connect to.&quot;</span>
+        <span class="p">)</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="5">
+<li><p>Now we want to load the moveit configuration and launch the move_group node (the main node of moveit) as well as the rviz (if the user wants rviz to be launched). To do this we use the <code class="docutils literal notranslate"><span class="pre">launch_ros_extras</span></code> package and functions provided by the <code class="docutils literal notranslate"><span class="pre">moveit_configs_utils</span></code> package.</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="n">load_moveit_config</span> <span class="o">=</span> <span class="n">LoadMoveitConfig</span><span class="p">(</span>
+        <span class="n">robot_name</span><span class="o">=</span><span class="s2">&quot;ur5e_workcell_fake&quot;</span><span class="p">,</span>
+        <span class="n">package_name</span><span class="o">=</span><span class="s2">&quot;ur5e_cell_moveit_config&quot;</span><span class="p">)</span>
+    
+    <span class="n">generate_move_group_ld</span> <span class="o">=</span> <span class="n">GenerateMoveitLaunch</span><span class="p">(</span>
+        <span class="n">function</span><span class="o">=</span><span class="n">generate_move_group_launch</span>
+    <span class="p">)</span>
+    
+    <span class="n">generate_moveit_rviz_ld</span> <span class="o">=</span> <span class="n">GenerateMoveitLaunch</span><span class="p">(</span>
+        <span class="n">function</span><span class="o">=</span><span class="n">generate_moveit_rviz_launch</span><span class="p">,</span>
+        <span class="n">condition</span><span class="o">=</span><span class="n">IfCondition</span><span class="p">(</span><span class="n">LaunchConfiguration</span><span class="p">(</span><span class="s2">&quot;use_rviz&quot;</span><span class="p">))</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="6">
+<li><p>Then it is time to include the <code class="docutils literal notranslate"><span class="pre">ur_control.launch.py</span></code> launch file provided by the <code class="docutils literal notranslate"><span class="pre">ur_robot_driver</span></code> package, which contains everything that is necessary to connect to the real hardware. We use the launch arguments to configure the driver for our purpose.</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="n">ur_control_launch</span> <span class="o">=</span> <span class="n">IncludeLaunchDescription</span><span class="p">(</span>
+        <span class="n">launch_description_source</span><span class="o">=</span><span class="n">PythonLaunchDescriptionSource</span><span class="p">(</span>
+            <span class="n">PathJoinSubstitution</span><span class="p">([</span><span class="n">FindPackageShare</span><span class="p">(</span><span class="s2">&quot;ur_robot_driver&quot;</span><span class="p">),</span> <span class="s2">&quot;launch&quot;</span><span class="p">,</span> <span class="s2">&quot;ur_control.launch.py&quot;</span><span class="p">])</span>
+        <span class="p">),</span>
+        <span class="n">launch_arguments</span><span class="o">=</span><span class="p">{</span>
+            <span class="s2">&quot;ur_type&quot;</span><span class="p">:</span> <span class="s2">&quot;ur5e&quot;</span><span class="p">,</span>              
+            <span class="s2">&quot;use_fake_hardware&quot;</span><span class="p">:</span> <span class="s2">&quot;false&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;initial_joint_controller&quot;</span><span class="p">:</span> <span class="s2">&quot;joint_trajectory_controller&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;activate_joint_controller&quot;</span><span class="p">:</span> <span class="s2">&quot;true&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;robot_ip&quot;</span><span class="p">:</span> <span class="n">LaunchConfiguration</span><span class="p">(</span><span class="s2">&quot;robot_ip&quot;</span><span class="p">),</span>
+            <span class="s2">&quot;description_package&quot;</span><span class="p">:</span> <span class="s2">&quot;ur5e_cell_description&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;description_file&quot;</span><span class="p">:</span> <span class="s2">&quot;workcell.urdf.xacro&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;launch_rviz&quot;</span><span class="p">:</span> <span class="s2">&quot;false&quot;</span>
+            <span class="p">}</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="7">
+<li><p>Finally, we need to add all launch entities we created to the <code class="docutils literal notranslate"><span class="pre">LaunchDescription</span></code> and return it. When adding the entities it is important to use the right order. We need to first launch the arguments, then load the configuration, launch the hardware and finally launch move_group and rviz.</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="n">ld</span> <span class="o">=</span> <span class="n">LaunchDescription</span><span class="p">(</span>
+        <span class="p">[</span>
+            <span class="n">database_config</span><span class="p">,</span>
+            <span class="n">debug_config</span><span class="p">,</span>
+            <span class="n">rviz_config</span><span class="p">,</span>
+            <span class="n">robot_ip_config</span><span class="p">,</span>
+            <span class="n">load_moveit_config</span><span class="p">,</span>
+            <span class="n">ur_control_launch</span><span class="p">,</span>
+            <span class="n">generate_move_group_ld</span><span class="p">,</span>
+            <span class="n">generate_moveit_rviz_ld</span><span class="p">,</span>
+        <span class="p">]</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">ld</span>
+</pre></div>
+</div>
+<p>Now the launchfile is complete and you can rebuild your workspace by using the following command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>colcon<span class="w"> </span>build<span class="w"> </span>--packages-select<span class="w"> </span>ur5e_cell_moveit_config
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="connecting-to-the-robot">
+<h2>2. Connecting to the robot<a class="headerlink" href="#connecting-to-the-robot" title="Permalink to this heading"></a></h2>
+</section>
+<hr class="docutils" />
+<section id="introspection">
+<h2>3. Introspection<a class="headerlink" href="#introspection" title="Permalink to this heading"></a></h2>
+<p>Launch the RQT Graph tool again to observe what the computation graph looks like now.</p>
+<p>If you had saved the previous graph, you would notice that the <code class="docutils literal notranslate"><span class="pre">/robot_state_publisher</span></code> came previously from a <code class="docutils literal notranslate"><span class="pre">/move_group/fake_controller_joint_states</span></code> node whereas now it comes from Gazebo/real robot, telling us that the actual robot is being tracked.</p>
+<p>You will also notice a new <code class="docutils literal notranslate"><span class="pre">/arm_controller/follow_joint_trajectory</span></code> action, which now drives the sim/actual robot.</p>
+<p>When you execute a valid plan, echo in terminal the topics in this action, specifically the <em>goal</em>, <em>status</em> and <em>result</em> topics, to see what is being published. The goal shows you what the computed trajectory precisely looks like. This one set of values is the result of the complete Moveit pipeline.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="1.Setup_assistant.html" class="btn btn-neutral float-left" title="MOVEIT SETUP ASSISTANT" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="3.Simple_pick_n_place.html" class="btn btn-neutral float-right" title="SIMPLE PICK &amp; PLACE" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Christoph Hellmann Santos, Harshavardan Deshpande, Ragesh Ramachandran, Ruichao Wu.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

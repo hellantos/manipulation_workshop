@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ROBOT WORKCELL COMPOSITION &mdash; ROS2 Manipulation Workshop  documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="MOVEIT SETUP ASSISTANT" href="../../moveit/workshops/1.Setup_assistant.html" />
+    <link rel="prev" title="DEVELOPMENT ENVIRONEMNT SETUP" href="../../tech_setup/workshops/0.Setup_Environment.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            ROS2 Manipulation Workshop
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../tech_setup/workshops/0.Setup_Environment.html">DEVELOPMENT ENVIRONEMNT SETUP</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">ROBOT WORKCELL COMPOSITION</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#create-a-worcell-urdf-xacro">1. Create a worcell.urdf.xacro</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#include-the-components-the-components">2. Include the components the components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#get-all-necessary-arguments-for-the-components">3. Get all necessary arguments for the components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#instantiate-the-components">3. Instantiate the components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#create-the-joints-between-the-components-and-the-world-frame">5. Create the joints between the components and the world frame</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../moveit/workshops/1.Setup_assistant.html">MOVEIT SETUP ASSISTANT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../moveit/workshops/2.Connecting_real_hardware.html">CONNECTING REAL HARDWARE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../moveit/workshops/3.Simple_pick_n_place.html">SIMPLE PICK &amp; PLACE</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ROS2 Manipulation Workshop</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">ROBOT WORKCELL COMPOSITION</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/robot_description/workshops/2.Robot_workcell_composition.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="robot-workcell-composition">
+<h1>ROBOT WORKCELL COMPOSITION<a class="headerlink" href="#robot-workcell-composition" title="Permalink to this heading"></a></h1>
+<p>Contents:</p>
+<ul class="simple">
+<li><p>Create a worcell.urdf.xacro</p></li>
+<li><p>Include the components the components</p></li>
+<li><p>Get all necessary arguments for the components</p></li>
+<li><p>Instantiate the components</p></li>
+<li><p>Create the joints between the components and the world frame</p></li>
+</ul>
+<hr class="docutils" />
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading"></a></h2>
+<p>In this workshop, we will create the URDF/XACRO description for the robot workcell. The description composes the robot, the gripper, the camera and the robot cell.</p>
+<p>To start the workshop, open the ws_manipulation_workshop/src folder in VS Code and reopen it in the DevContainer. The please checkout the ur5e_cell repository at the tag… In a VS Code terminal, you can do this like this:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/ws_manipulation_workshop/src/ur5e_cell
+git<span class="w"> </span>fetch<span class="w"> </span>--all<span class="w"> </span>--tags
+git<span class="w"> </span>checkout<span class="w"> </span>tags/workshop_2
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="create-a-worcell-urdf-xacro">
+<h2>1. Create a worcell.urdf.xacro<a class="headerlink" href="#create-a-worcell-urdf-xacro" title="Permalink to this heading"></a></h2>
+<p>The first step is to create a new file called <code class="docutils literal notranslate"><span class="pre">workcell.urdf.xacro</span></code> in the <code class="docutils literal notranslate"><span class="pre">ur5e_cell/ur5e_description/urdf</span></code> folder. You can do this in the VS Code file explorer.</p>
+<p>Now open the file and add the following lines:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
+<span class="nt">&lt;robot</span><span class="w"> </span><span class="na">xmlns:xacro=</span><span class="s">&quot;http://www.ros.org/wiki/xacro&quot;</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;ur5e_cell&quot;</span><span class="nt">&gt;</span>
+<span class="cm">&lt;!-- Here is where your code will go. --&gt;</span>
+<span class="nt">&lt;/robot&gt;</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p><strong>Hint</strong>: You can use the ROS plugin of VS Code to visualize the URDF from the start. To do so press <code class="docutils literal notranslate"><span class="pre">Ctrl+Shift+P</span></code> and type <code class="docutils literal notranslate"><span class="pre">ROS:</span> <span class="pre">Preview</span> <span class="pre">URDF</span></code>.</p>
+</div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="include-the-components-the-components">
+<h2>2. Include the components the components<a class="headerlink" href="#include-the-components-the-components" title="Permalink to this heading"></a></h2>
+<p>The next step is to include the components of the robot workcell. To do so, we will use the <code class="docutils literal notranslate"><span class="pre">xacro:include</span></code> tag. The tag has the following syntax:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;xacro:include</span><span class="w"> </span><span class="na">filename=</span><span class="s">&quot;path/to/file&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">filename</span></code> attribute specifies the path to the file that should be included. The path is relative to the file that includes the file.</p>
+<p>As during install relative paths can change we will use the <code class="docutils literal notranslate"><span class="pre">find</span></code> tag to find the path to the file in install space. The <code class="docutils literal notranslate"><span class="pre">find</span></code> substitution has the following syntax:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span>${find(ros_package_name)/path/to/file}
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">ros_package_name</span></code> attribute specifies the name of the ROS package that contains the file. The path is relative to the package’s share folder.</p>
+<p>To include a robot description, you can use the following line:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;xacro:include</span><span class="w"> </span><span class="na">filename=</span><span class="s">&quot;${find(ros_package_name)/path/to/robot_description_file}&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p>Now add the following lines to the <code class="docutils literal notranslate"><span class="pre">workcell.urdf.xacro</span></code> file:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;xacro:include</span><span class="w"> </span><span class="na">filename=</span><span class="s">&quot;$(find ur5e_cell_description)/urdf/robot_cell.xacro&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;xacro:include</span><span class="w"> </span><span class="na">filename=</span><span class="s">&quot;$(find ur5e_cell_description)/urdf/shunk_egp50.xacro&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;xacro:include</span><span class="w"> </span><span class="na">filename=</span><span class="s">&quot;$(find ur_description)/urdf/ur_macro.xacro&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;xacro:include</span><span class="w"> </span><span class="na">filename=</span><span class="s">&quot;$(find realsense2_description)/urdf/_d435.urdf.xacro&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p>If you look into the robot_cell.xacro file, you will see that it does not contain a <code class="docutils literal notranslate"><span class="pre">xacro:macro</span></code>. Therefore, its content will be directly copied into this file at runtime. If you look into the other files, you will see that they contain a <code class="docutils literal notranslate"><span class="pre">xacro:macro</span></code>. Therefore, we will need to instantiate these components individually and pass the necessary arguments.</p>
+</section>
+<hr class="docutils" />
+<section id="get-all-necessary-arguments-for-the-components">
+<h2>3. Get all necessary arguments for the components<a class="headerlink" href="#get-all-necessary-arguments-for-the-components" title="Permalink to this heading"></a></h2>
+<p>The next step is to get all necessary arguments for the components. To do so, we will use the <code class="docutils literal notranslate"><span class="pre">xacro:args</span></code> tag. The tag has the following syntax:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span>&lt;xacro:args name1=&quot;default_value1&quot; name2=&quot;default_value2&quot; .../&gt;
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">name</span></code> attribute specifies the name of the argument. The <code class="docutils literal notranslate"><span class="pre">default_value</span></code> attribute specifies the default value of the argument. If the argument is not passed to the macro, the default value will be used.</p>
+<ul>
+<li><p>Now to add the necessary arguments for instantiating the robot, take a look at the <a class="reference external" href="https://github.com/UniversalRobots/Universal_Robots_ROS2_Description/blob/ros2/urdf/ur_macro.xacro"><code class="docutils literal notranslate"><span class="pre">ur_macro.xacro</span></code></a> file. You will see that the <code class="docutils literal notranslate"><span class="pre">ur_robot</span></code>-macro can the following parameters:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;xacro:macro</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;ur_robot&quot;</span><span class="w"> </span><span class="na">params=</span><span class="s">&quot;</span>
+<span class="s">    name</span>
+<span class="s">    prefix</span>
+<span class="s">    parent</span>
+<span class="s">    *origin</span>
+<span class="s">    joint_limits_parameters_file</span>
+<span class="s">    kinematics_parameters_file</span>
+<span class="s">    physical_parameters_file</span>
+<span class="s">    visual_parameters_file</span>
+<span class="s">    transmission_hw_interface:=[...]</span>
+<span class="s">    safety_limits:=false</span>
+<span class="s">    safety_pos_margin:=0.15</span>
+<span class="s">    safety_k_position:=20</span>
+<span class="s">    use_fake_hardware:=false</span>
+<span class="s">    fake_sensor_commands:=false</span>
+<span class="s">    sim_gazebo:=false</span>
+<span class="s">    sim_ignition:=false</span>
+<span class="s">    headless_mode:=false</span>
+<span class="s">    initial_positions:=[...]</span>
+<span class="s">    use_tool_communication:=false</span>
+<span class="s">    tool_voltage:=0</span>
+<span class="s">    tool_parity:=0</span>
+<span class="s">    tool_baud_rate:=115200</span>
+<span class="s">    tool_stop_bits:=1</span>
+<span class="s">    tool_rx_idle_chars:=1.5</span>
+<span class="s">    tool_tx_idle_chars:=3.5</span>
+<span class="s">    tool_device_name:=/tmp/ttyUR</span>
+<span class="s">    tool_tcp_port:=54321</span>
+<span class="s">    robot_ip:=0.0.0.0</span>
+<span class="s">    script_filename:=to_be_filled_by_ur_robot_driver</span>
+<span class="s">    output_recipe_filename:=to_be_filled_by_ur_robot_driver</span>
+<span class="s">    input_recipe_filename:=to_be_filled_by_ur_robot_driver</span>
+<span class="s">    reverse_port:=50001</span>
+<span class="s">    script_sender_port:=50002</span>
+<span class="s">    reverse_ip:=0.0.0.0</span>
+<span class="s">    script_command_port:=50004&quot;</span><span class="nt">&gt;</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p><strong>Note:</strong> The <code class="docutils literal notranslate"><span class="pre">*</span></code> in front of the <code class="docutils literal notranslate"><span class="pre">origin</span></code> parameter means that the parameter is a block parameter which goes the brackets of the <code class="docutils literal notranslate"><span class="pre">&lt;xacro::ur_robot&gt;&lt;/xacro::ur_robot&gt;</span></code> tag.</p>
+</div></blockquote>
+<p>Now add the following lines to the <code class="docutils literal notranslate"><span class="pre">workcell.urdf.xacro</span></code> file:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;xacro:arg</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;name&quot;</span><span class="w"> </span><span class="na">default=</span><span class="s">&quot;ur5e&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;xacro:arg</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;ur_type&quot;</span><span class="w"> </span><span class="na">default=</span><span class="s">&quot;ur5e&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;xacro:arg</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;prefix&quot;</span><span class="w"> </span><span class="na">default=</span><span class="s">&quot;&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;xacro:arg</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;joint_limit_params&quot;</span><span class="w"> </span><span class="na">default=</span><span class="s">&quot;$(find ur5e_cell_description)/config/$(arg ur_type)/joint_limits.yaml&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;xacro:arg</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;kinematics_params&quot;</span><span class="w"> </span><span class="na">default=</span><span class="s">&quot;$(find ur5e_cell_description)/config/$(arg ur_type)/default_kinematics.yaml&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;xacro:arg</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;physical_params&quot;</span><span class="w"> </span><span class="na">default=</span><span class="s">&quot;$(find ur5e_cell_description)/config/$(arg ur_type)/physical_parameters.yaml&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;xacro:arg</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;visual_params&quot;</span><span class="w"> </span><span class="na">default=</span><span class="s">&quot;$(find ur5e_cell_description)/config/$(arg ur_type)/visual_parameters.yaml&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;xacro:arg</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;transmission_hw_interface&quot;</span><span class="w"> </span><span class="na">default=</span><span class="s">&quot;&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;xacro:arg</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;safety_limits&quot;</span><span class="w"> </span><span class="na">default=</span><span class="s">&quot;false&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;xacro:arg</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;safety_pos_margin&quot;</span><span class="w"> </span><span class="na">default=</span><span class="s">&quot;0.15&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;xacro:arg</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;safety_k_position&quot;</span><span class="w"> </span><span class="na">default=</span><span class="s">&quot;20&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;xacro:arg</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;headless_mode&quot;</span><span class="w"> </span><span class="na">default=</span><span class="s">&quot;false&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;xacro:arg</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;robot_ip&quot;</span><span class="w"> </span><span class="na">default=</span><span class="s">&quot;0.0.0.0&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;xacro:arg</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;script_filename&quot;</span><span class="w"> </span><span class="na">default=</span><span class="s">&quot;ros_control.urscript&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;xacro:arg</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;output_recipe_filename&quot;</span><span class="w"> </span><span class="na">default=</span><span class="s">&quot;rtde_output_recipe.txt&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;xacro:arg</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;input_recipe_filename&quot;</span><span class="w"> </span><span class="na">default=</span><span class="s">&quot;rtde_input_recipe.txt&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;xacro:arg</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;use_tool_communication&quot;</span><span class="w"> </span><span class="na">default=</span><span class="s">&quot;false&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;xacro:arg</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;tool_voltage&quot;</span><span class="w"> </span><span class="na">default=</span><span class="s">&quot;24&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;xacro:arg</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;tool_parity&quot;</span><span class="w"> </span><span class="na">default=</span><span class="s">&quot;0&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;xacro:arg</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;tool_baud_rate&quot;</span><span class="w"> </span><span class="na">default=</span><span class="s">&quot;115200&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;xacro:arg</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;tool_stop_bits&quot;</span><span class="w"> </span><span class="na">default=</span><span class="s">&quot;1&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;xacro:arg</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;tool_rx_idle_chars&quot;</span><span class="w"> </span><span class="na">default=</span><span class="s">&quot;1.5&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;xacro:arg</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;tool_tx_idle_chars&quot;</span><span class="w"> </span><span class="na">default=</span><span class="s">&quot;3.5&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;xacro:arg</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;tool_device_name&quot;</span><span class="w"> </span><span class="na">default=</span><span class="s">&quot;/tmp/ttyUR&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;xacro:arg</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;tool_tcp_port&quot;</span><span class="w"> </span><span class="na">default=</span><span class="s">&quot;54321&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;xacro:arg</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;use_fake_hardware&quot;</span><span class="w"> </span><span class="na">default=</span><span class="s">&quot;false&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;xacro:arg</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;fake_sensor_commands&quot;</span><span class="w"> </span><span class="na">default=</span><span class="s">&quot;false&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;xacro:arg</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;sim_gazebo&quot;</span><span class="w"> </span><span class="na">default=</span><span class="s">&quot;false&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;xacro:arg</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;sim_ignition&quot;</span><span class="w"> </span><span class="na">default=</span><span class="s">&quot;false&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;xacro:arg</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;simulation_controllers&quot;</span><span class="w"> </span><span class="na">default=</span><span class="s">&quot;&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;xacro:arg</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;initial_positions_file&quot;</span><span class="w"> </span><span class="na">default=</span><span class="s">&quot;$(find ur5e_cell_description)/config/initial_positions.yaml&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+
+<span class="cm">&lt;!-- Set arg initial_positions_file as property --&gt;</span>
+<span class="nt">&lt;xacro:property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;initial_positions_file&quot;</span><span class="w"> </span><span class="na">default=</span><span class="s">&quot;$(arg initial_positions_file)&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+</li>
+<li><p>For the camera, we need to add only few arguments here. Take a look at the <a class="reference external" href="https://github.com/IntelRealSense/realsense-ros/blob/ros2-development/realsense2_description/urdf/_d435.urdf.xacro"><code class="docutils literal notranslate"><span class="pre">camera_macro.xacro</span></code></a>, can you find the parameters that need to be added?</p>
+<p>Add the following lines to the <code class="docutils literal notranslate"><span class="pre">workcell.urdf.xacro</span></code> file:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;xacro:arg</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;use_nominal_extrinsics&quot;</span><span class="w"> </span><span class="na">default=</span><span class="s">&quot;false&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;xacro:arg</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;add_plug&quot;</span><span class="w"> </span><span class="na">default=</span><span class="s">&quot;false&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;xacro:arg</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;use_mesh&quot;</span><span class="w"> </span><span class="na">default=</span><span class="s">&quot;true&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>These are all the arguments we want to add to the <code class="docutils literal notranslate"><span class="pre">workcell.urdf.xacro</span></code> file. Now we need to instantiate the components.</p>
+</section>
+<hr class="docutils" />
+<section id="instantiate-the-components">
+<h2>3. Instantiate the components<a class="headerlink" href="#instantiate-the-components" title="Permalink to this heading"></a></h2>
+<ul>
+<li><p><strong>Instantiate the ur_robot macro:</strong> To instantiate the <code class="docutils literal notranslate"><span class="pre">ur_robot</span></code>-macro, we need to add the following lines to the <code class="docutils literal notranslate"><span class="pre">workcell.urdf.xacro</span></code> file:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cm">&lt;!-- Instantiate the UR robot --&gt;</span>
+<span class="nt">&lt;xacro:ur_robot</span>
+<span class="w">    </span><span class="na">name=</span><span class="s">&quot;$(arg name)&quot;</span>
+<span class="w">    </span><span class="na">prefix=</span><span class="s">&quot;$(arg prefix)&quot;</span>
+<span class="w">    </span><span class="na">parent=</span><span class="s">&quot;robotcell_base_link&quot;</span>
+<span class="w">    </span><span class="na">joint_limits_parameters_file=</span><span class="s">&quot;$(arg joint_limit_params)&quot;</span>
+<span class="w">    </span><span class="na">kinematics_parameters_file=</span><span class="s">&quot;$(arg kinematics_params)&quot;</span>
+<span class="w">    </span><span class="na">physical_parameters_file=</span><span class="s">&quot;$(arg physical_params)&quot;</span>
+<span class="w">    </span><span class="na">visual_parameters_file=</span><span class="s">&quot;$(arg visual_params)&quot;</span>
+<span class="w">    </span><span class="na">transmission_hw_interface=</span><span class="s">&quot;$(arg transmission_hw_interface)&quot;</span>
+<span class="w">    </span><span class="na">safety_limits=</span><span class="s">&quot;$(arg safety_limits)&quot;</span>
+<span class="w">    </span><span class="na">safety_pos_margin=</span><span class="s">&quot;$(arg safety_pos_margin)&quot;</span>
+<span class="w">    </span><span class="na">safety_k_position=</span><span class="s">&quot;$(arg safety_k_position)&quot;</span>
+<span class="w">    </span><span class="na">use_fake_hardware=</span><span class="s">&quot;$(arg use_fake_hardware)&quot;</span>
+<span class="w">    </span><span class="na">fake_sensor_commands=</span><span class="s">&quot;$(arg fake_sensor_commands)&quot;</span>
+<span class="w">    </span><span class="na">sim_gazebo=</span><span class="s">&quot;$(arg sim_gazebo)&quot;</span>
+<span class="w">    </span><span class="na">sim_ignition=</span><span class="s">&quot;$(arg sim_ignition)&quot;</span>
+<span class="w">    </span><span class="na">headless_mode=</span><span class="s">&quot;$(arg headless_mode)&quot;</span>
+<span class="w">    </span><span class="na">initial_positions=</span><span class="s">&quot;${xacro.load_yaml(initial_positions_file)}&quot;</span>
+<span class="w">    </span><span class="na">use_tool_communication=</span><span class="s">&quot;$(arg use_tool_communication)&quot;</span>
+<span class="w">    </span><span class="na">tool_voltage=</span><span class="s">&quot;$(arg tool_voltage)&quot;</span>
+<span class="w">    </span><span class="na">tool_parity=</span><span class="s">&quot;$(arg tool_parity)&quot;</span>
+<span class="w">    </span><span class="na">tool_baud_rate=</span><span class="s">&quot;$(arg tool_baud_rate)&quot;</span>
+<span class="w">    </span><span class="na">tool_stop_bits=</span><span class="s">&quot;$(arg tool_stop_bits)&quot;</span>
+<span class="w">    </span><span class="na">tool_rx_idle_chars=</span><span class="s">&quot;$(arg tool_rx_idle_chars)&quot;</span>
+<span class="w">    </span><span class="na">tool_tx_idle_chars=</span><span class="s">&quot;$(arg tool_tx_idle_chars)&quot;</span>
+<span class="w">    </span><span class="na">tool_device_name=</span><span class="s">&quot;$(arg tool_device_name)&quot;</span>
+<span class="w">    </span><span class="na">tool_tcp_port=</span><span class="s">&quot;$(arg tool_tcp_port)&quot;</span>
+<span class="w">    </span><span class="na">robot_ip=</span><span class="s">&quot;$(arg robot_ip)&quot;</span>
+<span class="w">    </span><span class="na">script_filename=</span><span class="s">&quot;$(arg script_filename)&quot;</span>
+<span class="w">    </span><span class="na">output_recipe_filename=</span><span class="s">&quot;$(arg output_recipe_filename)&quot;</span>
+<span class="w">    </span><span class="na">input_recipe_filename=</span><span class="s">&quot;$(arg input_recipe_filename)&quot;</span>
+<span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;origin</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;${robot_center_offset_length} ${robot_center_offset_width} ${robot_base_height}&quot;</span><span class="w"> </span><span class="na">rpy=</span><span class="s">&quot;0 0 ${pi/2}&quot;</span><span class="w"> </span><span class="nt">/&gt;</span><span class="w"> </span><span class="cm">&lt;!-- position robot in the world --&gt;</span>
+<span class="nt">&lt;/xacro:ur_robot&gt;</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>Instantiate the camera macro:</strong> To instantiate the <code class="docutils literal notranslate"><span class="pre">schunk_egp50</span></code>-macro, we need to add the following lines to the <code class="docutils literal notranslate"><span class="pre">workcell.urdf.xacro</span></code> file:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cm">&lt;!-- Instantiate gripper. --&gt;</span>
+<span class="nt">&lt;xacro:schunk_egp50</span><span class="w"> </span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>Instantiate the camera macro:</strong> To instantiate the <code class="docutils literal notranslate"><span class="pre">sensor_d435</span></code>-macro, we need to add the following lines to the <code class="docutils literal notranslate"><span class="pre">workcell.urdf.xacro</span></code> file:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;xacro:sensor_d435</span><span class="w"> </span>
+<span class="w">    </span><span class="na">parent=</span><span class="s">&quot;tool0&quot;</span>
+<span class="w">    </span><span class="na">use_nominal_extrinsics=</span><span class="s">&quot;$(arg use_nominal_extrinsics)&quot;</span>
+<span class="w">    </span><span class="na">add_plug=</span><span class="s">&quot;$(arg add_plug)&quot;</span>
+<span class="w">    </span><span class="na">use_mesh=</span><span class="s">&quot;$(arg use_mesh)&quot;</span>
+<span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;origin</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;0 -0.05 0&quot;</span><span class="w"> </span><span class="na">rpy=</span><span class="s">&quot;${pi/2} ${pi/2} 0&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/xacro:sensor_d435&gt;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="create-the-joints-between-the-components-and-the-world-frame">
+<h2>5. Create the joints between the components and the world frame<a class="headerlink" href="#create-the-joints-between-the-components-and-the-world-frame" title="Permalink to this heading"></a></h2>
+<p>Now we need to create the joints between the robot, camera and gripper, so that the gripper and camera are mounted on the robot and follow the movements of the robot.</p>
+<p>First, we need to create the world frame by creating a link with the name <code class="docutils literal notranslate"><span class="pre">world</span></code>. Then we will add a joint between the <code class="docutils literal notranslate"><span class="pre">world</span></code> and the <code class="docutils literal notranslate"><span class="pre">robotcell_base_link</span></code>. In addition we need to create a link between the <code class="docutils literal notranslate"><span class="pre">tool0</span></code>-link of the robot and the <code class="docutils literal notranslate"><span class="pre">shunk_egp50_base_link</span></code> of the gripper.
+Both the robot and the camera are linked through the parent parameter automatically.</p>
+<p>To do so add the following lines to the <code class="docutils literal notranslate"><span class="pre">workcell.urdf.xacro</span></code> file:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="cm">&lt;!-- Add world link --&gt;</span>
+<span class="w">    </span><span class="nt">&lt;link</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;world&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+
+<span class="w">    </span><span class="cm">&lt;!-- Add joint between robotcell and world --&gt;</span>
+<span class="w">    </span><span class="nt">&lt;joint</span>
+<span class="w">        </span><span class="na">name=</span><span class="s">&quot;world_to_robot_cell_joint&quot;</span>
+<span class="w">        </span><span class="na">type=</span><span class="s">&quot;fixed&quot;</span>
+<span class="w">    </span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;parent</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;world&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;child</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;robotcell_base_link&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;origin</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;0 0 0&quot;</span><span class="w"> </span><span class="na">rpy=</span><span class="s">&quot;0 0 0&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/joint&gt;</span>
+
+<span class="w">    </span><span class="cm">&lt;!-- Add joint between gripper and robot --&gt;</span>
+<span class="w">    </span><span class="nt">&lt;joint</span><span class="w"> </span>
+<span class="w">        </span><span class="na">name=</span><span class="s">&quot;robot_to_gripper_joint&quot;</span>
+<span class="w">        </span><span class="na">type=</span><span class="s">&quot;fixed&quot;</span>
+<span class="w">    </span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;parent</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;tool0&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;child</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;shunk_egp50_base_link&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;origin</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;0 0 0&quot;</span><span class="w"> </span><span class="na">rpy=</span><span class="s">&quot;0 0 0&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/joint&gt;</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../tech_setup/workshops/0.Setup_Environment.html" class="btn btn-neutral float-left" title="DEVELOPMENT ENVIRONEMNT SETUP" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../moveit/workshops/1.Setup_assistant.html" class="btn btn-neutral float-right" title="MOVEIT SETUP ASSISTANT" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Christoph Hellmann Santos, Harshavardan Deshpande, Ragesh Ramachandran, Ruichao Wu.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

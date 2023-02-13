@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SIMPLE PICK &amp; PLACE &mdash; ROS2 Manipulation Workshop  documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="CONNECTING REAL HARDWARE" href="2.Connecting_real_hardware.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            ROS2 Manipulation Workshop
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../tech_setup/workshops/0.Setup_Environment.html">DEVELOPMENT ENVIRONEMNT SETUP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../robot_description/workshops/2.Robot_workcell_composition.html">ROBOT WORKCELL COMPOSITION</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1.Setup_assistant.html">MOVEIT SETUP ASSISTANT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2.Connecting_real_hardware.html">CONNECTING REAL HARDWARE</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">SIMPLE PICK &amp; PLACE</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#creating-a-package-that-uses-moveit-cpp">1. Creating a package that uses moveit_cpp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#adding-moveit-cpp-configuration-file">2. Adding moveit_cpp configuration file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#writing-a-launch-file-for-a-moveit-cpp-node">3. Writing a launch file for a moveit_cpp node</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#writing-the-pick-n-place-node">4. Writing the pick_n_place_node</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ROS2 Manipulation Workshop</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">SIMPLE PICK &amp; PLACE</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/moveit/workshops/3.Simple_pick_n_place.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="simple-pick-place">
+<h1>SIMPLE PICK &amp; PLACE<a class="headerlink" href="#simple-pick-place" title="Permalink to this heading"></a></h1>
+<p>Contents:</p>
+<ul class="simple">
+<li><p>Creating a package that uses moveit_cpp</p></li>
+<li><p>Adding configuration files</p></li>
+<li><p>Writing a launch file for a moveit_cpp node</p></li>
+<li><p>Writing a simple pick &amp; place application</p></li>
+<li><p>Running the application</p></li>
+</ul>
+<section id="creating-a-package-that-uses-moveit-cpp">
+<h2>1. Creating a package that uses moveit_cpp<a class="headerlink" href="#creating-a-package-that-uses-moveit-cpp" title="Permalink to this heading"></a></h2>
+<p>The first step to write an application that leverages moveit_cpp is to create a package with the necessary dependencies and files.</p>
+<p>To do so you should use the following command in your workspace’s src folder:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>pkg<span class="w"> </span>create<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--description<span class="w"> </span><span class="s2">&quot;A simple pick and place application using moveit_cpp interface&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--build-type<span class="w"> </span>ament_cmake<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--dependencies<span class="w"> </span>rclcpp<span class="w"> </span>moveit<span class="w"> </span>moveit_msgs<span class="w"> </span>moveit_ros_planning<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--license<span class="w"> </span>Apache-2.0<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--maintainer<span class="w"> </span><span class="s2">&quot;Your Name&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--maintainer-email<span class="w"> </span><span class="s2">&quot;Your Email&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--node-name<span class="w"> </span>pick_n_place_node<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>ur5e_cell_pick_and_place
+</pre></div>
+</div>
+<p>No create a config and a launch directory in the created package:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>ur5e_cell_pick_and_place
+mkdir<span class="w"> </span>config<span class="w"> </span>launch
+</pre></div>
+</div>
+<p>To make sure the files in the launch and config directories are installed with the package, add the following lines to your CmakeLists.txt after the <code class="docutils literal notranslate"><span class="pre">install(TARGETS</span> <span class="pre">...)</span></code> line:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">install</span><span class="p">(</span><span class="s">DIRECTORY</span><span class="w"> </span><span class="s">launch</span><span class="w"> </span><span class="s">config</span>
+<span class="w">  </span><span class="s">DESTINATION</span><span class="w"> </span><span class="s">share/</span><span class="o">${</span><span class="nv">PROJECT_NAME</span><span class="o">}</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Now your package is ready to be used.</p>
+</section>
+<section id="adding-moveit-cpp-configuration-file">
+<h2>2. Adding moveit_cpp configuration file<a class="headerlink" href="#adding-moveit-cpp-configuration-file" title="Permalink to this heading"></a></h2>
+<p>Before we start with the real development, we’ll already add the configuration file for the moveit_cpp node we are going to create. This file will be used to configure the node and to set up the planning pipeline.</p>
+<p>To do so, create a file called <code class="docutils literal notranslate"><span class="pre">moveitcpp.yaml</span></code> in the config directory and add the following content:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">planning_scene_monitor_options</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;planning_scene_monitor&quot;</span>
+<span class="w">  </span><span class="nt">robot_description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;robot_description&quot;</span>
+<span class="w">  </span><span class="nt">joint_state_topic</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/joint_states&quot;</span>
+<span class="w">  </span><span class="nt">attached_collision_object_topic</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/moveit_cpp/planning_scene_monitor&quot;</span>
+<span class="w">  </span><span class="nt">publish_planning_scene_topic</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/moveit_cpp/publish_planning_scene&quot;</span>
+<span class="w">  </span><span class="nt">monitored_planning_scene_topic</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/moveit_cpp/monitored_planning_scene&quot;</span>
+<span class="w">  </span><span class="nt">wait_for_initial_state_timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10.0</span>
+
+<span class="nt">planning_pipelines</span><span class="p">:</span>
+<span class="w">  </span><span class="c1">#namespace: &quot;moveit_cpp&quot;  # optional, default is ~</span>
+<span class="w">  </span><span class="nt">pipeline_names</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;pilz_industrial_motion_planner&quot;</span><span class="p p-Indicator">]</span>
+
+<span class="nt">plan_request_params</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">planning_attempts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">  </span><span class="nt">planning_pipeline</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pilz_industrial_motion_planner</span>
+<span class="w">  </span><span class="nt">planner_id</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;LIN&quot;</span>
+<span class="w">  </span><span class="nt">max_velocity_scaling_factor</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.5</span>
+<span class="w">  </span><span class="nt">max_acceleration_scaling_factor</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.5</span>
+</pre></div>
+</div>
+<p>You can see, that this basically defines where the node will get the robot description from and which planning pipeline to use. You can experiment with it later on.</p>
+</section>
+<section id="writing-a-launch-file-for-a-moveit-cpp-node">
+<h2>3. Writing a launch file for a moveit_cpp node<a class="headerlink" href="#writing-a-launch-file-for-a-moveit-cpp-node" title="Permalink to this heading"></a></h2>
+<p>Now we are going to write two launch files. One for the ur_robot_driver and one for the moveit_cpp node, which we are going to create.</p>
+<ol class="arabic simple">
+<li><p>Create a file called <code class="docutils literal notranslate"><span class="pre">pick_n_place_driver.launch.py</span></code> in the launch directory. This file will start the ur_robot_driver and an rviz instance, but it will not start a move_group node.</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">launch</span> <span class="kn">import</span> <span class="n">LaunchDescription</span>
+<span class="kn">from</span> <span class="nn">launch.actions</span> <span class="kn">import</span> <span class="n">IncludeLaunchDescription</span>
+<span class="kn">from</span> <span class="nn">launch.launch_description_sources</span> <span class="kn">import</span> <span class="n">PythonLaunchDescriptionSource</span>
+<span class="kn">from</span> <span class="nn">launch.substitutions</span> <span class="kn">import</span> <span class="n">PathJoinSubstitution</span>
+<span class="kn">from</span> <span class="nn">launch_ros.substitutions</span> <span class="kn">import</span> <span class="n">FindPackageShare</span>
+
+
+<span class="k">def</span> <span class="nf">generate_launch_description</span><span class="p">():</span>
+    <span class="c1"># Start the ur_robot driver with fake hardware using</span>
+    <span class="c1"># the ur5e_cell_description package and its workcell.</span>
+    <span class="c1"># urdf.xacro file</span>
+    <span class="n">ur_control_launch</span> <span class="o">=</span> <span class="n">IncludeLaunchDescription</span><span class="p">(</span>
+        <span class="n">launch_description_source</span><span class="o">=</span><span class="n">PythonLaunchDescriptionSource</span><span class="p">(</span>
+            <span class="n">PathJoinSubstitution</span><span class="p">([</span><span class="n">FindPackageShare</span><span class="p">(</span><span class="s2">&quot;ur_robot_driver&quot;</span><span class="p">),</span> <span class="s2">&quot;launch&quot;</span><span class="p">,</span> <span class="s2">&quot;ur_control.launch.py&quot;</span><span class="p">])</span>
+        <span class="p">),</span>
+        <span class="n">launch_arguments</span><span class="o">=</span><span class="p">{</span>
+            <span class="s2">&quot;ur_type&quot;</span><span class="p">:</span> <span class="s2">&quot;ur5e&quot;</span><span class="p">,</span>              
+            <span class="s2">&quot;use_fake_hardware&quot;</span><span class="p">:</span> <span class="s2">&quot;true&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;initial_joint_controller&quot;</span><span class="p">:</span> <span class="s2">&quot;joint_trajectory_controller&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;activate_joint_controller&quot;</span><span class="p">:</span> <span class="s2">&quot;true&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;robot_ip&quot;</span><span class="p">:</span> <span class="s2">&quot;xxx.yyy.zzz.vvv&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;description_package&quot;</span><span class="p">:</span> <span class="s2">&quot;ur5e_cell_description&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;description_file&quot;</span><span class="p">:</span> <span class="s2">&quot;workcell.urdf.xacro&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;launch_rviz&quot;</span><span class="p">:</span> <span class="s2">&quot;true&quot;</span>
+            <span class="p">}</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+    <span class="p">)</span>
+    
+    
+    <span class="n">ld</span> <span class="o">=</span> <span class="n">LaunchDescription</span><span class="p">(</span>
+        <span class="p">[</span>
+            <span class="n">ur_control_launch</span>
+        <span class="p">]</span>
+    <span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">ld</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Create a file called <code class="docutils literal notranslate"><span class="pre">pick_n_place.launch.py</span></code> in the launch directory. This file will start the moveit_cpp node we will create in the next section.</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">launch</span> <span class="kn">import</span> <span class="n">LaunchDescription</span>
+<span class="kn">from</span> <span class="nn">launch_ros.actions</span> <span class="kn">import</span> <span class="n">Node</span>
+<span class="kn">from</span> <span class="nn">ament_index_python.packages</span> <span class="kn">import</span> <span class="n">get_package_share_directory</span>
+<span class="kn">from</span> <span class="nn">moveit_configs_utils</span> <span class="kn">import</span> <span class="n">MoveItConfigsBuilder</span>
+
+<span class="k">def</span> <span class="nf">generate_launch_description</span><span class="p">():</span>
+
+    <span class="c1"># Load the moveit_configuration from the </span>
+    <span class="c1"># ur5e_cell_moveit_config package and add the</span>
+    <span class="c1"># moveit_cpp.yaml file from the ur5e_cell_pick_n_place</span>
+    <span class="c1"># package to the parameters</span>
+    <span class="n">moveit_config</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">MoveItConfigsBuilder</span><span class="p">(</span><span class="s2">&quot;ur5e_workcell&quot;</span><span class="p">,</span> <span class="n">package_name</span><span class="o">=</span><span class="s2">&quot;ur5e_cell_moveit_config&quot;</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">robot_description</span><span class="p">(</span><span class="n">file_path</span><span class="o">=</span><span class="s2">&quot;config/ur5e_workcell.urdf.xacro&quot;</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">moveit_cpp</span><span class="p">(</span>
+            <span class="n">file_path</span><span class="o">=</span><span class="n">get_package_share_directory</span><span class="p">(</span><span class="s2">&quot;ur5e_cell_pick_n_place&quot;</span><span class="p">)</span>
+            <span class="o">+</span> <span class="s2">&quot;/config/moveitcpp.yaml&quot;</span>
+        <span class="p">)</span>
+        <span class="o">.</span><span class="n">to_moveit_configs</span><span class="p">()</span>
+    <span class="p">)</span>
+    
+    <span class="c1"># Run the pick_n_place_node with the loaded </span>
+    <span class="c1"># moveit_config</span>
+    <span class="n">moveit_cpp_node</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;pick_n_place_node&quot;</span><span class="p">,</span>
+        <span class="n">package</span><span class="o">=</span><span class="s2">&quot;ur5e_cell_pick_n_place&quot;</span><span class="p">,</span>
+        <span class="n">executable</span><span class="o">=</span><span class="s2">&quot;pick_n_place_node&quot;</span><span class="p">,</span>
+        <span class="n">output</span><span class="o">=</span><span class="s2">&quot;screen&quot;</span><span class="p">,</span>
+        <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="n">moveit_config</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()],</span>
+    <span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">LaunchDescription</span><span class="p">(</span>
+        <span class="p">[</span>
+            <span class="n">moveit_cpp_node</span>
+        <span class="p">]</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+<p>Now you can start the pick_n_place_driver.launch.py. It will start the controllers for the robot with fake hardware. An rviz instance will also be started, so you can see the robot in rviz and inspect the tfs of the robot.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>ur5e_cell_pick_n_place<span class="w"> </span>pick_n_place_driver.launch.py
+</pre></div>
+</div>
+</section>
+<section id="writing-the-pick-n-place-node">
+<h2>4. Writing the pick_n_place_node<a class="headerlink" href="#writing-the-pick-n-place-node" title="Permalink to this heading"></a></h2>
+<p>Now we are going to write the pick_n_place_node. This node will be responsible for the pick and place application. It will use the moveit_cpp interface to plan and execute the pick and place motion.</p>
+<ol class="arabic simple">
+<li><p>Open the <code class="docutils literal notranslate"><span class="pre">pick_n_place_node.cpp</span></code> file in the src directory of the ur5e_cell_pick_n_place package. The <code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">pkg</span> <span class="pre">create</span></code> command already created it. Add the following includes to the top of the file:</p></li>
+</ol>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;rclcpp/rclcpp.hpp&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;memory&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;moveit/moveit_cpp/moveit_cpp.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;moveit/moveit_cpp/planning_component.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;geometry_msgs/msg/point_stamped.h&gt;</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Now add a main function that starts rclcpp and shuts it down when the node is destroyed:</p></li>
+</ol>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">**</span><span class="w"> </span><span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">rclcpp</span><span class="o">::</span><span class="n">init</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">);</span>
+<span class="w">  </span><span class="c1">//Where the applicaiton code goes.</span>
+<span class="w">  </span><span class="n">rclcpp</span><span class="o">::</span><span class="n">shutdown</span><span class="p">();</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p><strong>Hint</strong>: You can use the <code class="docutils literal notranslate"><span class="pre">colcon</span> <span class="pre">build</span></code> command to build the package after each step and the <code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">launch</span> <span class="pre">ur5e_cell_pick_n_place</span> <span class="pre">pick_n_place.launch.py</span></code> command to start the pick_n_place_node and see the progress.</p>
+</div></blockquote>
+<ol class="arabic simple" start="3">
+<li><p>The next step is to create a ROS2 node, add it to an executor and spin the executor in a seperate thread.</p></li>
+</ol>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="c1">// Configure the node options to automatically declare parameters, </span>
+<span class="w">  </span><span class="c1">// this is necessary for moveit_cpp to work</span>
+<span class="w">  </span><span class="n">rclcpp</span><span class="o">::</span><span class="n">NodeOptions</span><span class="w"> </span><span class="n">node_options</span><span class="p">;</span>
+<span class="w">  </span><span class="n">node_options</span><span class="p">.</span><span class="n">automatically_declare_parameters_from_overrides</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
+
+<span class="w">  </span><span class="c1">// Create the node</span>
+<span class="w">  </span><span class="n">rclcpp</span><span class="o">::</span><span class="n">Node</span><span class="o">::</span><span class="n">SharedPtr</span><span class="w"> </span><span class="n">node</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rclcpp</span><span class="o">::</span><span class="n">Node</span><span class="o">::</span><span class="n">make_shared</span><span class="p">(</span><span class="s">&quot;pick_n_place_node&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">node_options</span><span class="p">);</span>
+
+<span class="w">  </span><span class="c1">//Create an executor</span>
+<span class="w">  </span><span class="n">rclcpp</span><span class="o">::</span><span class="n">executors</span><span class="o">::</span><span class="n">SingleThreadedExecutor</span><span class="w"> </span><span class="n">executor</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// Add the node to the executor</span>
+<span class="w">  </span><span class="n">executor</span><span class="p">.</span><span class="n">add_node</span><span class="p">(</span><span class="n">node</span><span class="p">);</span>
+
+<span class="w">  </span><span class="c1">// Spin the executor in a seperate thread</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="kr">thread</span><span class="p">([</span><span class="o">&amp;</span><span class="n">executor</span><span class="p">]()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">executor</span><span class="p">.</span><span class="n">spin</span><span class="p">();</span><span class="w"> </span><span class="p">}).</span><span class="n">detach</span><span class="p">();</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li><p>Now we are going to create a moveit_cpp instance and a planning component. The planning component will be used to plan and execute the pick and place motion.</p></li>
+</ol>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="c1">// Define the planning group we are using, we called it &quot;arm&quot; in moveit setup assistant. </span>
+<span class="w">  </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">PLANNING_GROUP</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;arm&quot;</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// Add moveit_cpp to the node we created.</span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">moveit_cpp_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">moveit_cpp</span><span class="o">::</span><span class="n">MoveItCpp</span><span class="o">&gt;</span><span class="p">(</span><span class="n">node</span><span class="p">);</span>
+
+<span class="w">  </span><span class="c1">// Tell the Planning Scene Monitor to provide the planning scene service</span>
+<span class="w">  </span><span class="n">moveit_cpp_ptr</span><span class="o">-&gt;</span><span class="n">getPlanningSceneMonitor</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">providePlanningSceneService</span><span class="p">();</span>
+
+<span class="w">  </span><span class="c1">// Create a planning component for the planning group we defined above</span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">planning_components</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">moveit_cpp</span><span class="o">::</span><span class="n">PlanningComponent</span><span class="o">&gt;</span><span class="p">(</span><span class="n">PLANNING_GROUP</span><span class="p">,</span><span class="w"> </span><span class="n">moveit_cpp_ptr</span><span class="p">);</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="5">
+<li><p>Now we can start planning using pose goals. One issue is that a pose takes the orientation in quaternion, which is not very intuitive. Therefore we will use the tf2 library to translate a roll pitch yaw orientation to a quaternion.</p></li>
+</ol>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="n">tf2</span><span class="o">::</span><span class="n">Quaternion</span><span class="w"> </span><span class="n">q</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// Set the orientation of the tool to face downwards for picking.</span>
+<span class="w">  </span><span class="n">q</span><span class="p">.</span><span class="n">setRPY</span><span class="p">(</span><span class="mf">-3.14</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mf">1.57</span><span class="p">);</span>
+</pre></div>
+</div>
+<ol class="arabic" start="6">
+<li><p>We can now start defining goal poses for our pick and place application. We are going to start the application from the <code class="docutils literal notranslate"><span class="pre">start</span> <span class="pre">position</span></code>, the move sequentially to the <code class="docutils literal notranslate"><span class="pre">approach_object_1</span></code>, <code class="docutils literal notranslate"><span class="pre">pick_object_1</span></code>, <code class="docutils literal notranslate"><span class="pre">approach_object_1</span></code>, <code class="docutils literal notranslate"><span class="pre">approach_object_2</span></code>, <code class="docutils literal notranslate"><span class="pre">pick_object_2</span></code> poses, then we are going to move back to <code class="docutils literal notranslate"><span class="pre">start</span> <span class="pre">position</span></code>. All poses take the orientation we defined above. You find the posisitions of the poses in the table below.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Positions</p></th>
+<th class="head"><p>X</p></th>
+<th class="head"><p>Y</p></th>
+<th class="head"><p>Z</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>start position</p></td>
+<td><p>-0.17</p></td>
+<td><p>0.0</p></td>
+<td><p>1.5</p></td>
+</tr>
+<tr class="row-odd"><td><p>approach_object_1</p></td>
+<td><p>-0.17</p></td>
+<td><p>0.16</p></td>
+<td><p>1.2</p></td>
+</tr>
+<tr class="row-even"><td><p>pick_object_1</p></td>
+<td><p>-0.17</p></td>
+<td><p>0.16</p></td>
+<td><p>1.05</p></td>
+</tr>
+<tr class="row-odd"><td><p>approach_object_2</p></td>
+<td><p>-0.17</p></td>
+<td><p>0.10</p></td>
+<td><p>1.2</p></td>
+</tr>
+<tr class="row-even"><td><p>pick_object_2</p></td>
+<td><p>-0.17</p></td>
+<td><p>0.10</p></td>
+<td><p>1.05</p></td>
+</tr>
+</tbody>
+</table>
+<p>The goal pose to the planner can be defined as a PoseStamped message. The PoseStamped message takes the position and orientation of the pose. In the header of the message we need to define the <code class="docutils literal notranslate"><span class="pre">frame_id</span></code>, which defines the coordinate system that the pose is defined in. We will chose the <code class="docutils literal notranslate"><span class="pre">world</span></code> frame. Here is an example of how to define a pose:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">geometry_msgs</span><span class="o">::</span><span class="n">msg</span><span class="o">::</span><span class="n">PoseStamped</span><span class="w"> </span><span class="n">start_position</span><span class="p">;</span>
+<span class="n">start_position</span><span class="p">.</span><span class="n">header</span><span class="p">.</span><span class="n">frame_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;world&quot;</span><span class="p">;</span>
+<span class="n">start_position</span><span class="p">.</span><span class="n">pose</span><span class="p">.</span><span class="n">position</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">-0.17</span><span class="p">;</span>
+<span class="n">start_position</span><span class="p">.</span><span class="n">pose</span><span class="p">.</span><span class="n">position</span><span class="p">.</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span>
+<span class="n">start_position</span><span class="p">.</span><span class="n">pose</span><span class="p">.</span><span class="n">position</span><span class="p">.</span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.5</span><span class="p">;</span>
+<span class="n">start_position</span><span class="p">.</span><span class="n">pose</span><span class="p">.</span><span class="n">orientation</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">q</span><span class="p">.</span><span class="n">getX</span><span class="p">();</span>
+<span class="n">start_position</span><span class="p">.</span><span class="n">pose</span><span class="p">.</span><span class="n">orientation</span><span class="p">.</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">q</span><span class="p">.</span><span class="n">getY</span><span class="p">();</span>
+<span class="n">start_position</span><span class="p">.</span><span class="n">pose</span><span class="p">.</span><span class="n">orientation</span><span class="p">.</span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">q</span><span class="p">.</span><span class="n">getZ</span><span class="p">();</span>
+<span class="n">start_position</span><span class="p">.</span><span class="n">pose</span><span class="p">.</span><span class="n">orientation</span><span class="p">.</span><span class="n">w</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">q</span><span class="p">.</span><span class="n">getW</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Create the poses for all the poses defined above.</p>
+</li>
+<li><p>Now we can start planning. We will use the <code class="docutils literal notranslate"><span class="pre">plan()</span></code> function of the <code class="docutils literal notranslate"><span class="pre">planning_components</span></code> to plan a motion to the goal pose. The <code class="docutils literal notranslate"><span class="pre">plan()</span></code> function takes a <code class="docutils literal notranslate"><span class="pre">geoemtry_msgs::msg::PoseStamped</span></code> message as input and returns a <code class="docutils literal notranslate"><span class="pre">moveit_cpp::PlanningComponent::PlanSolution</span></code> object.
+The <code class="docutils literal notranslate"><span class="pre">PlanSolution</span></code> object can be evaluated in an if statement to check if planning was successful. If planning was successful the planned trajectory is stored in the <code class="docutils literal notranslate"><span class="pre">trajectory_</span></code> member of the <code class="docutils literal notranslate"><span class="pre">PlanSolution</span></code> object.</p>
+<p>The first thing to do for creating a plan is to set the start state. We use the current state of the robot. Then we set the goal pose and start planning. Here is an example of how to plan to the <code class="docutils literal notranslate"><span class="pre">start_position</span></code> pose:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="c1">// Set the start state to the current state</span>
+<span class="w">  </span><span class="n">planning_components</span><span class="o">-&gt;</span><span class="n">setStartStateToCurrentState</span><span class="p">();</span>
+<span class="w">  </span><span class="c1">// Set the goal pose and the planning frame</span>
+<span class="w">  </span><span class="n">planning_components</span><span class="o">-&gt;</span><span class="n">setGoal</span><span class="p">(</span><span class="n">start_position</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;tool_tip&quot;</span><span class="p">);</span>
+
+<span class="w">  </span><span class="c1">// Plan to the goal pose</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">moveit_cpp</span><span class="o">::</span><span class="n">PlanningComponent</span><span class="o">::</span><span class="n">PlanSolution</span><span class="w"> </span><span class="n">to_start_plan</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">planning_components</span><span class="o">-&gt;</span><span class="n">plan</span><span class="p">();</span>
+
+<span class="w">  </span><span class="c1">// Check if planning was successful</span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">to_start_plan</span><span class="p">)</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">      </span><span class="n">RCLCPP_INFO</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">get_logger</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;Planning to start failed.&quot;</span><span class="p">);</span>
+<span class="w">      </span><span class="n">rclcpp</span><span class="o">::</span><span class="n">shutdown</span><span class="p">();</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="c1">// Execute the planned trajectory</span>
+<span class="w">  </span><span class="n">moveit_cpp_ptr</span><span class="o">-&gt;</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;arm&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">to_start_plan</span><span class="p">.</span><span class="n">trajectory</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Add the planning and exectution steps for the whole pick and place sequence: <code class="docutils literal notranslate"><span class="pre">start</span> <span class="pre">position</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">approach_object_1</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">pick_object_1</span></code>-&gt;<code class="docutils literal notranslate"><span class="pre">approach_object_1</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">approach_object_2</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">pick_object_2</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">start</span> <span class="pre">position</span></code>.</p>
+</li>
+</ol>
+<p>Now you can execute the full pick an place sequence.</p>
+<ol class="arabic">
+<li><p><strong>Advanced</strong>: We are still missing the commands to open and close the gripper. On the real robot, the gripper is connected to the Digital Ouputs 0 and 1. For opening and closing the gripper we need to set the Digital Outputs as shown in the following table.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>State</p></th>
+<th class="head"><p>DO0</p></th>
+<th class="head"><p>DO1</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Open</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Closed</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+</tr>
+</tbody>
+</table>
+<p>The ur_robot_driver provides a service to set the Digital Outputs under <code class="docutils literal notranslate"><span class="pre">/io_and_status_controller/set_io</span></code>. The service takes a <code class="docutils literal notranslate"><span class="pre">ur_msgs::srv::SetIO</span></code> message as input. The <code class="docutils literal notranslate"><span class="pre">SetIO</span></code> message takes the following parameters:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">fun</span></code>: The function of the Digital Output. For setting digital outputs use:<br />
+<code class="docutils literal notranslate"><span class="pre">ur_msgs::srv::SetIO::Request::FUN_SET_DIGITAL_OUT</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pin</span></code>: The pin number of the Digital Output. 0 for DO0 and 1 for DO1.<br />
+<code class="docutils literal notranslate"><span class="pre">ur_msgs::srv::SetIO::Request::PIN_DOUT0/DOUT1</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">state</span></code>: The state of the Digital Output.<br />
+<code class="docutils literal notranslate"><span class="pre">ur_msgs::srv::SetIO::Request::STATE_ON/OFF</span></code></p></li>
+</ul>
+ <br/>
+ Add a service client to the node to call the ``/io_and_status_controller/set_io`` service. Then add the commands to open and close the gripper to the pick and place sequence.
+ <br/>
+<blockquote>
+<div><p><strong>Node</strong>: The <code class="docutils literal notranslate"><span class="pre">SetIO</span></code> service is not available in simulation. Therefore you can only test the full pick and place sequence on the real robot.</p>
+</div></blockquote>
+</li>
+</ol>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="2.Connecting_real_hardware.html" class="btn btn-neutral float-left" title="CONNECTING REAL HARDWARE" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Christoph Hellmann Santos, Harshavardan Deshpande, Ragesh Ramachandran, Ruichao Wu.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MOVEIT SETUP ASSISTANT &mdash; ROS2 Manipulation Workshop  documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="CONNECTING REAL HARDWARE" href="2.Connecting_real_hardware.html" />
+    <link rel="prev" title="ROBOT WORKCELL COMPOSITION" href="../../robot_description/workshops/2.Robot_workcell_composition.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            ROS2 Manipulation Workshop
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../tech_setup/workshops/0.Setup_Environment.html">DEVELOPMENT ENVIRONEMNT SETUP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../robot_description/workshops/2.Robot_workcell_composition.html">ROBOT WORKCELL COMPOSITION</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">MOVEIT SETUP ASSISTANT</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-a-urdf-file-with-the-setup-assistant">2. Using a URDF file with the setup assistant</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#introduction-to-the-moveit-setup-assistant">Introduction to the MoveIt! Setup Assistant</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#configure-your-robot-cell-with-the-moveit-setup-assistant">Configure your robot cell with the MoveIt Setup Assistant</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#adding-and-adjusting-configuration-files">3. Adding and adjusting configuration files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#moveit-usage">4. MoveIt Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#scene-objects">5. Scene objects</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="2.Connecting_real_hardware.html">CONNECTING REAL HARDWARE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3.Simple_pick_n_place.html">SIMPLE PICK &amp; PLACE</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ROS2 Manipulation Workshop</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">MOVEIT SETUP ASSISTANT</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/moveit/workshops/1.Setup_assistant.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="moveit-setup-assistant">
+<h1>MOVEIT SETUP ASSISTANT<a class="headerlink" href="#moveit-setup-assistant" title="Permalink to this heading"></a></h1>
+<p>Contents</p>
+<ol class="arabic simple">
+<li><p>Introduction</p></li>
+<li><p>Using a URDF file with the setup assistant</p>
+<ul class="simple">
+<li><p>Introduction to the MoveIt! Setup Assistant</p></li>
+<li><p>Configure your robot with the MoveIt! Setup Assistant</p></li>
+</ul>
+</li>
+<li><p>MoveIt! Usage</p>
+<ul class="simple">
+<li><p>demo.launch</p></li>
+</ul>
+</li>
+</ol>
+<hr class="docutils" />
+<section id="introduction">
+<h2>1. Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading"></a></h2>
+<p>This tutorial explains the basics of how to describe industrial robots in ROS and how to use the created kinematic models. You will learn about the Unified Robot Description Format (URDF). The tutorial will inform about how to create a robot model, how to visualize your robot and begin with easy planning for your model.</p>
+<ul class="simple">
+<li><p>Lines beginning with $ are terminal commands</p></li>
+<li><p>Lines beginning with # indicate the syntax of the commands</p></li>
+<li><p>The symbol → represents a line break.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="using-a-urdf-file-with-the-setup-assistant">
+<h2>2. Using a URDF file with the setup assistant<a class="headerlink" href="#using-a-urdf-file-with-the-setup-assistant" title="Permalink to this heading"></a></h2>
+<p>A URDF file can be used from several ROS tools, e.g. as robot model in
+the Gazebo Simulation environment, as visualization element in rviz or as a kinematic model for MoveIt!.</p>
+<p>MoveIt! is the most widely used Open Source software for motion planning,
+manipulation, 3D perception, kinematic, control and navigation.</p>
+<p>It provides an easy-to-use platform for developing advanced robotics applications, evaluating new robot designs and building integrated robotics products.</p>
+<section id="introduction-to-the-moveit-setup-assistant">
+<h3>Introduction to the MoveIt! Setup Assistant<a class="headerlink" href="#introduction-to-the-moveit-setup-assistant" title="Permalink to this heading"></a></h3>
+<p>The MoveIt! Setup Assistant is a powerful graphical tool to configure any robot you want to use with MoveIt!. The main task of the Setup Assistant consists in generating the Semantic Robot Description Format (SRDF), which is used in the ROS node move_group.</p>
+<p>Check http://wiki.ros.org/srdf for further information.
+Besides the SRDF, there are a lot of other configuration files generated e.g. for joint limits, kinematics and motion planning. The only information the tool needs is the Unified Robot Description Format (URDF) of the robot, i.e. the file that you have created recently.</p>
+</section>
+<section id="configure-your-robot-cell-with-the-moveit-setup-assistant">
+<h3>Configure your robot cell with the MoveIt Setup Assistant<a class="headerlink" href="#configure-your-robot-cell-with-the-moveit-setup-assistant" title="Permalink to this heading"></a></h3>
+<p>To start the Setup Assistant you need the following command:</p>
+<p><code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">launch</span> <span class="pre">moveit_setup_assistant</span> <span class="pre">setup_assistant.launch.py</span></code></p>
+<p>A graphical user interface comparable to figure 1 should appear.</p>
+<p><img alt="Figure 1" src="../../_images/figure1.png" /><br />
+Figure 1: MoveIt! Setup Assistant start screen</p>
+<ul class="simple">
+<li><p>Select the Create New MoveIt! Configuration Package button and browse for the file called ur_demo_description.urdf.xacro in <code class="docutils literal notranslate"><span class="pre">~/moveit_ws/src/ur5e_cell/ur5e_cell_description/urdf/</span></code> .
+This file includes the URDF file you edited in the URDF tutorial. Your window should look like shown in figure 2.</p></li>
+<li><p>Click on the Load Files button and after a few seconds the Setup Assistant will present
+you a model of the robot on the right side of the window.</p></li>
+<li><p>Afterwards click on the Self Collision pane selector to generate a matrix for pair of links which are not necessary to be checked for collision every time at planning process. This is because they are either always in collision or never in collision.</p></li>
+</ul>
+<p><img alt="Figure 2" src="../../_images/figure2.png" /><br />
+Figure 2: Choose mode and select URDF</p>
+<ul class="simple">
+<li><p>Change the Sampling Density to maximum possible</p></li>
+<li><p>Select the Regenerate Default Collision Matrix button</p></li>
+<li><p>After a few seconds the MoveIt! Setup Assistant will present you the results of the computation. Have a look at figure 3 for reference.</p></li>
+</ul>
+<p><img alt="Figure 3" src="../../_images/figure3.png" /><br />
+Figure 3: Results for the Default Collision Matrix</p>
+<ul class="simple">
+<li><p>Skip the virtual joints pane as the workcell.xacro.urdf already contains a fixed link.</p></li>
+<li><p>In the next step you will define your planning group for which MoveIt! later on tries to compute a path.</p>
+<ul>
+<li><p>Click on the <strong>Planning Groups</strong> pane selector on the left</p></li>
+<li><p>Click on <strong>Add Group</strong> at the bottom</p></li>
+<li><p>Set the Group Name as “arm”</p></li>
+<li><p>Choose <code class="docutils literal notranslate"><span class="pre">kdl_kinematics_plugin/KDLKinematicsPlugin</span></code> as the Kinematic solver.</p></li>
+<li><p>Choose RTTConnect as default planner.</p></li>
+<li><p>Click on the <strong>Add Kin. Chain</strong> button and choose <code class="docutils literal notranslate"><span class="pre">base_link</span></code> as Base Link and <code class="docutils literal notranslate"><span class="pre">tool_tip</span></code> as Tip Link (see Figure 5.1).</p></li>
+<li><p>Select <strong>Joints</strong> and <strong>Edit Selected</strong>. Add joints <code class="docutils literal notranslate"><span class="pre">shoulder_pan_joint</span></code>, <code class="docutils literal notranslate"><span class="pre">shoulder_lift_joint</span></code>, <code class="docutils literal notranslate"><span class="pre">elbow_joint</span></code> and <code class="docutils literal notranslate"><span class="pre">wrist_[1-3]_joint</span></code> (see Figure 5.2).</p></li>
+<li><p>Click “Save”. See the result in Figure 5 for reference.</p></li>
+</ul>
+</li>
+</ul>
+<p><img alt="Figure 5" src="../../_images/figure5.png" /><br />
+Figure 5: Add Planning Group “arm”</p>
+<p><img alt="Figure 5.1" src="../../_images/figure51.png" /><br />
+Figure 5.1: Adding the kinematic chain to planning group arm</p>
+<p><img alt="Figure 5.2" src="../../_images/figure52.png" />
+Figure 5.2: Adding the joints to planning group arm</p>
+<p><img alt="Figure 5.3" src="../../_images/figure53.png" />
+Figure 5.3 Final planning group arm</p>
+<ul class="simple">
+<li><p>Skip the End Effectors and Passive Joints pane selectors.</p></li>
+<li><p>The Setup Assistant includes the option to add poses. It is helpful to define poses that
+will be used often in later developing process e.g. a home pose for the robot.</p>
+<ul>
+<li><p>Select Robot Poses</p></li>
+<li><p>Click the Add Pose button</p></li>
+<li><p>Choose a name for the pose and move the joints to a position that you like</p></li>
+<li><p>Save the Pose</p></li>
+</ul>
+</li>
+</ul>
+<p><img alt="Figure 7" src="../../_images/figure14.png" /><br />
+Figure 7: Defining robot poses</p>
+<ul class="simple">
+<li><p>Skip the <code class="docutils literal notranslate"><span class="pre">ros2_control</span> <span class="pre">URDF</span> <span class="pre">Model</span></code> pane as we use the ros2_control model provided by UR Robot Driver.</p></li>
+<li><p>Choose the <strong>ROS 2 Controllers</strong> pane on the left.</p>
+<ul>
+<li><p>Auto add the controllers and then click on arm_controller and <strong>Edit selected</strong> (see Figure 10)</p></li>
+<li><p>Change the name to <code class="docutils literal notranslate"><span class="pre">joint_trajectory_controller</span></code> and click save (Figure 10.1, Figure 10.2)</p></li>
+</ul>
+</li>
+</ul>
+<p><img alt="Figure 10" src="../../_images/figure100.png" /><br />
+Figure 10: ROS2 controllers after auto adding</p>
+<p><img alt="Figure 10.1" src="../../_images/figure101.png" /><br />
+Figure 10.1: Modifying the ROS2 controllers</p>
+<p><img alt="Figure 10.2" src="../../_images/figure102.png" /><br />
+Figure 10.2: Correctly added and named ROS2 controllers</p>
+<ul class="simple">
+<li><p>Choose the <strong>Moveit Controllers</strong> pane on the left</p>
+<ul>
+<li><p>Auto add the controllers and then click on arm_controller and <strong>Edit selected</strong> (Figure 11)</p></li>
+<li><p>Change the name to <code class="docutils literal notranslate"><span class="pre">joint_trajectory_controller</span></code> and click save (Figure 11.1, Figure 11.2)</p></li>
+</ul>
+</li>
+<li><p>Chose the <strong>Author information</strong> pane on the left and enter your name and e-mail adress</p></li>
+<li><p>Click on <strong>Configuration Files</strong>, click <strong>Browse</strong> and select path till “src” inside your workspace and manually name the package “ur5e_demo_moveit_config” as shown in figure 6.</p></li>
+<li><p>Click “Generate Package”</p></li>
+<li><p>If the process completes successfully you can try out your newly created MoveIt! configuration as described in the next section</p></li>
+</ul>
+<p><img alt="Figure 11" src="../../_images/figure6.png" /><br />
+Figure 12: Configuration Files</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="adding-and-adjusting-configuration-files">
+<h2>3. Adding and adjusting configuration files<a class="headerlink" href="#adding-and-adjusting-configuration-files" title="Permalink to this heading"></a></h2>
+<p>Sadly, <strong>Moveit Setup Assistant</strong> is not yet feature complete and the generated package does not contain all necessary and correct configuration files.</p>
+<ul class="simple">
+<li><p>You need to setup correct initial positions for the robot. To do so copy the file provided under <code class="docutils literal notranslate"><span class="pre">workshop_resources/ur5e_moveit_config/config/initial_positions.yaml</span></code> into the config folder of your ur5e_cell_moveit_config package.</p></li>
+<li><p>Next you need to setup the correct joint limits. To do so copy the contents of <code class="docutils literal notranslate"><span class="pre">workshop_resources/ur5e_moveit_config/config/joint_limits.yaml</span></code> into your joint_limits.yaml</p></li>
+<li><p>Then we need to fix the ROS2 controllers configuration. The UR robot has many more controllers than the ones Moveit knows about. Therefore copy the contents `workshop_resources/ur5e_moveit_config/config/ros2_controllers.yaml`` into your ros2_controllers.yaml.</p></li>
+<li><p>Finally we need to add the configuration for the ompl planner. To do so copy <code class="docutils literal notranslate"><span class="pre">workshop_resources/ur5e_moveit_config/config/ompl_planning.yaml</span></code> to your config folder.</p></li>
+<li><p>The UR robot comes with a quite complex xacro file that needs many arguments which <strong>Moveit Setup Assistant</strong> does not know about. Replace the contents of ur5e_workcell.urdf.xacro with the following content.</p></li>
+</ul>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
+<span class="nt">&lt;robot</span><span class="w"> </span><span class="na">xmlns:xacro=</span><span class="s">&quot;http://www.ros.org/wiki/xacro&quot;</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;ur5e_workcell&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="cm">&lt;!-- &lt;xacro:arg name=&quot;initial_positions_file&quot; default=&quot;$(find ur5e_cell_moveit_config)/config/initial_positions.yaml&quot;/&gt; --&gt;</span>
+<span class="w">    </span><span class="nt">&lt;xacro:arg</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;name&quot;</span><span class="w"> </span><span class="na">default=</span><span class="s">&quot;ur5e_workcell&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;xacro:arg</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;ur_type&quot;</span><span class="w"> </span><span class="na">default=</span><span class="s">&quot;ur5e&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;xacro:arg</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;prefix&quot;</span><span class="w"> </span><span class="na">default=</span><span class="s">&quot;&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;xacro:arg</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;script_filename&quot;</span><span class="w"> </span><span class="na">default=</span><span class="s">&quot;$(find ur_robot_driver)/resources/ros_control.urscript&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;xacro:arg</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;output_recipe_filename&quot;</span><span class="w"> </span><span class="na">default=</span><span class="s">&quot;$(find ur_robot_driver)/resources/rtde_output_recipe.txt&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;xacro:arg</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;input_recipe_filename&quot;</span><span class="w"> </span><span class="na">default=</span><span class="s">&quot;$(find ur_robot_driver)/resources/rtde_input_recipe.txt&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;xacro:arg</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;use_fake_hardware&quot;</span><span class="w"> </span><span class="na">default=</span><span class="s">&quot;true&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;xacro:arg</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;fake_sensor_commands&quot;</span><span class="w"> </span><span class="na">default=</span><span class="s">&quot;true&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;xacro:arg</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;robot_ip&quot;</span><span class="w"> </span><span class="na">default=</span><span class="s">&quot;192.168.56.2&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;xacro:arg</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;prefix&quot;</span><span class="w"> </span><span class="na">default=</span><span class="s">&quot;&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="cm">&lt;!-- Import ur5e_workcell urdf file --&gt;</span>
+<span class="w">    </span><span class="nt">&lt;xacro:include</span><span class="w"> </span><span class="na">filename=</span><span class="s">&quot;$(find ur5e_cell_description)/urdf/workcell.urdf.xacro&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/robot&gt;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>You an delete <code class="docutils literal notranslate"><span class="pre">ur5e_workcell.ros2_control.xacro</span></code>.</p></li>
+</ul>
+<p>Now you are all setup for running the cell in rviz with fake actuators (simulated).</p>
+</section>
+<hr class="docutils" />
+<section id="moveit-usage">
+<h2>4. MoveIt Usage<a class="headerlink" href="#moveit-usage" title="Permalink to this heading"></a></h2>
+<p>This section makes actual use of your newly created MoveIt! Package.</p>
+<p>You can try out your newly created MoveIt! package by launching the following:<br />
+<code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">launch</span> <span class="pre">ur5e_cell_moveit_config</span> <span class="pre">demo.launch.py</span></code><br />
+RViz should start and the UR5 should be visualized.</p>
+<ul class="simple">
+<li><p>Uncheck: Displays -&gt; Motion Planning -&gt; Planned Path -&gt; Loop Animation</p></li>
+<li><p>Set: Motion Planning -&gt; Planning Request -&gt; Interactive Marker Size -&gt; 0.1</p></li>
+<li><p>Select: Motion Planning -&gt; Context -&gt; Planning Library -&gt; RRTConnectkConfigDefault</p></li>
+<li><p>Select: Motion Planning -&gt; Planning -&gt; Query -&gt; Select Start State -&gt; Update</p></li>
+<li><p>Select: Motion Planning -&gt; Planning -&gt; Query -&gt; Select Goal State -&gt; Update</p></li>
+<li><p>Click on the Plan Button in the Commands category</p>
+<ul>
+<li><p>You should see the robot moving on the computed path from the Start State pre sented in blue and silver to the Goal State presented in yellow (figure 7)</p></li>
+</ul>
+</li>
+<li><p>Click on the Execute Button in the Commands category</p>
+<ul>
+<li><p>The Start State should now be at the selected Goal State</p></li>
+</ul>
+</li>
+</ul>
+<p>You should get a screen similar to figure 7.</p>
+<p><img alt="Figure 12" src="../../_images/figure120.png" /><br />
+<em>Figure 12: Motion planning in RViz</em></p>
+<p>You can now use RVIZ and move around the interactive markers (the RGB arrows and rings on the tip link of the robot) to give goals to Moveit.</p>
+<p>Under the <em>Context</em> tab ind the <em>MotionPlanning</em> pane, you can select which planner from OMPL (or your custom choice of planning library) you want to use. Note that every planner has strengths and weaknesses, and you might use different planners for different scenarios. You can leave it to <em>unspecified</em> and the default of <code class="docutils literal notranslate"><span class="pre">RRTConnectkConfigDefault</span></code> will be chosen, which is usually a good generic choice. If any of your goal states fail to be planned for or plans poorly, you could change the planner to see if that works better.</p>
+<p>When ready with a valid goal state, select the <em>Planning</em> tab under the <em>MotionPlanning</em> pane in RVIZ, and click on <strong>Plan</strong>. If the goal state is valid (no collissions, plannable goal etc…), the planner calculates a plan for you and displays the trajectory. You can now click <strong>Execute</strong> to execute this plan.</p>
+<p>Feel free to plan more goals and play around with any of the parameters to observe the changes they effect. When you are satisfied, you can move on to the next workshop.</p>
+<blockquote>
+<div><p>HINT: You could use the RQT Graph tool to see what the computational graph looks like now, consider if everyting looks fine, and compare to the next workshop. Command: <code class="docutils literal notranslate"><span class="pre">rqt_graph</span></code>. You can save this as an image for later reference.</p>
+</div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="scene-objects">
+<h2>5. Scene objects<a class="headerlink" href="#scene-objects" title="Permalink to this heading"></a></h2>
+<p>After that you are able to use the Plan and Execute commands again.<br />
+There is also the possibility to add scene objects to your robot model. Change to the <strong>Scene Objects</strong> tab and under <code class="docutils literal notranslate"><span class="pre">Add/Remove</span> <span class="pre">scene</span> <span class="pre">object</span></code> you will find the option to add geometric shapes and also .stl files.
+After you load this object a (possibly giant) box appears. Do not be alarmed, the box is friendly. Use the <strong>Scale</strong> slider to make it smaller &amp; move it somewhere next to the robot using the giant interactive markers. Click once the <strong>Publish Scene</strong> button to include the box in the planning environment of the robot.<br />
+Change back to the <strong>Planning</strong> tab. Give a new goal target across this box and execute to it. You will recognize, that the box is avoided because it represents a collision object. See figure 1 for reference.</p>
+<p><img alt="Figure 1" src="../../_images/figure130.png" /><br />
+<em>Figure 1: Insert a scene object to the MoveIt! planning environment</em></p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../robot_description/workshops/2.Robot_workcell_composition.html" class="btn btn-neutral float-left" title="ROBOT WORKCELL COMPOSITION" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="2.Connecting_real_hardware.html" class="btn btn-neutral float-right" title="CONNECTING REAL HARDWARE" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Christoph Hellmann Santos, Harshavardan Deshpande, Ragesh Ramachandran, Ruichao Wu.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
