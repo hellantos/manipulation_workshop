@@ -146,14 +146,14 @@ td, th {
 }
 
 ol li {
-  background: #ffe5e5;
+  /*background: #ffe5e5;+/
   color: rgb(196, 39, 0);
   padding: 2px;
   margin-left: 25px;
 }
 
 ul li {
-  background: #cce5ff;
+  /*background: #cce5ff;*/
   color: rgb(13, 53, 95);
   margin: 2px;
 }
