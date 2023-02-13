@@ -33,14 +33,15 @@ jobs:
         run: |
             git clone https://github.com/ipa-cmh/manipulation_training.git --branch gh-pages --single-branch gh-pages
             mkdir -p gh-pages/
+            rm -rf gh-pages/*
             touch gh-pages/.nojekyll
             cp -r ./_build/html/* gh-pages/
             mkdir -p gh-pages/robot_description/slides/
-            cp -r ./robot_description/slides/ gh-pages/robot_description/slides/
+            cp -r ./robot_description/slides/* gh-pages/robot_description/slides/
             mkdir -p gh-pages/moveit/slides/
-            cp -r ./moveit/slides/ gh-pages/moveit/slides/
+            cp -r ./moveit/slides/* gh-pages/moveit/slides/
             mkdir -p gh-pages/advanced_applicaiton_examples/slides/
-            cp -r ./advanced_applicaiton_examples/slides/ gh-pages/advanced_applicaiton_examples/slides/
+            cp -r ./advanced_applicaiton_examples/slides/* gh-pages/advanced_applicaiton_examples/slides/
             cd gh-pages
             git config --local user.email "action@github.com"
             git config --local user.name "GitHub Action"
