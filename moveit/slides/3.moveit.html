@@ -172,6 +172,48 @@ https://ros-planning.github.io/moveit_tutorials/doc/planning_scene_monitor/plann
 
 ## Key Concepts
 
+### Robot Model
+
+---
+
+## Key Concepts
+
+### Planning Scene
+
+The `PlanningScene` class provides the main interface that you will use for collision checking and constraint checking. Multiple planning scenes can be created simultaneously. The most up-to-date version is maintained by the `PlanningSceneMonitor`
+
+<div>
+    <center>
+      <img src="resources/plan_scene1.jpg" width="400px">
+    </center>
+</div>
+
+---
+
+## Key Concepts
+
+### Planning Scene
+
+```c++
+// Initialize planning scene (NOT the recommended way)
+planning_scene::PlanningScene planning_scene(robot_model);
+
+// Check whether the robot in its current state is in self-collision
+collision_detection::CollisionRequest collision_request;
+collision_detection::CollisionResult collision_result;
+planning_scene.checkSelfCollision(collision_request, collision_result);
+RCLCPP_INFO_STREAM(LOGGER, "Current state is " << (collision_result.collision ? "in" : "not in")
+                                               << " self collision");
+
+// planning_scene.checkCollision(collision_request, collision_result, copied_state);
+RCLCPP_INFO_STREAM(LOGGER, "Current state is " << (collision_result.collision ? "in" : "not in")
+                                               << " self collision");
+```
+
+---
+
+## Key Concepts
+
 ### Planning Scene Monitor
 
 The `PlanningSceneMonitor` wraps a `PlanningScene` with ROS interfaces for keeping the `PlanningScene` up to date.  
