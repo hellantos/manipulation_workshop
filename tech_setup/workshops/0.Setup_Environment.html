@@ -167,11 +167,11 @@ vcs<span class="w"> </span>import<span class="w"> </span>--input<span class="w">
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
 <span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ROS2 Development Container&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;privileged&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;remoteUser&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;xxx&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;remoteUser&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;christoph&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;build&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;dockerfile&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Dockerfile&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;dockerfile&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;DOCKERFILE&quot;</span><span class="p">,</span>
 <span class="w">        </span><span class="nt">&quot;args&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="nt">&quot;USERNAME&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;xxx&quot;</span>
+<span class="w">            </span><span class="nt">&quot;USERNAME&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;christoph&quot;</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">},</span>
 <span class="w">    </span><span class="nt">&quot;workspaceFolder&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/home/ws&quot;</span><span class="p">,</span>
@@ -189,7 +189,9 @@ vcs<span class="w"> </span>import<span class="w"> </span>--input<span class="w">
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">},</span>
 <span class="w">    </span><span class="nt">&quot;containerEnv&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;DISPLAY&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;unix:0&quot;</span>
+<span class="w">        </span><span class="nt">&quot;DISPLAY&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;unix:0&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;ROS_LOCALHOST_ONLY&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;ROS_DOMAIN_ID&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;42&quot;</span>
 <span class="w">    </span><span class="p">},</span>
 <span class="w">    </span><span class="nt">&quot;runArgs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">        </span><span class="s2">&quot;--net=host&quot;</span>
@@ -200,7 +202,7 @@ vcs<span class="w"> </span>import<span class="w"> </span>--input<span class="w">
 <span class="w">        </span><span class="s2">&quot;source=${localWorkspaceFolder}/../install,target=/home/ws/install,type=bind&quot;</span><span class="p">,</span>
 <span class="w">        </span><span class="s2">&quot;source=${localWorkspaceFolder}/../log,target=/home/ws/log,type=bind&quot;</span>
 <span class="w">    </span><span class="p">],</span>
-<span class="w">    </span><span class="nt">&quot;postCreateCommand&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sudo rosdep update &amp;&amp; sudo rosdep install --from-paths src --ignore-src -y &amp;&amp; sudo chown -R xxx /home/ws/&quot;</span>
+<span class="w">    </span><span class="nt">&quot;postCreateCommand&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sudo rosdep update &amp;&amp; sudo rosdep install --from-paths src --ignore-src -y &amp;&amp; sudo chown -R christoph /home/ws/&quot;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
