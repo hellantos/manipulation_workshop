@@ -101,7 +101,7 @@
 <p>To start the workshop, open the ws_manipulation_workshop/src folder in VS Code and reopen it in the DevContainer. The please checkout the ur5e_cell repository at the tag… In a VS Code terminal, you can do this like this:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/ws_manipulation_workshop/src/ur5e_cell
 git<span class="w"> </span>fetch<span class="w"> </span>--all<span class="w"> </span>--tags
-git<span class="w"> </span>checkout<span class="w"> </span>tags/workshop_2
+git<span class="w"> </span>checkout<span class="w"> </span>tags/2-robot-cell-composition-start
 </pre></div>
 </div>
 </section>
@@ -156,7 +156,7 @@ git<span class="w"> </span>checkout<span class="w"> </span>tags/workshop_2
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">name</span></code> attribute specifies the name of the argument. The <code class="docutils literal notranslate"><span class="pre">default_value</span></code> attribute specifies the default value of the argument. If the argument is not passed to the macro, the default value will be used.</p>
 <ul>
-<li><p>Now to add the necessary arguments for instantiating the robot, take a look at the <a class="reference external" href="https://github.com/UniversalRobots/Universal_Robots_ROS2_Description/blob/ros2/urdf/ur_macro.xacro"><code class="docutils literal notranslate"><span class="pre">ur_macro.xacro</span></code></a> file. You will see that the <code class="docutils literal notranslate"><span class="pre">ur_robot</span></code>-macro can the following parameters:</p>
+<li><p>Now to add the necessary arguments for instantiating the robot, take a look at the <a class="reference external" href="https://github.com/UniversalRobots/Universal_Robots_ROS2_Description/blob/ros2/urdf/ur_macro.xacro">ur_macro.xacro</a> file. You will see that the <code class="docutils literal notranslate"><span class="pre">ur_robot</span></code>-macro can the following parameters:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;xacro:macro</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;ur_robot&quot;</span><span class="w"> </span><span class="na">params=</span><span class="s">&quot;</span>
 <span class="s">    name</span>
 <span class="s">    prefix</span>
@@ -237,7 +237,7 @@ git<span class="w"> </span>checkout<span class="w"> </span>tags/workshop_2
 </pre></div>
 </div>
 </li>
-<li><p>For the camera, we need to add only few arguments here. Take a look at the <a class="reference external" href="https://github.com/IntelRealSense/realsense-ros/blob/ros2-development/realsense2_description/urdf/_d435.urdf.xacro"><code class="docutils literal notranslate"><span class="pre">camera_macro.xacro</span></code></a>, can you find the parameters that need to be added?</p>
+<li><p>For the camera, we need to add only few arguments here. Take a look at the <a class="reference external" href="https://github.com/IntelRealSense/realsense-ros/blob/ros2-development/realsense2_description/urdf/_d435.urdf.xacro">camera_macro.xacro</a>, can you find the parameters that need to be added?</p>
 <p>Add the following lines to the <code class="docutils literal notranslate"><span class="pre">workcell.urdf.xacro</span></code> file:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;xacro:arg</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;use_nominal_extrinsics&quot;</span><span class="w"> </span><span class="na">default=</span><span class="s">&quot;false&quot;</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;xacro:arg</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;add_plug&quot;</span><span class="w"> </span><span class="na">default=</span><span class="s">&quot;false&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
