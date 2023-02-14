@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CONNECTING REAL HARDWARE &mdash; ROS2 Manipulation Workshop  documentation</title>
+  <title>6. CONNECTING REAL HARDWARE &mdash; ROS2 Manipulation Workshop  documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -20,8 +20,8 @@
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="SIMPLE PICK &amp; PLACE" href="3.Simple_pick_n_place.html" />
-    <link rel="prev" title="MOVEIT SETUP ASSISTANT" href="1.Setup_assistant.html" /> 
+    <link rel="next" title="7. SIMPLE PICK &amp; PLACE" href="3.Simple_pick_n_place.html" />
+    <link rel="prev" title="5. MOVEIT SETUP ASSISTANT" href="1.Setup_assistant.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -43,21 +43,22 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Workshops:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../../tech_setup/workshops/0.Setup_Environment.html">DEVELOPMENT ENVIRONEMNT SETUP</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../robot_description/workshops/1.Simple_urdf_composition.html">SIMPLE COMPOSITION</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../robot_description/workshops/2.Robot_workcell_composition.html">ROBOT WORKCELL COMPOSITION</a></li>
-<li class="toctree-l1"><a class="reference internal" href="1.Setup_assistant.html">MOVEIT SETUP ASSISTANT</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">CONNECTING REAL HARDWARE</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#creating-the-real-hardware-launchfile-for-ur5e-robot-cell">1. Creating the real hardware launchfile for ur5e_robot_cell</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#connecting-to-the-robot">2. Connecting to the robot</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#on-the-robot-gui-you-need-to-activate-the-remote-connection-programm-no-everything-should-be-well-and-you-can-start-planning-and-executing-trajectories-on-the-real-robot">On the ROBOT GUI you need to activate the remote connection programm.
+<li class="toctree-l1"><a class="reference internal" href="../../agenda.html">1. AGENDA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tech_setup/workshops/0.Setup_Environment.html">2. DEVELOPMENT ENVIRONEMNT SETUP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../robot_description/workshops/1.Simple_urdf_composition.html">3. SIMPLE COMPOSITION</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../robot_description/workshops/2.Robot_workcell_composition.html">4. ROBOT WORKCELL COMPOSITION</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1.Setup_assistant.html">5. MOVEIT SETUP ASSISTANT</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">6. CONNECTING REAL HARDWARE</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#creating-the-real-hardware-launchfile-for-ur5e-robot-cell">6.1. 1. Creating the real hardware launchfile for ur5e_robot_cell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#connecting-to-the-robot">6.2. 2. Connecting to the robot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#on-the-robot-gui-you-need-to-activate-the-remote-connection-programm-no-everything-should-be-well-and-you-can-start-planning-and-executing-trajectories-on-the-real-robot">6.3. On the ROBOT GUI you need to activate the remote connection programm.
 No everything should be well and you can start planning and executing trajectories on the real robot.</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#introspection">3. Introspection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#introspection">6.4. 3. Introspection</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="3.Simple_pick_n_place.html">SIMPLE PICK &amp; PLACE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3.Simple_pick_n_place.html">7. SIMPLE PICK &amp; PLACE</a></li>
 </ul>
 
         </div>
@@ -74,7 +75,7 @@ No everything should be well and you can start planning and executing trajectori
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">CONNECTING REAL HARDWARE</li>
+      <li class="breadcrumb-item active"><span class="section-number">6. </span>CONNECTING REAL HARDWARE</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../_sources/moveit/workshops/2.Connecting_real_hardware.md.txt" rel="nofollow"> View page source</a>
       </li>
@@ -85,11 +86,17 @@ No everything should be well and you can start planning and executing trajectori
            <div itemprop="articleBody">
              
   <section id="connecting-real-hardware">
-<h1>CONNECTING REAL HARDWARE<a class="headerlink" href="#connecting-real-hardware" title="Permalink to this heading"></a></h1>
+<h1><span class="section-number">6. </span>CONNECTING REAL HARDWARE<a class="headerlink" href="#connecting-real-hardware" title="Permalink to this heading"></a></h1>
 <p>You have created a new moveit config package for the custom UR5 URDF and used the <code class="docutils literal notranslate"><span class="pre">demo.launch.py</span></code> to get a quick feel for how it works with RVIZ. This method is useful for quickly verifying the setup assistant process and the validity of the URDF. Unfortunately, what it executes is just fake controllers for this reason. Further configuration is necessary to fully connect Moveit and the real controllers. This tutorial will show you how to do this for the ur_robot_driver.</p>
+<p>In case you haven’t correctly completed the previous workshop, you can use the following commands to checkout the correct tag:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/home/ws/src/ur5e_cell
+git<span class="w"> </span>fetch<span class="w"> </span>--all<span class="w"> </span>--tags
+git<span class="w"> </span>checkout<span class="w"> </span><span class="m">2</span>-connecting-real-hardware-workshop
+</pre></div>
+</div>
 <hr class="docutils" />
 <section id="creating-the-real-hardware-launchfile-for-ur5e-robot-cell">
-<h2>1. Creating the real hardware launchfile for ur5e_robot_cell<a class="headerlink" href="#creating-the-real-hardware-launchfile-for-ur5e-robot-cell" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">6.1. </span>1. Creating the real hardware launchfile for ur5e_robot_cell<a class="headerlink" href="#creating-the-real-hardware-launchfile-for-ur5e-robot-cell" title="Permalink to this heading"></a></h2>
 <p>The ur_robot_driver package provides us with a highly configurable launch file to connect to the real robot hardware. We are now going to create a launchfile for our application, that uses launchfiles provided by ur_robot_driver and by moveit setup assistant to launch our robot cell.</p>
 <ol class="arabic simple">
 <li><p>Create a file called <code class="docutils literal notranslate"><span class="pre">robot.launch.py</span></code> in the <code class="docutils literal notranslate"><span class="pre">ur5e_cell_moveit_config/launch</span></code> folder.</p></li>
@@ -211,7 +218,7 @@ No everything should be well and you can start planning and executing trajectori
 </section>
 <hr class="docutils" />
 <section id="connecting-to-the-robot">
-<h2>2. Connecting to the robot<a class="headerlink" href="#connecting-to-the-robot" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">6.2. </span>2. Connecting to the robot<a class="headerlink" href="#connecting-to-the-robot" title="Permalink to this heading"></a></h2>
 <p>In order to connect to the real robot, you need to setup your network connection correctly.
 Our robot here at Fraunhofer IPA has the IP address <code class="docutils literal notranslate"><span class="pre">192.168.56.2</span></code>. The ROS PC is directly
 connected to the robot via an ethernet cable. The ROS PC has the IP address <code class="docutils literal notranslate"><span class="pre">192.168.56.1</span></code>.
@@ -241,11 +248,11 @@ choose the correct network interface in the <code class="docutils literal notran
 </div>
 </section>
 <section id="on-the-robot-gui-you-need-to-activate-the-remote-connection-programm-no-everything-should-be-well-and-you-can-start-planning-and-executing-trajectories-on-the-real-robot">
-<h2>On the ROBOT GUI you need to activate the remote connection programm.
+<h2><span class="section-number">6.3. </span>On the ROBOT GUI you need to activate the remote connection programm.
 No everything should be well and you can start planning and executing trajectories on the real robot.<a class="headerlink" href="#on-the-robot-gui-you-need-to-activate-the-remote-connection-programm-no-everything-should-be-well-and-you-can-start-planning-and-executing-trajectories-on-the-real-robot" title="Permalink to this heading"></a></h2>
 </section>
 <section id="introspection">
-<h2>3. Introspection<a class="headerlink" href="#introspection" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">6.4. </span>3. Introspection<a class="headerlink" href="#introspection" title="Permalink to this heading"></a></h2>
 <p>Launch the RQT Graph tool again to observe what the computation graph looks like now.</p>
 <p>If you had saved the previous graph, you would notice that the <code class="docutils literal notranslate"><span class="pre">/robot_state_publisher</span></code> came previously from a <code class="docutils literal notranslate"><span class="pre">/move_group/fake_controller_joint_states</span></code> node whereas now it comes from Gazebo/real robot, telling us that the actual robot is being tracked.</p>
 <p>You will also notice a new <code class="docutils literal notranslate"><span class="pre">/arm_controller/follow_joint_trajectory</span></code> action, which now drives the sim/actual robot.</p>
@@ -257,8 +264,8 @@ No everything should be well and you can start planning and executing trajectori
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="1.Setup_assistant.html" class="btn btn-neutral float-left" title="MOVEIT SETUP ASSISTANT" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="3.Simple_pick_n_place.html" class="btn btn-neutral float-right" title="SIMPLE PICK &amp; PLACE" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="1.Setup_assistant.html" class="btn btn-neutral float-left" title="5. MOVEIT SETUP ASSISTANT" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="3.Simple_pick_n_place.html" class="btn btn-neutral float-right" title="7. SIMPLE PICK &amp; PLACE" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

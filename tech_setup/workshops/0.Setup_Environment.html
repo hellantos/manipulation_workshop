@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DEVELOPMENT ENVIRONEMNT SETUP &mdash; ROS2 Manipulation Workshop  documentation</title>
+  <title>2. DEVELOPMENT ENVIRONEMNT SETUP &mdash; ROS2 Manipulation Workshop  documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -20,8 +20,8 @@
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="SIMPLE COMPOSITION" href="../../robot_description/workshops/1.Simple_urdf_composition.html" />
-    <link rel="prev" title="Welcome to the ROS2 Manipulation Workshop" href="../../index.html" /> 
+    <link rel="next" title="3. SIMPLE COMPOSITION" href="../../robot_description/workshops/1.Simple_urdf_composition.html" />
+    <link rel="prev" title="1. AGENDA" href="../../agenda.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -43,28 +43,29 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Workshops:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">DEVELOPMENT ENVIRONEMNT SETUP</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#install-vs-code-and-docker">1. Install VS Code and Docker</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#install-docker">Install Docker</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#install-vs-code">Install VS Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../agenda.html">1. AGENDA</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">2. DEVELOPMENT ENVIRONEMNT SETUP</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#install-vs-code-and-docker">2.1. 1. Install VS Code and Docker</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#install-docker">2.1.1. Install Docker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#install-vs-code">2.1.2. Install VS Code</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#create-a-ros2-workspace">2. Create a ROS2 workspace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#open-workspace-in-docker-and-vs-code">3. Open workspace in docker and VS Code</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#edit-devcontainer-json-for-your-environment">1. Edit devcontainer.json for your environment.</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#build-development-container">2. Build Development Container</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#test-container">3. Test Container</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#create-a-ros2-workspace">2.2. 2. Create a ROS2 workspace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#open-workspace-in-docker-and-vs-code">2.3. 3. Open workspace in docker and VS Code</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#edit-devcontainer-json-for-your-environment">2.3.1. 1. Edit devcontainer.json for your environment.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#build-development-container">2.3.2. 2. Build Development Container</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#test-container">2.3.3. 3. Test Container</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../robot_description/workshops/1.Simple_urdf_composition.html">SIMPLE COMPOSITION</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../robot_description/workshops/2.Robot_workcell_composition.html">ROBOT WORKCELL COMPOSITION</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../moveit/workshops/1.Setup_assistant.html">MOVEIT SETUP ASSISTANT</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../moveit/workshops/2.Connecting_real_hardware.html">CONNECTING REAL HARDWARE</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../moveit/workshops/3.Simple_pick_n_place.html">SIMPLE PICK &amp; PLACE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../robot_description/workshops/1.Simple_urdf_composition.html">3. SIMPLE COMPOSITION</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../robot_description/workshops/2.Robot_workcell_composition.html">4. ROBOT WORKCELL COMPOSITION</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../moveit/workshops/1.Setup_assistant.html">5. MOVEIT SETUP ASSISTANT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../moveit/workshops/2.Connecting_real_hardware.html">6. CONNECTING REAL HARDWARE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../moveit/workshops/3.Simple_pick_n_place.html">7. SIMPLE PICK &amp; PLACE</a></li>
 </ul>
 
         </div>
@@ -81,7 +82,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">DEVELOPMENT ENVIRONEMNT SETUP</li>
+      <li class="breadcrumb-item active"><span class="section-number">2. </span>DEVELOPMENT ENVIRONEMNT SETUP</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../_sources/tech_setup/workshops/0.Setup_Environment.md.txt" rel="nofollow"> View page source</a>
       </li>
@@ -92,7 +93,7 @@
            <div itemprop="articleBody">
              
   <section id="development-environemnt-setup">
-<h1>DEVELOPMENT ENVIRONEMNT SETUP<a class="headerlink" href="#development-environemnt-setup" title="Permalink to this heading"></a></h1>
+<h1><span class="section-number">2. </span>DEVELOPMENT ENVIRONEMNT SETUP<a class="headerlink" href="#development-environemnt-setup" title="Permalink to this heading"></a></h1>
 <p>Contents</p>
 <ul class="simple">
 <li><p>Install VS Code and docker</p></li>
@@ -100,10 +101,10 @@
 <li><p>Launch Development environment in Docker container</p></li>
 </ul>
 <section id="install-vs-code-and-docker">
-<h2>1. Install VS Code and Docker<a class="headerlink" href="#install-vs-code-and-docker" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">2.1. </span>1. Install VS Code and Docker<a class="headerlink" href="#install-vs-code-and-docker" title="Permalink to this heading"></a></h2>
 <p>The training will be conducted using Visual Studio Code and Docker Containers. The ROS2 code used in the training will run in a docker container.</p>
 <section id="install-docker">
-<h3>Install Docker<a class="headerlink" href="#install-docker" title="Permalink to this heading"></a></h3>
+<h3><span class="section-number">2.1.1. </span>Install Docker<a class="headerlink" href="#install-docker" title="Permalink to this heading"></a></h3>
 <p>To install docker and set the correct user rights please use the following commands.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>docker.io<span class="w"> </span>git<span class="w"> </span>python3-pip
 pip3<span class="w"> </span>install<span class="w"> </span>vcstool
@@ -124,7 +125,7 @@ newgrp<span class="w"> </span>docker
 </div>
 </section>
 <section id="install-vs-code">
-<h3>Install VS Code<a class="headerlink" href="#install-vs-code" title="Permalink to this heading"></a></h3>
+<h3><span class="section-number">2.1.2. </span>Install VS Code<a class="headerlink" href="#install-vs-code" title="Permalink to this heading"></a></h3>
 <ol class="arabic simple">
 <li><p>To install VS Code please use the following commands:</p></li>
 </ol>
@@ -147,7 +148,7 @@ You find the extension menu on the left side, click on the following item.</p>
 </section>
 </section>
 <section id="create-a-ros2-workspace">
-<h2>2. Create a ROS2 workspace<a class="headerlink" href="#create-a-ros2-workspace" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">2.2. </span>2. Create a ROS2 workspace<a class="headerlink" href="#create-a-ros2-workspace" title="Permalink to this heading"></a></h2>
 <p>A workspace is the folder structure that you use for development. We need to create a workspace for our training. To do so, please execute the following commands in a terminal.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/
 mkdir<span class="w"> </span>ws_manipulation_workshop
@@ -164,10 +165,10 @@ vcs<span class="w"> </span>import<span class="w"> </span>--input<span class="w">
 <p><strong>Now your workspace is setup and we are ready to open the development environment.</strong></p>
 </section>
 <section id="open-workspace-in-docker-and-vs-code">
-<h2>3. Open workspace in docker and VS Code<a class="headerlink" href="#open-workspace-in-docker-and-vs-code" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">2.3. </span>3. Open workspace in docker and VS Code<a class="headerlink" href="#open-workspace-in-docker-and-vs-code" title="Permalink to this heading"></a></h2>
 <p>Open the <code class="docutils literal notranslate"><span class="pre">src</span></code> folder of your workspace in VS Code.</p>
 <section id="edit-devcontainer-json-for-your-environment">
-<h3>1. Edit devcontainer.json for your environment.<a class="headerlink" href="#edit-devcontainer-json-for-your-environment" title="Permalink to this heading"></a></h3>
+<h3><span class="section-number">2.3.1. </span>1. Edit devcontainer.json for your environment.<a class="headerlink" href="#edit-devcontainer-json-for-your-environment" title="Permalink to this heading"></a></h3>
 <p>For the Dev Container to function properly, we have to build it with the correct user. Therefore open <code class="docutils literal notranslate"><span class="pre">.devcontainer/devcontainer.json</span></code></p>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
 <span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ROS2 Development Container&quot;</span><span class="p">,</span>
@@ -214,13 +215,13 @@ vcs<span class="w"> </span>import<span class="w"> </span>--input<span class="w">
 <p>Use <code class="docutils literal notranslate"><span class="pre">Ctrl+F</span></code> to open the search and replace menu. Search for <code class="docutils literal notranslate"><span class="pre">xxx</span></code> and replace with your <code class="docutils literal notranslate"><span class="pre">Linux</span> <span class="pre">username</span></code>. If you do not know your username, you can find it by running <code class="docutils literal notranslate"><span class="pre">echo</span> <span class="pre">$USERNAME</span></code> in the terminal.</p>
 </section>
 <section id="build-development-container">
-<h3>2. Build Development Container<a class="headerlink" href="#build-development-container" title="Permalink to this heading"></a></h3>
+<h3><span class="section-number">2.3.2. </span>2. Build Development Container<a class="headerlink" href="#build-development-container" title="Permalink to this heading"></a></h3>
 <p>Use <code class="docutils literal notranslate"><span class="pre">View-&gt;Command</span> <span class="pre">Pallette...</span></code> or <code class="docutils literal notranslate"><span class="pre">Ctrl+Shift+P</span></code> to open the command pallette. Search for command <code class="docutils literal notranslate"><span class="pre">Dev</span> <span class="pre">Containers:</span> <span class="pre">Rebuild</span> <span class="pre">and</span> <span class="pre">Reopen</span> <span class="pre">in</span> <span class="pre">Container</span></code>. This should look like this.</p>
 <p><img alt="command-palette" src="../../_images/command-pallette-rebuild.png" /></p>
 <p>Now click on the command. This will build your development docker container for your. This will take a while. Sit back or get a coffee.</p>
 </section>
 <section id="test-container">
-<h3>3. Test Container<a class="headerlink" href="#test-container" title="Permalink to this heading"></a></h3>
+<h3><span class="section-number">2.3.3. </span>3. Test Container<a class="headerlink" href="#test-container" title="Permalink to this heading"></a></h3>
 <p>To test if everything works correctly, open a terminal in the container using <code class="docutils literal notranslate"><span class="pre">Terminal-&gt;New</span> <span class="pre">Terminal</span></code>in VS Code. Inside the terminal do the following:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/opt/ros/humble/setup.bash
 rviz2
@@ -235,8 +236,8 @@ rviz2
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../../index.html" class="btn btn-neutral float-left" title="Welcome to the ROS2 Manipulation Workshop" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../../robot_description/workshops/1.Simple_urdf_composition.html" class="btn btn-neutral float-right" title="SIMPLE COMPOSITION" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../../agenda.html" class="btn btn-neutral float-left" title="1. AGENDA" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../robot_description/workshops/1.Simple_urdf_composition.html" class="btn btn-neutral float-right" title="3. SIMPLE COMPOSITION" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

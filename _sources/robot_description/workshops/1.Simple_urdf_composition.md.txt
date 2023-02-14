@@ -13,6 +13,12 @@ You will learn about the Unified Robot Description Format
 (URDF). The tutorial will inform about how to create a robot model and how to visualize your
 robot.
 
+```bash
+cd /home/ws/src/ur5e_cell
+git fetch --all --tags
+git checkout 2-robot-cell-composition-start
+```
+
 ## 1. Create a URDF file
 A URDF file is created in the XML format. URDFs contain information about the robot links
 and joints. For detailed information about this format check the following link:

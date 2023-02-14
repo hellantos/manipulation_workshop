@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SIMPLE COMPOSITION &mdash; ROS2 Manipulation Workshop  documentation</title>
+  <title>3. SIMPLE COMPOSITION &mdash; ROS2 Manipulation Workshop  documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -20,8 +20,8 @@
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="ROBOT WORKCELL COMPOSITION" href="2.Robot_workcell_composition.html" />
-    <link rel="prev" title="DEVELOPMENT ENVIRONEMNT SETUP" href="../../tech_setup/workshops/0.Setup_Environment.html" /> 
+    <link rel="next" title="4. ROBOT WORKCELL COMPOSITION" href="2.Robot_workcell_composition.html" />
+    <link rel="prev" title="2. DEVELOPMENT ENVIRONEMNT SETUP" href="../../tech_setup/workshops/0.Setup_Environment.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -43,22 +43,23 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Workshops:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../../tech_setup/workshops/0.Setup_Environment.html">DEVELOPMENT ENVIRONEMNT SETUP</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">SIMPLE COMPOSITION</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#create-a-urdf-file">1. Create a URDF file</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#create-the-tree-structure">2. Create the tree structure</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#add-dimensions">3. Add dimensions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#completing-the-kinematics">4. Completing the kinematics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#cleanup">Cleanup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../agenda.html">1. AGENDA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tech_setup/workshops/0.Setup_Environment.html">2. DEVELOPMENT ENVIRONEMNT SETUP</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">3. SIMPLE COMPOSITION</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">3.1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#create-a-urdf-file">3.2. 1. Create a URDF file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#create-the-tree-structure">3.3. 2. Create the tree structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#add-dimensions">3.4. 3. Add dimensions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#completing-the-kinematics">3.5. 4. Completing the kinematics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cleanup">3.6. Cleanup</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="2.Robot_workcell_composition.html">ROBOT WORKCELL COMPOSITION</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../moveit/workshops/1.Setup_assistant.html">MOVEIT SETUP ASSISTANT</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../moveit/workshops/2.Connecting_real_hardware.html">CONNECTING REAL HARDWARE</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../moveit/workshops/3.Simple_pick_n_place.html">SIMPLE PICK &amp; PLACE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2.Robot_workcell_composition.html">4. ROBOT WORKCELL COMPOSITION</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../moveit/workshops/1.Setup_assistant.html">5. MOVEIT SETUP ASSISTANT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../moveit/workshops/2.Connecting_real_hardware.html">6. CONNECTING REAL HARDWARE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../moveit/workshops/3.Simple_pick_n_place.html">7. SIMPLE PICK &amp; PLACE</a></li>
 </ul>
 
         </div>
@@ -75,7 +76,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">SIMPLE COMPOSITION</li>
+      <li class="breadcrumb-item active"><span class="section-number">3. </span>SIMPLE COMPOSITION</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../_sources/robot_description/workshops/1.Simple_urdf_composition.md.txt" rel="nofollow"> View page source</a>
       </li>
@@ -86,7 +87,7 @@
            <div itemprop="articleBody">
              
   <section id="simple-composition">
-<h1>SIMPLE COMPOSITION<a class="headerlink" href="#simple-composition" title="Permalink to this heading"></a></h1>
+<h1><span class="section-number">3. </span>SIMPLE COMPOSITION<a class="headerlink" href="#simple-composition" title="Permalink to this heading"></a></h1>
 <p>Contents:</p>
 <ul class="simple">
 <li><p>Create a URDF file</p></li>
@@ -95,15 +96,20 @@
 <li><p>Complete kinemtatics</p></li>
 </ul>
 <section id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">3.1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading"></a></h2>
 <p>This tutorial explains the basics of how to describe industrial robots in ROS and how to use
 the created kinematic models.
 You will learn about the Unified Robot Description Format
 (URDF). The tutorial will inform about how to create a robot model and how to visualize your
 robot.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/home/ws/src/ur5e_cell
+git<span class="w"> </span>fetch<span class="w"> </span>--all<span class="w"> </span>--tags
+git<span class="w"> </span>checkout<span class="w"> </span><span class="m">2</span>-robot-cell-composition-start
+</pre></div>
+</div>
 </section>
 <section id="create-a-urdf-file">
-<h2>1. Create a URDF file<a class="headerlink" href="#create-a-urdf-file" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">3.2. </span>1. Create a URDF file<a class="headerlink" href="#create-a-urdf-file" title="Permalink to this heading"></a></h2>
 <p>A URDF file is created in the XML format. URDFs contain information about the robot links
 and joints. For detailed information about this format check the following link:
 http://wiki.ros.org/urdf/XML</p>
@@ -113,7 +119,7 @@ Figure 1: Serial kinematics sketch</p>
 <p>It is a simple kinematics existing of two links connected via a continuous rotating joint.</p>
 </section>
 <section id="create-the-tree-structure">
-<h2>2. Create the tree structure<a class="headerlink" href="#create-the-tree-structure" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">3.3. </span>2. Create the tree structure<a class="headerlink" href="#create-the-tree-structure" title="Permalink to this heading"></a></h2>
 <p>The robot in figure 1 is a tree structure. Let’s start very simple, and create a description of that
 tree structure, without worrying about the dimensions etc. Create a file called workcell.urdf in the urdf folder of ur_robot_description package:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;robot</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;custom_robot&quot;</span><span class="w"> </span><span class="na">xmlns:xacro=</span><span class="s">&quot;http://www.ros.org/wiki/xacro&quot;</span><span class="nt">&gt;</span>
@@ -139,7 +145,7 @@ tree structure, without worrying about the dimensions etc. Create a file called 
 </div>
 </section>
 <section id="add-dimensions">
-<h2>3. Add dimensions<a class="headerlink" href="#add-dimensions" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">3.4. </span>3. Add dimensions<a class="headerlink" href="#add-dimensions" title="Permalink to this heading"></a></h2>
 <p>To add dimensions to our tree, we have to specify the offset from a link to the joint(s) of its
 children. To accomplish this, we will add the feld <origin> to each of the joints.
 Joint1 is offset in the Z-direction from link1. So, we need to add the following <origin> element:</p>
@@ -150,7 +156,7 @@ Joint1 is offset in the Z-direction from link1. So, we need to add the following
 syntax with the command shown above.</p>
 </section>
 <section id="completing-the-kinematics">
-<h2>4. Completing the kinematics<a class="headerlink" href="#completing-the-kinematics" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">3.5. </span>4. Completing the kinematics<a class="headerlink" href="#completing-the-kinematics" title="Permalink to this heading"></a></h2>
 <p>We need to specify around which axis the joints rotate. Once we add that, we actually have a
 full kinematic model of this robot! We need to add the <axis> element to each joint. The axis
 specifies the rotational axis in the local frame.
@@ -195,7 +201,7 @@ robot_state_publisher to calculate all of transforms between the different parts
 transform tree is then used to display all of the shapes in Rviz.</p>
 </section>
 <section id="cleanup">
-<h2>Cleanup<a class="headerlink" href="#cleanup" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">3.6. </span>Cleanup<a class="headerlink" href="#cleanup" title="Permalink to this heading"></a></h2>
 <p>To clean up the workspace rename workcell.urdf.xacro to workcell.urdf.</p>
 </section>
 </section>
@@ -204,8 +210,8 @@ transform tree is then used to display all of the shapes in Rviz.</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../../tech_setup/workshops/0.Setup_Environment.html" class="btn btn-neutral float-left" title="DEVELOPMENT ENVIRONEMNT SETUP" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="2.Robot_workcell_composition.html" class="btn btn-neutral float-right" title="ROBOT WORKCELL COMPOSITION" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../../tech_setup/workshops/0.Setup_Environment.html" class="btn btn-neutral float-left" title="2. DEVELOPMENT ENVIRONEMNT SETUP" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="2.Robot_workcell_composition.html" class="btn btn-neutral float-right" title="4. ROBOT WORKCELL COMPOSITION" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

@@ -15,6 +15,12 @@ This tutorial explains the basics of how to describe industrial robots in ROS an
 - Lines beginning with # indicate the syntax of the commands
 - The symbol → represents a line break. 
 
+```bash
+cd /home/ws/src/ur5e_cell
+git fetch --all --tags
+git checkout 1-setup-assistant-workshop
+```
+
 ---
 ## 2. Using a URDF file with the setup assistant
 
