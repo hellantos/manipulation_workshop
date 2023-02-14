@@ -38,6 +38,8 @@ jobs:
             cp -r ./_build/html/* gh-pages/
             mkdir gh-pages/common/
             cp -r ./common/* gh-pages/common/
+            mkdir -p gh-pages/tech_setup/slides/
+            cp -r ./tech_setup/slides/* gh-pages/tech_setup/slides/
             mkdir -p gh-pages/robot_description/slides/
             cp -r ./robot_description/slides/* gh-pages/robot_description/slides/
             mkdir -p gh-pages/moveit/slides/
