@@ -51,15 +51,13 @@ controllers through common interfaces
 
 <div>
     <center>
-      <img src="resources/moveit_overview.png" width="700px">
+      <img src="resources/moveit_overview.png" width="650px">
     </center>
 </div>
 
 ---
 
-## Key Concepts
-
-### Robot Model
+## Robot Model
 
 - `RobotModel` class contains the relationships between all links and joints including their joint limit properties as loaded from the `URDF`.   
 - It also separates the robot's links and joints into planning groups defined in the `SRDF` (`JointModelGroup`).
@@ -74,33 +72,35 @@ controllers through common interfaces
 
 ---
 
-## Key Concepts
-
-### Robot State
+## Robot State
 
 - `RobotState` contains information about the robot at a certain point in time, storing vectors of joint positions and optionally velocities and accelerations. 
-- `RobotState` also contains helper functions for setting the Cartesian pose and for computing Cartesian trajectories
-
----
-
-## Key Concepts
-
-### Planning Scene
-- `PlanningScene` is an object used for storing the representation of the world around the robot and also the state of the robot itself 
-- It provides the main interface used for collision checking and constraint checking
-- `PlanningSceneMonitor` is the recommended method to create and maintain the current planning scene using data from the robot's joints and the sensors on the robot
+- `RobotState` can include any objects attached to (carried by) the robot
+- It also contains helper functions for setting the Cartesian pose and for computing Cartesian trajectories
 
 <div>
     <center>
-      <img src="resources/plan_scene1.jpg" width="350px">
+      <img src="resources/robot_state.png" width="350px">
     </center>
 </div>
 
 ---
 
-## Key Concepts
+## Planning Scene
+- `PlanningScene` is an object used for storing the representation of the world around the robot and also the state of the robot itself 
+- It provides the main interface used for collision checking and constraint checking
+- `PlanningSceneMonitor` is the recommended method to create and maintain the current planning scene using data from the robot's joints and the sensors on the robot
 
-### Planning Scene Monitor
+<div style="float:left; margin:30px">
+    <img src="resources/planning_scene.png" width="450px">
+</div>
+<div style="float:left">
+    <img src="resources/plan_scene1.jpg" width="350px">
+</div>
+
+---
+
+## Planning Scene Monitor
 
 The `PlanningSceneMonitor` wraps a `PlanningScene` with ROS interfaces for keeping the planning scene up-to-date  
 
@@ -112,9 +112,31 @@ The `PlanningSceneMonitor` wraps a `PlanningScene` with ROS interfaces for keepi
 
 ---
 
-## Key Concepts
+## Planning Pipeline
 
-### MoveGroup
+- `PlanningPipeline` is used to chain motion planner with pre-processing and post-processing planned path (e.g. time parameterization)
+- `PlanningPipeline` uses ROS parameters to determine set of request adapters and planning plugin
+- Multiple motion planning algorithms can be used in a pipeline to produce robust motion plans
+
+<div>
+    <center>
+      <img src="resources/planning_pipeline.png" width="800px">
+    </center>
+</div>
+---
+
+## Trajectory Execution Manager
+
+- Library for managing controllers and the execution of trajectories
+- Multiple trajectories can be specified to be executed in sequence
+- The execution process:
+    - Sends trajectories to appropriate controllers
+    - Monitors execution
+    - (optionally) waits for completion of the execution
+    - Switches active controllers as needed (optionally) to be able to execute the specified trajectories
+---
+
+## MoveGroup
 
 - `MoveGroupInterface` class provides easy to use functionality for 
     - setting joint or pose goals
@@ -126,9 +148,7 @@ The `PlanningSceneMonitor` wraps a `PlanningScene` with ROS interfaces for keepi
 
 ---
 
-## Key Concepts
-
-### MoveItCpp
+## MoveItCpp
 
 - `MoveItCpp` is a new high level interface without ROS interfaces
 - Direct access to core MoveIt functionalities useful for realtime control or for industry applications
@@ -138,6 +158,14 @@ The `PlanningSceneMonitor` wraps a `PlanningScene` with ROS interfaces for keepi
       <img src="resources/arch.png" width="300px">
     </center>
 </div>
+
+---
+
+## PlanningComponent
+
+---
+
+## Constrain planning
 
 ---
 
