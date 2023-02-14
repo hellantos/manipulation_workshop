@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Template</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="../../common/css/rostraining_slides.css">
+</head>
+
+<body>
+  <textarea id="source">
+
+layout: true
+<div class="header"><img src="https://rosin-project.eu/wp-content/uploads/rosin_ack_logo_wide.png" style="background-color:transparent"/></div>
+<div class="footer"><img src="https://www.ipa.fraunhofer.de/content/dam/ipa/ipa.svg" /><p>&copy; Fraunhofer IPA</p></div>
+<div class="triangle"></div>
+
+---
+ 
+# MOVEIT
+## The motion planning framework
+
+---
+
+## MoveIt Capabilities  
+
+- Motion Planning  
+    - Generate high-degree of freedom trajectories through  
+      cluttered environments and avoid local minima  
+- Manipulation  
+    - Analyze and interact with the environment with grasp generation  
+- Inverse Kinematics  
+    - Solve for joint positions for a given pose, even in over-actuated arms  
+- Control  
+    - Execute time-parameterized joint trajectories to low level hardware  
+controllers through common interfaces  
+- 3D Perception  
+    - Connect to depth sensors and point clouds with Octomaps  
+- Collision Checking  
+    - Avoid obstacles using geometric primitives, meshes, or point clouds  
+
+---
+
+## Timeline
+
+![evolution width:900](resources/evolution.png)
+
+---
+
+## Overview
+
+<div>
+    <center>
+      <img src="resources/moveit_overview.png" width="700px">
+    </center>
+</div>
+
+---
+
+## Key Concepts
+
+### Robot Model
+
+- `RobotModel` class contains the relationships between all links and joints including their joint limit properties as loaded from the `URDF`.   
+- It also separates the robot's links and joints into planning groups defined in the `SRDF` (`JointModelGroup`).
+
+
+<div style="float:left; margin:80px">
+    <img src="resources/robot_model.png" width="400px">
+</div>
+<div style="float:left">
+    <img src="resources/panda_tf.png" width="400px">
+</div>
+
+---
+
+## Key Concepts
+
+### Robot State
+
+- `RobotState` contains information about the robot at a certain point in time, storing vectors of joint positions and optionally velocities and accelerations. 
+- `RobotState` also contains helper functions for setting the Cartesian pose and for computing Cartesian trajectories
+
+---
+
+## Key Concepts
+
+### Planning Scene
+- `PlanningScene` is an object used for storing the representation of the world around the robot and also the state of the robot itself 
+- It provides the main interface used for collision checking and constraint checking
+- `PlanningSceneMonitor` is the recommended method to create and maintain the current planning scene using data from the robot's joints and the sensors on the robot
+
+<div>
+    <center>
+      <img src="resources/plan_scene1.jpg" width="350px">
+    </center>
+</div>
+
+---
+
+## Key Concepts
+
+### Planning Scene Monitor
+
+The `PlanningSceneMonitor` wraps a `PlanningScene` with ROS interfaces for keeping the planning scene up-to-date  
+
+<div>
+    <center>
+      <img src="resources/planning_scene_monitor.png" width="400px">
+    </center>
+</div>
+
+---
+
+## Key Concepts
+
+### MoveGroup
+
+- `MoveGroupInterface` class provides easy to use functionality for 
+    - setting joint or pose goals
+    - creating motion plans
+    - moving the robot
+    - adding objects into the environment
+    - attaching/detaching objects from the robot 
+- It communicates over ROS topics, services, and actions
+
+---
+
+## Key Concepts
+
+### MoveItCpp
+
+- `MoveItCpp` is a new high level interface without ROS interfaces
+- Direct access to core MoveIt functionalities useful for realtime control or for industry applications
+
+<div style="margin:50px">
+    <center>
+      <img src="resources/arch.png" width="300px">
+    </center>
+</div>
+
+---
+
+## Cartesian planning
+
+- end effector follows an exact path along a surface (welding and painting applications)
+- list of waypoints specified for the end-effector to go through
+- MoveIt! now supports real-time & global, collision-aware cartesian planning
+
+#### Desirable properties
+- Completeness, Underconstrained, Planning ahead, Realtime
+
+<img src="resources/cartesian_libraries.png" alt="Cartesian Planning" style="width:600px"  class="image-center"/>
+
+https://picknik.ai/cartesian%20planners/moveit/motion%20planning/2021/01/07/guide-to-cartesian-planners-in-moveit.html
+---
+
+# Thank you! 
+
+### Main maintainers:  
+PickNik Robotics  
+picknik.ai  
+Boulder, Colorado 80302  
+@picknikrobotics  
+
+</textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js">
+</script>
+<script>
+  var slideshow = remark.create({ratio: "16:9"});
+</script>
+</body>
+</html>
+

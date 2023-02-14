@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Template</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="../../common/css/rostraining_slides.css">
+</head>
+
+<body>
+  <textarea id="source">
+
+layout: true
+<div class="header"><img src="https://rosin-project.eu/wp-content/uploads/rosin_ack_logo_wide.png" style="background-color:transparent"/></div>
+<div class="footer"><img src="https://www.ipa.fraunhofer.de/content/dam/ipa/ipa.svg" /><p>&copy; Fraunhofer IPA</p></div>
+<div class="triangle"></div>
+
+---
+ 
+# MOVEIT
+## The motion planning framework
+
+---
+
+## Key Concepts
+
+### Robot Model
+
+```
+robot_model_loader::RobotModelLoader robot_model_loader(node);
+const moveit::core::RobotModelPtr& robot_model = robot_model_loader.getModel();
+RCLCPP_INFO(LOGGER, "Model frame: %s", robot_model->getModelFrame().c_str());
+
+const moveit::core::JointModelGroup* joint_model_group = robot_model->getJointModelGroup("panda_arm");
+const std::vector<std::string>& joint_names = joint_model_group->getVariableNames();
+```
+---
+
+## Key Concepts
+
+### Robot State
+
+```
+moveit::core::RobotStatePtr robot_state(new moveit::core::RobotState(kinematic_model));
+robot_state->setToDefaultValues();
+
+```
+```
+std::vector<double> joint_values;
+robot_state->copyJointGroupPositions(joint_model_group, joint_values);
+for (std::size_t i = 0; i < joint_names.size(); ++i)
+{
+    RCLCPP_INFO(LOGGER, "Joint %s: %f", joint_names[i].c_str(), joint_values[i]);
+}
+```
+
+---
+
+## Key Concepts
+
+### Planning Scene
+
+```c++
+// Initialize planning scene (NOT the recommended way)
+planning_scene::PlanningScene planning_scene(robot_model);
+
+// Check whether the robot in its current state is in self-collision
+collision_detection::CollisionRequest collision_request;
+collision_detection::CollisionResult collision_result;
+planning_scene.checkSelfCollision(collision_request, collision_result);
+RCLCPP_INFO_STREAM(LOGGER, "Current state is " << (collision_result.collision ? "in" : "not in")
+                                               << " self collision");
+
+// planning_scene.checkCollision(collision_request, collision_result, copied_state);
+RCLCPP_INFO_STREAM(LOGGER, "Current state is " << (collision_result.collision ? "in" : "not in")
+                                               << " self collision");
+```
+
+---
+
+---
+
+## Key Concepts
+
+### Planning Scene Monitor
+
+```c++
+/* initialize planning scene monitor */
+auto psm_ = std::make_shared<planning_scene_monitor::PlanningSceneMonitor>(node, robot_model_loader));
+
+// listen for planning scene messages on topic /XXX and apply them to the internal planning scene
+// the internal planning scene accordingly
+psm_->startSceneMonitor();
+
+// listens to changes of world geometry, collision objects, and (optionally) octomaps
+// world geometry, collision objects and optionally octomaps
+psm_->startWorldGeometryMonitor();
+
+// listen to joint state updates as well as changes in attached collision objects
+// and update the internal planning scene accordingly
+psm_->startStateMonitor();
+```
+
+---
+
+## MoveItCpp API
+
+```cpp
+// \brief load the robot model,
+//        configure the planning pipeline from ROS 2 parameters and
+//        initialize defaults  
+moveit_cpp_ = std::make_shared<moveit::planning_interface::MoveItCpp>(node_);
+
+// \brief associated to a planning group  
+//          used to setup the motion plan request and  
+//          call the low-level planner  
+moveit::planning_interface::PlanningComponent arm("ur5_arm", moveit_cpp_);
+
+/** \brief Set the goal constraints generated from target pose and robot link */
+geometry_msgs::PoseStamped target_pose1;
+target_pose1.header.frame_id = "base_link";
+target_pose1.pose.orientation.w = 1.0;
+target_pose1.pose.position.x = 0.28;
+target_pose1.pose.position.y = -0.2;
+target_pose1.pose.position.z = 0.5;
+arm->setGoal(target_pose1, "ee_link");
+
+/** \brief Set the goal constraints generated from a named target state */
+arm->setGoal("ready");
+```
+---
+
+## Constraint planning
+
+Used to 
+- constrain robot motion
+- define planning goals
+
+```cpp
+kinematic_constraints::JointConstraint
+kinematic_constraints::OrientationConstraint
+kinematic_constraints::PositionConstraint
+kinematic_constraints::VisibilityConstraint
+```
+https://www.youtube.com/watch?v=qEketOee7_g
+---
+
+## Constraint planning
+
+e.g. Planning with Path Constraints specified for a link on robot
+
+```cpp
+moveit_msgs::OrientationConstraint ocm;
+ocm.link_name = "panda_link7";
+ocm.header.frame_id = "panda_link0";
+ocm.orientation.w = 1.0;
+ocm.absolute_x_axis_tolerance = 0.1;
+ocm.absolute_y_axis_tolerance = 0.1;
+ocm.absolute_z_axis_tolerance = 0.1;
+```
+set this a path constraint for the planning group
+```cpp
+moveit_msgs::Constraints test_constraints;
+test_constraints.orientation_constraints.push_back(ocm);
+move_group_interface.setPathConstraints(test_constraints);
+```
+
+---
+
+## Cartesian planning
+
+```cpp
+std::vector<geometry_msgs::Pose> waypoints;
+waypoints.push_back(start_pose);
+
+geometry_msgs::Pose way_pose;
+waypoints.push_back(way_pose);
+
+way_pose.position.y -= 0.2;
+waypoints.push_back(way_pose);  // right
+
+way_pose.position.z += 0.2;
+way_pose.position.y += 0.2;
+way_pose.position.x -= 0.2;
+waypoints.push_back(way_pose);  // up and left
+```
+now compute trajectory with interpolation
+```cpp
+moveit_msgs::RobotTrajectory trajectory;
+const double jump_threshold = 0.0;
+const double eef_step = 0.01;
+double fraction = move_group_interface.computeCartesianPath(waypoints, eef_step, jump_threshold, trajectory);
+```
+
+https://ros-planning.github.io/moveit_tutorials/doc/move_group_interface/move_group_interface_tutorial.html#cartesian-paths
+
+---
+
+# Thank you! 
+
+### Main maintainers:  
+PickNik Robotics  
+picknik.ai  
+Boulder, Colorado 80302  
+@picknikrobotics  
+
+</textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js">
+</script>
+<script>
+  var slideshow = remark.create({ratio: "16:9"});
+</script>
+</body>
+</html>
+
