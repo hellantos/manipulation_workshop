@@ -51,6 +51,8 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">CONNECTING REAL HARDWARE</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#creating-the-real-hardware-launchfile-for-ur5e-robot-cell">1. Creating the real hardware launchfile for ur5e_robot_cell</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#connecting-to-the-robot">2. Connecting to the robot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#on-the-robot-gui-you-need-to-activate-the-remote-connection-programm-no-everything-should-be-well-and-you-can-start-planning-and-executing-trajectories-on-the-real-robot">On the ROBOT GUI you need to activate the remote connection programm.
+No everything should be well and you can start planning and executing trajectories on the real robot.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#introspection">3. Introspection</a></li>
 </ul>
 </li>
@@ -209,8 +211,38 @@
 <hr class="docutils" />
 <section id="connecting-to-the-robot">
 <h2>2. Connecting to the robot<a class="headerlink" href="#connecting-to-the-robot" title="Permalink to this heading"></a></h2>
+<p>In order to connect to the real robot, you need to setup your network connection correctly.
+Our robot here at Fraunhofer IPA has the IP address <code class="docutils literal notranslate"><span class="pre">192.168.56.2</span></code>. The ROS PC is directly
+connected to the robot via an ethernet cable. The ROS PC has the IP address <code class="docutils literal notranslate"><span class="pre">192.168.56.1</span></code>.
+You will need to create a static network configuration on your ROS PC to connect to the robot.</p>
+<ol class="arabic simple">
+<li><p>Open the `Ẁired Settings`` menu on your Ubuntu PC. You find this if you click on the Wifi, Speaker and Battery icon in the top right corner of your screen.</p></li>
+</ol>
+<p><img alt="Wired Settings" src="../../_images/wired_settings.png" /></p>
+<ol class="arabic simple" start="2">
+<li><p>Create a new wired connection configuration by clicking on the <code class="docutils literal notranslate"><span class="pre">+</span></code> button next to Wired.</p></li>
+</ol>
+<p><img alt="New Wired Connection" src="../../_images/new_wired_connection.png" /></p>
+<ol class="arabic simple" start="3">
+<li><p>Call it something like <code class="docutils literal notranslate"><span class="pre">UR5E_ROBOT</span></code> and switch to the IPv4 tab. Select <code class="docutils literal notranslate"><span class="pre">Manual</span></code> and enter the IP address <code class="docutils literal notranslate"><span class="pre">192.168.56.1</span></code> and the subnet mask <code class="docutils literal notranslate"><span class="pre">255.255.255.0</span></code>. Click on <code class="docutils literal notranslate"><span class="pre">Save</span></code>.</p></li>
+</ol>
+<p>You are now ready to connect to the robot. You can test your connection by pinging the robot from your ROS PC. When you are connected to the
+choose the correct network interface in the <code class="docutils literal notranslate"><span class="pre">Wired</span></code> dropdown menu. You can now ping the robot by using the following command from a normal terminal (won’t work in the docker container as ping is not installed).</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ping<span class="w"> </span><span class="m">192</span>.168.56.2
+</pre></div>
+</div>
+<p>If you get a response, you are ready to connect to the robot. If not, check your network configuration again (switching it off completely and on again might help).</p>
+<ol class="arabic simple" start="4">
+<li><p>Now you can launch the moveit launchfile. You can do this by using the following command.</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>ur5e_moveit_config<span class="w"> </span>robot.launch.py
+</pre></div>
+</div>
 </section>
-<hr class="docutils" />
+<section id="on-the-robot-gui-you-need-to-activate-the-remote-connection-programm-no-everything-should-be-well-and-you-can-start-planning-and-executing-trajectories-on-the-real-robot">
+<h2>On the ROBOT GUI you need to activate the remote connection programm.
+No everything should be well and you can start planning and executing trajectories on the real robot.<a class="headerlink" href="#on-the-robot-gui-you-need-to-activate-the-remote-connection-programm-no-everything-should-be-well-and-you-can-start-planning-and-executing-trajectories-on-the-real-robot" title="Permalink to this heading"></a></h2>
+</section>
 <section id="introspection">
 <h2>3. Introspection<a class="headerlink" href="#introspection" title="Permalink to this heading"></a></h2>
 <p>Launch the RQT Graph tool again to observe what the computation graph looks like now.</p>
