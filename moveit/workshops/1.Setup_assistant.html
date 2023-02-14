@@ -160,20 +160,21 @@ Figure 3: Results for the Default Collision Matrix</p>
 <li><p>Click on <strong>Add Group</strong> at the bottom</p></li>
 <li><p>Set the Group Name as “arm”</p></li>
 <li><p>Choose <code class="docutils literal notranslate"><span class="pre">kdl_kinematics_plugin/KDLKinematicsPlugin</span></code> as the Kinematic solver.</p></li>
-<li><p>Choose RTTConnect as default planner.</p></li>
-<li><p>Click on the <strong>Add Kin. Chain</strong> button and choose <code class="docutils literal notranslate"><span class="pre">base_link</span></code> as Base Link and <code class="docutils literal notranslate"><span class="pre">tool_tip</span></code> as Tip Link (see Figure 5.1).</p></li>
+<li><p>Choose RRTConnect as default planner.</p></li>
+<li><p>Click on the <strong>Add Kin. Chain</strong> button and in the new window on <strong>Expand all</strong>. Choose <code class="docutils literal notranslate"><span class="pre">base_link</span></code> as Base Link and <code class="docutils literal notranslate"><span class="pre">tool_tip</span></code> as Tip Link
+and save (see Figure 5.1).</p></li>
 <li><p>Select <strong>Joints</strong> and <strong>Edit Selected</strong>. Add joints <code class="docutils literal notranslate"><span class="pre">shoulder_pan_joint</span></code>, <code class="docutils literal notranslate"><span class="pre">shoulder_lift_joint</span></code>, <code class="docutils literal notranslate"><span class="pre">elbow_joint</span></code> and <code class="docutils literal notranslate"><span class="pre">wrist_[1-3]_joint</span></code> (see Figure 5.2).</p></li>
-<li><p>Click “Save”. See the result in Figure 5 for reference.</p></li>
+<li><p>Click “Save”. See the result in Figure 5.3 for reference.</p></li>
 </ul>
 </li>
 </ul>
 <p><img alt="Figure 5" src="../../_images/figure5.png" /><br />
-Figure 5: Add Planning Group “arm”</p>
-<p><img alt="Figure 5.1" src="../../_images/figure51.png" /><br />
-Figure 5.1: Adding the kinematic chain to planning group arm</p>
-<p><img alt="Figure 5.2" src="../../_images/figure52.png" />
-Figure 5.2: Adding the joints to planning group arm</p>
-<p><img alt="Figure 5.3" src="../../_images/figure53.png" />
+Figure 5: Add Planning Group “arm”
+<img alt="Figure 5.1" src="../../_images/figure51.png" /><br />
+Figure 5.1: Adding the kinematic chain to planning group arm
+<img alt="Figure 5.2" src="../../_images/figure52.png" />
+Figure 5.2: Adding the joints to planning group arm
+<img alt="Figure 5.3" src="../../_images/figure53.png" />
 Figure 5.3 Final planning group arm</p>
 <ul class="simple">
 <li><p>Skip the End Effectors and Passive Joints pane selectors.</p></li>
@@ -207,12 +208,12 @@ Figure 10.2: Correctly added and named ROS2 controllers</p>
 <ul class="simple">
 <li><p>Choose the <strong>Moveit Controllers</strong> pane on the left</p>
 <ul>
-<li><p>Auto add the controllers and then click on arm_controller and <strong>Edit selected</strong> (Figure 11)</p></li>
-<li><p>Change the name to <code class="docutils literal notranslate"><span class="pre">joint_trajectory_controller</span></code> and click save (Figure 11.1, Figure 11.2)</p></li>
+<li><p>Auto add the controllers and then click on arm_controller and <strong>Edit selected</strong></p></li>
+<li><p>Change the name to <code class="docutils literal notranslate"><span class="pre">joint_trajectory_controller</span></code> and click save</p></li>
 </ul>
 </li>
-<li><p>Chose the <strong>Author information</strong> pane on the left and enter your name and e-mail adress</p></li>
-<li><p>Click on <strong>Configuration Files</strong>, click <strong>Browse</strong> and select path till “src” inside your workspace and manually name the package “ur5e_demo_moveit_config” as shown in figure 6.</p></li>
+<li><p>Chose the <strong>Author information</strong> pane on the left and enter your name and e-mail address</p></li>
+<li><p>Click on <strong>Configuration Files</strong>, click <strong>Browse</strong> and select path till “src” inside your workspace and manually name the package “ur5e_demo_moveit_config” (don’t confuse with the existing package “ur5e_cell_moveit_config”) as shown in figure 6.</p></li>
 <li><p>Click “Generate Package”</p></li>
 <li><p>If the process completes successfully you can try out your newly created MoveIt! configuration as described in the next section</p></li>
 </ul>

@@ -101,7 +101,7 @@
 </ul>
 <section id="install-vs-code-and-docker">
 <h2>1. Install VS Code and Docker<a class="headerlink" href="#install-vs-code-and-docker" title="Permalink to this heading"></a></h2>
-<p>The training will be conducted using Visual Studio Code and Docker Containers. The ROS2 code used in th training will run in a docker container.</p>
+<p>The training will be conducted using Visual Studio Code and Docker Containers. The ROS2 code used in the training will run in a docker container.</p>
 <section id="install-docker">
 <h3>Install Docker<a class="headerlink" href="#install-docker" title="Permalink to this heading"></a></h3>
 <p>To install docker and set the correct user rights please use the following commands.</p>
@@ -118,11 +118,15 @@ newgrp<span class="w"> </span>docker
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>hello-world
 </pre></div>
 </div>
+<p>You might need to start the Docker Daemon first, if you cannot run hello-world out of the box:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>docker
+</pre></div>
+</div>
 </section>
 <section id="install-vs-code">
 <h3>Install VS Code<a class="headerlink" href="#install-vs-code" title="Permalink to this heading"></a></h3>
 <ol class="arabic simple">
-<li><p>Install VS Code please use the following commands:</p></li>
+<li><p>To install VS Code please use the following commands:</p></li>
 </ol>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>update
 sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>software-properties-common<span class="w"> </span>apt-transport-https<span class="w"> </span>wget<span class="w"> </span>-y
@@ -139,19 +143,19 @@ sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> <
 You find the extension menu on the left side, click on the following item.</p>
 <p><img alt="code icon" src="../../_images/vscode-extension-icon.png" /></p>
 <p>Then search for <code class="docutils literal notranslate"><span class="pre">Remote</span> <span class="pre">Development</span></code> and click <code class="docutils literal notranslate"><span class="pre">install</span></code>.</p>
-<p><strong>Now you are all setup an we can create you workspace.</strong></p>
+<p><strong>Now you are all setup and we can create your workspace.</strong></p>
 </section>
 </section>
 <section id="create-a-ros2-workspace">
 <h2>2. Create a ROS2 workspace<a class="headerlink" href="#create-a-ros2-workspace" title="Permalink to this heading"></a></h2>
-<p>A workspace the folder structure that you use for development. We need to create a workspace for our training. To do so, please execute the following commands in a terminal.</p>
+<p>A workspace is the folder structure that you use for development. We need to create a workspace for our training. To do so, please execute the following commands in a terminal.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/
 mkdir<span class="w"> </span>ws_manipulation_workshop
 <span class="nb">cd</span><span class="w"> </span>ws_manipulation_workshop
 mkdir<span class="w"> </span>build<span class="w"> </span>install<span class="w"> </span>log
 </pre></div>
 </div>
-<p>Now we have setup the folder structure an we are ready to download the prepare workshop repositories.</p>
+<p>Now we have setup the folder structure and we are ready to download the workshop repositories.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/ipa-cmh/ros2_manipulation_workshop.git<span class="w"> </span>src
 <span class="nb">cd</span><span class="w"> </span>src
 vcs<span class="w"> </span>import<span class="w"> </span>--input<span class="w"> </span>manipulation_training.repos
@@ -168,11 +172,11 @@ vcs<span class="w"> </span>import<span class="w"> </span>--input<span class="w">
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
 <span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ROS2 Development Container&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;privileged&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;remoteUser&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;christoph&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;remoteUser&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;xxx&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;build&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nt">&quot;dockerfile&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;DOCKERFILE&quot;</span><span class="p">,</span>
 <span class="w">        </span><span class="nt">&quot;args&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="nt">&quot;USERNAME&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;christoph&quot;</span>
+<span class="w">            </span><span class="nt">&quot;USERNAME&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;xxx&quot;</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">},</span>
 <span class="w">    </span><span class="nt">&quot;workspaceFolder&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/home/ws&quot;</span><span class="p">,</span>
@@ -203,7 +207,7 @@ vcs<span class="w"> </span>import<span class="w"> </span>--input<span class="w">
 <span class="w">        </span><span class="s2">&quot;source=${localWorkspaceFolder}/../install,target=/home/ws/install,type=bind&quot;</span><span class="p">,</span>
 <span class="w">        </span><span class="s2">&quot;source=${localWorkspaceFolder}/../log,target=/home/ws/log,type=bind&quot;</span>
 <span class="w">    </span><span class="p">],</span>
-<span class="w">    </span><span class="nt">&quot;postCreateCommand&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sudo rosdep update &amp;&amp; sudo rosdep install --from-paths src --ignore-src -y &amp;&amp; sudo chown -R christoph /home/ws/&quot;</span>
+<span class="w">    </span><span class="nt">&quot;postCreateCommand&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sudo rosdep update &amp;&amp; sudo rosdep install --from-paths src --ignore-src -y &amp;&amp; sudo chown -R xxx /home/ws/&quot;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -217,7 +221,7 @@ vcs<span class="w"> </span>import<span class="w"> </span>--input<span class="w">
 </section>
 <section id="test-container">
 <h3>3. Test Container<a class="headerlink" href="#test-container" title="Permalink to this heading"></a></h3>
-<p>To test if everything works correctly, open a terminal in the container using <code class="docutils literal notranslate"><span class="pre">Terminal-&gt;New</span> <span class="pre">Temrinal</span></code>in VS Code. Inside the terminal do the following:</p>
+<p>To test if everything works correctly, open a terminal in the container using <code class="docutils literal notranslate"><span class="pre">Terminal-&gt;New</span> <span class="pre">Terminal</span></code>in VS Code. Inside the terminal do the following:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/opt/ros/humble/setup.bash
 rviz2
 </pre></div>

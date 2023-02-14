@@ -2,7 +2,7 @@
 
 Contents:
 * Create a worcell.urdf.xacro
-* Include the components the components
+* Include the components
 * Get all necessary arguments for the components
 * Instantiate the components
 * Create the joints between the components and the world frame
@@ -11,16 +11,22 @@ Contents:
 ## Introduction
 In this workshop, we will create the URDF/XACRO description for the robot workcell. The description composes the robot, the gripper, the camera and the robot cell. 
 
-To start the workshop, open the ws_manipulation_workshop/src folder in VS Code and reopen it in the DevContainer. The please checkout the ur5e_cell repository at the tag... In a VS Code terminal, you can do this like this:
+To start the workshop, open the ws_manipulation_workshop/src folder in VS Code and reopen it in the DevContainer. Then please checkout the ur5e_cell repository at the tag... In a VS Code terminal, you can do this like this:
     
 ```bash
-cd ~/ws_manipulation_workshop/src/ur5e_cell
+cd /home/ws/src/ur5e_cell
 git fetch --all --tags
-git checkout tags/2-robot-cell-composition-start
+git checkout 2-robot-cell-composition-start
 ```
+Build the repository : 
 
+```bash 
+cd/home/ws
+colcon build --symlink-install 
+source /home/ws/install/setup.bash
+```
 ---
-## 1. Create a worcell.urdf.xacro
+## 1. Create a workcell.urdf.xacro
 The first step is to create a new file called ``workcell.urdf.xacro`` in the ``ur5e_cell/ur5e_description/urdf`` folder. You can do this in the VS Code file explorer.
 
 Now open the file and add the following lines:
@@ -46,7 +52,7 @@ The next step is to include the components of the robot workcell. To do so, we w
 
 The ``filename`` attribute specifies the path to the file that should be included. The path is relative to the file that includes the file.
 
-As during install relative paths can change we will use the ``find`` tag to find the path to the file in install space. The ``find`` substitution has the following syntax:
+As during install relative paths can change we will use the ``find`` tag to find the path to the file in the install space. The ``find`` substitution has the following syntax:
 
 ```xml
 ${find(ros_package_name)/path/to/file}
@@ -80,7 +86,7 @@ The next step is to get all necessary arguments for the components. To do so, we
 
 The ``name`` attribute specifies the name of the argument. The ``default_value`` attribute specifies the default value of the argument. If the argument is not passed to the macro, the default value will be used.
 
-* Now to add the necessary arguments for instantiating the robot, take a look at the [ur_macro.xacro](https://github.com/UniversalRobots/Universal_Robots_ROS2_Description/blob/ros2/urdf/ur_macro.xacro) file. You will see that the ``ur_robot``-macro can the following parameters:
+* Now to add the necessary arguments for instantiating the robot, take a look at the [ur_macro.xacro](https://github.com/UniversalRobots/Universal_Robots_ROS2_Description/blob/ros2/urdf/ur_macro.xacro) file. You will see that the ``ur_robot``-macro has the following parameters:
 
     ```xml
     <xacro:macro name="ur_robot" params="
@@ -121,7 +127,7 @@ The ``name`` attribute specifies the name of the argument. The ``default_value``
         script_command_port:=50004">
     ```
     ```{note}
-    The ``*`` in front of the ``origin`` parameter means that the parameter is a block parameter which goes the brackets of the ``<xacro::ur_robot></xacro::ur_robot>`` tag.
+    The ``*`` in front of the ``origin`` parameter means that the parameter is a block parameter which goes in the brackets of the ``<xacro::ur_robot></xacro::ur_robot>`` tag.
     ```
 
     Now add the following lines to the ``workcell.urdf.xacro`` file:
@@ -233,7 +239,7 @@ These are all the arguments we want to add to the ``workcell.urdf.xacro`` file. 
         add_plug="$(arg add_plug)"
         use_mesh="$(arg use_mesh)"
     >
-        <origin xyz="0 -0.05 0" rpy="${pi/2} ${pi/2} 0"/>
+        <origin xyz="0 -0.05 0" rpy="${pi/2} -${pi/2} 0"/>
     </xacro:sensor_d435>
     ```
 
