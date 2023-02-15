@@ -168,6 +168,15 @@ The `PlanningSceneMonitor` wraps a `PlanningScene` with ROS interfaces for keepi
 - Rejection sampling for each joint state might lead to very long planning times
 - Approximation of the constraint manifold beforehand and perform trajectory planning in that
 
+### Available constraint type
+```cpp
+kinematic_constraints::JointConstraint
+kinematic_constraints::OrientationConstraint
+kinematic_constraints::PositionConstraint
+kinematic_constraints::VisibilityConstraint
+```
+https://www.youtube.com/watch?v=qEketOee7_g
+
 ---
 
 ## Cartesian planning
