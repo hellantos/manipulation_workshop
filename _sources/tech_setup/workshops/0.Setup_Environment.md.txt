@@ -1,4 +1,4 @@
-# DEVELOPMENT ENVIRONEMNT SETUP
+# DEVELOPMENT ENVIRONMENT SETUP
 Contents
 * Install VS Code and docker
 * Fetch training repository and sources
