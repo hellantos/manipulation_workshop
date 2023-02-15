@@ -161,11 +161,12 @@ The `PlanningSceneMonitor` wraps a `PlanningScene` with ROS interfaces for keepi
 
 ---
 
-## PlanningComponent
+## Constraint planning
 
----
-
-## Constrain planning
+- `OMPL` supports custom constraints (joint or cartesian space) to enable planning trajectories that follow a desired behavior
+- Each joint state in the planned trajectory needs to follow all of the set constraints, which is performed by rejection sampling
+- Rejection sampling for each joint state might lead to very long planning times
+- Approximation of the constraint manifold beforehand and perform trajectory planning in that
 
 ---
 
