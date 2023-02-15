@@ -17,35 +17,34 @@ layout: true
 
 ---
  
-# MOVEIT
+# MOVEIT CPP API
 ## The motion planning framework
 
 ---
 
-## Key Concepts
+## Robot Model
 
-### Robot Model
-
-```
+```cpp
+// instantiate the robot model which is done internally reading the 'robot_description' parameter
 robot_model_loader::RobotModelLoader robot_model_loader(node);
 const moveit::core::RobotModelPtr& robot_model = robot_model_loader.getModel();
 RCLCPP_INFO(LOGGER, "Model frame: %s", robot_model->getModelFrame().c_str());
 
+// get the planning group defined for the robot model in SRDF and all the joint names belonging to that group
 const moveit::core::JointModelGroup* joint_model_group = robot_model->getJointModelGroup("panda_arm");
 const std::vector<std::string>& joint_names = joint_model_group->getVariableNames();
 ```
 ---
 
-## Key Concepts
+## Robot State
 
-### Robot State
-
-```
-moveit::core::RobotStatePtr robot_state(new moveit::core::RobotState(kinematic_model));
+```cpp
+// Instantiate an arbitrary robot state and set to default values
+// It can be set to a specific joint or cartesian pose as well
+moveit::core::RobotStatePtr robot_state(new moveit::core::RobotState(robot_model));
 robot_state->setToDefaultValues();
 
-```
-```
+// get the joint values for the planning group
 std::vector<double> joint_values;
 robot_state->copyJointGroupPositions(joint_model_group, joint_values);
 for (std::size_t i = 0; i < joint_names.size(); ++i)
@@ -56,9 +55,7 @@ for (std::size_t i = 0; i < joint_names.size(); ++i)
 
 ---
 
-## Key Concepts
-
-### Planning Scene
+## Planning Scene
 
 ```c++
 // Initialize planning scene (NOT the recommended way)
@@ -71,32 +68,27 @@ planning_scene.checkSelfCollision(collision_request, collision_result);
 RCLCPP_INFO_STREAM(LOGGER, "Current state is " << (collision_result.collision ? "in" : "not in")
                                                << " self collision");
 
-// planning_scene.checkCollision(collision_request, collision_result, copied_state);
+planning_scene.checkCollision(collision_request, collision_result);
 RCLCPP_INFO_STREAM(LOGGER, "Current state is " << (collision_result.collision ? "in" : "not in")
-                                               << " self collision");
+                                               << " collision");
 ```
 
 ---
 
----
-
-## Key Concepts
-
-### Planning Scene Monitor
+## Planning Scene Monitor
 
 ```c++
-/* initialize planning scene monitor */
+// Initialize planning scene monitor
 auto psm_ = std::make_shared<planning_scene_monitor::PlanningSceneMonitor>(node, robot_model_loader));
 
-// listen for planning scene messages on topic /XXX and apply them to the internal planning scene
+// listen for planning scene messages on topic /planning_scene and apply them to the internal planning scene
 // the internal planning scene accordingly
 psm_->startSceneMonitor();
 
 // listens to changes of world geometry, collision objects, and (optionally) octomaps
-// world geometry, collision objects and optionally octomaps
 psm_->startWorldGeometryMonitor();
 
-// listen to joint state updates as well as changes in attached collision objects
+// listen to joint state updates on topic /joint_states as well as changes in attached collision objects
 // and update the internal planning scene accordingly
 psm_->startStateMonitor();
 ```
@@ -106,17 +98,17 @@ psm_->startStateMonitor();
 ## MoveItCpp API
 
 ```cpp
-// \brief load the robot model,
-//        configure the planning pipeline from ROS 2 parameters and
-//        initialize defaults  
+// Load the robot model,
+// configure the planning pipeline from ROS 2 parameters and
+// initialize defaults  
 moveit_cpp_ = std::make_shared<moveit::planning_interface::MoveItCpp>(node_);
 
-// \brief associated to a planning group  
-//          used to setup the motion plan request and  
-//          call the low-level planner  
+// Associated to a planning group  
+// used to setup the motion plan request and  
+// call the low-level planner  
 moveit::planning_interface::PlanningComponent arm("ur5_arm", moveit_cpp_);
 
-/** \brief Set the goal constraints generated from target pose and robot link */
+// Set the goal constraints generated from target pose and robot link
 geometry_msgs::PoseStamped target_pose1;
 target_pose1.header.frame_id = "base_link";
 target_pose1.pose.orientation.w = 1.0;
@@ -125,24 +117,9 @@ target_pose1.pose.position.y = -0.2;
 target_pose1.pose.position.z = 0.5;
 arm->setGoal(target_pose1, "ee_link");
 
-/** \brief Set the goal constraints generated from a named target state */
+// Set the goal constraints generated from a named target state
 arm->setGoal("ready");
 ```
----
-
-## Constraint planning
-
-Used to 
-- constrain robot motion
-- define planning goals
-
-```cpp
-kinematic_constraints::JointConstraint
-kinematic_constraints::OrientationConstraint
-kinematic_constraints::PositionConstraint
-kinematic_constraints::VisibilityConstraint
-```
-https://www.youtube.com/watch?v=qEketOee7_g
 ---
 
 ## Constraint planning
@@ -158,7 +135,7 @@ ocm.absolute_x_axis_tolerance = 0.1;
 ocm.absolute_y_axis_tolerance = 0.1;
 ocm.absolute_z_axis_tolerance = 0.1;
 ```
-set this a path constraint for the planning group
+set this as path constraint for the planning group
 ```cpp
 moveit_msgs::Constraints test_constraints;
 test_constraints.orientation_constraints.push_back(ocm);
