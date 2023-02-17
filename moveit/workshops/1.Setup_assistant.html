@@ -143,7 +143,7 @@ Besides the SRDF, there are a lot of other configuration files generated e.g. fo
 <p><img alt="Figure 1" src="../../_images/figure1.png" /><br />
 Figure 1: MoveIt! Setup Assistant start screen</p>
 <ul class="simple">
-<li><p>Select the Create New MoveIt! Configuration Package button and browse for the file called ur_demo_description.urdf.xacro in <code class="docutils literal notranslate"><span class="pre">~/moveit_ws/src/ur5e_cell/ur5e_cell_description/urdf/</span></code> .
+<li><p>Select the Create New MoveIt! Configuration Package button and browse for the file called <code class="docutils literal notranslate"><span class="pre">ur5e_workcell.urdf.xacro</span></code> in <code class="docutils literal notranslate"><span class="pre">~/moveit_ws/src/ur5e_cell/ur5e_cell_description/urdf/</span></code>.
 This file includes the URDF file you edited in the URDF tutorial. Your window should look like shown in figure 2.</p></li>
 <li><p>Click on the Load Files button and after a few seconds the Setup Assistant will present
 you a model of the robot on the right side of the window.</p></li>
@@ -219,7 +219,7 @@ Figure 10.2: Correctly added and named ROS2 controllers</p>
 </ul>
 </li>
 <li><p>Chose the <strong>Author information</strong> pane on the left and enter your name and e-mail address</p></li>
-<li><p>Click on <strong>Configuration Files</strong>, click <strong>Browse</strong> and select path till “src” inside your workspace and manually name the package “ur5e_demo_moveit_config” (don’t confuse with the existing package “ur5e_cell_moveit_config”) as shown in figure 6.</p></li>
+<li><p>Click on <strong>Configuration Files</strong>, click <strong>Browse</strong> and select path till “src” inside your workspace and manually name the package <code class="docutils literal notranslate"><span class="pre">ur5e_cell_moveit_config</span></code>.</p></li>
 <li><p>Click “Generate Package”</p></li>
 <li><p>If the process completes successfully you can try out your newly created MoveIt! configuration as described in the next section</p></li>
 </ul>
@@ -232,9 +232,9 @@ Figure 12: Configuration Files</p>
 <h2><span class="section-number">5.3. </span>3. Adding and adjusting configuration files<a class="headerlink" href="#adding-and-adjusting-configuration-files" title="Permalink to this heading"></a></h2>
 <p>Sadly, <strong>Moveit Setup Assistant</strong> is not yet feature complete and the generated package does not contain all necessary and correct configuration files.</p>
 <ul class="simple">
-<li><p>You need to setup correct initial positions for the robot. To do so copy the file provided under <code class="docutils literal notranslate"><span class="pre">workshop_resources/ur5e_moveit_config/config/initial_positions.yaml</span></code> into the config folder of your ur5e_cell_moveit_config package.</p></li>
-<li><p>Next you need to setup the correct joint limits. To do so copy the contents of <code class="docutils literal notranslate"><span class="pre">workshop_resources/ur5e_moveit_config/config/joint_limits.yaml</span></code> into your joint_limits.yaml</p></li>
-<li><p>Then we need to fix the ROS2 controllers configuration. The UR robot has many more controllers than the ones Moveit knows about. Therefore copy the contents `workshop_resources/ur5e_moveit_config/config/ros2_controllers.yaml`` into your ros2_controllers.yaml.</p></li>
+<li><p>You need to setup correct initial positions for the robot. To do so copy the file provided under <code class="docutils literal notranslate"><span class="pre">workshop_resources/ur5e_moveit_config/config/initial_positions.yaml</span></code> into the <code class="docutils literal notranslate"><span class="pre">config</span></code> folder of your <code class="docutils literal notranslate"><span class="pre">ur5e_cell_moveit_config</span></code> package.</p></li>
+<li><p>Next you need to setup the correct joint limits. To do so copy the contents of <code class="docutils literal notranslate"><span class="pre">workshop_resources/ur5e_moveit_config/config/joint_limits.yaml</span></code> into your <code class="docutils literal notranslate"><span class="pre">joint_limits.yaml</span></code></p></li>
+<li><p>Then we need to fix the ROS2 controllers configuration. The UR robot has many more controllers than the ones Moveit knows about. Therefore copy the contents <code class="docutils literal notranslate"><span class="pre">workshop_resources/ur5e_moveit_config/config/ros2_controllers.yaml</span></code> into your <code class="docutils literal notranslate"><span class="pre">ros2_controllers.yaml</span></code>.</p></li>
 <li><p>Finally we need to add the configuration for the ompl planner. To do so copy <code class="docutils literal notranslate"><span class="pre">workshop_resources/ur5e_moveit_config/config/ompl_planning.yaml</span></code> to your config folder.</p></li>
 <li><p>The UR robot comes with a quite complex xacro file that needs many arguments which <strong>Moveit Setup Assistant</strong> does not know about. Replace the contents of ur5e_workcell.urdf.xacro with the following content.</p></li>
 </ul>

@@ -28,13 +28,13 @@ ros2 pkg create \
     --maintainer "Your Name" \
     --maintainer-email "Your Email" \
     --node-name pick_n_place_node \
-    ur5e_cell_pick_and_place
+    ur5e_cell_pick_n_place
 ```
 
 No create a config and a launch directory in the created package:
 
 ```bash
-cd ur5e_cell_pick_and_place
+cd ur5e_cell_pick_n_place
 mkdir config launch
 ```
 
@@ -315,7 +315,9 @@ Now you can execute the full pick an place sequence.
 
     <br/>
 
-    > **Node**: The ``SetIO`` service is not available in simulation. Therefore you can only test the full pick and place sequence on the real robot.
+   ```{note}
+   The ``SetIO`` service is not available in simulation. Therefore you can only test the full pick and place sequence on the real robot.
+   ```
 
 
 

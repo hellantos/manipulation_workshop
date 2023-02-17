@@ -21,7 +21,7 @@ git checkout 2-robot-cell-composition-start
 Build the repository : 
 
 ```bash 
-cd/home/ws
+cd /home/ws
 colcon build --symlink-install 
 source /home/ws/install/setup.bash
 ```
@@ -33,7 +33,7 @@ Now open the file and add the following lines:
 
 ```xml
 <?xml version="1.0"?>
-<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="ur5e_cell">
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="ur5e_workcell">
 <!-- Here is where your code will go. -->
 </robot>
 ```

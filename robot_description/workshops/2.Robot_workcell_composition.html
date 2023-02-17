@@ -107,7 +107,7 @@ git<span class="w"> </span>checkout<span class="w"> </span><span class="m">2</sp
 </pre></div>
 </div>
 <p>Build the repository :</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cd/home/ws
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/home/ws
 colcon<span class="w"> </span>build<span class="w"> </span>--symlink-install<span class="w"> </span>
 <span class="nb">source</span><span class="w"> </span>/home/ws/install/setup.bash
 </pre></div>
@@ -119,7 +119,7 @@ colcon<span class="w"> </span>build<span class="w"> </span>--symlink-install<spa
 <p>The first step is to create a new file called <code class="docutils literal notranslate"><span class="pre">workcell.urdf.xacro</span></code> in the <code class="docutils literal notranslate"><span class="pre">ur5e_cell/ur5e_description/urdf</span></code> folder. You can do this in the VS Code file explorer.</p>
 <p>Now open the file and add the following lines:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
-<span class="nt">&lt;robot</span><span class="w"> </span><span class="na">xmlns:xacro=</span><span class="s">&quot;http://www.ros.org/wiki/xacro&quot;</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;ur5e_cell&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;robot</span><span class="w"> </span><span class="na">xmlns:xacro=</span><span class="s">&quot;http://www.ros.org/wiki/xacro&quot;</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;ur5e_workcell&quot;</span><span class="nt">&gt;</span>
 <span class="cm">&lt;!-- Here is where your code will go. --&gt;</span>
 <span class="nt">&lt;/robot&gt;</span>
 </pre></div>

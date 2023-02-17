@@ -33,7 +33,7 @@ It is a simple kinematics existing of two links connected via a continuous rotat
 
 ## 2. Create the tree structure
 The robot in figure 1 is a tree structure. Let's start very simple, and create a description of that
-tree structure, without worrying about the dimensions etc. Create a file called workcell.urdf.xacro in the urdf folder of ur5e_cell_description package:
+tree structure, without worrying about the dimensions etc. Create a file called ``workcell.urdf.xacro`` in the urdf folder of ``ur5e_cell_description package``:
 
 ```xml
 <robot name="custom_robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
@@ -70,7 +70,7 @@ syntax with the command shown above.
 
 ## 4. Completing the kinematics
 We need to specify around which axis the joints rotate. Once we add that, we actually have a
-full kinematic model of this robot! We need to add the <axis> element to each joint. The axis
+full kinematic model of this robot! We need to add the ``<axis>`` element to each joint. The axis
 specifies the rotational axis in the local frame.
 Joint1, you see it rotates around the positive Y-axis. So, simply add the following to the joint
 element:

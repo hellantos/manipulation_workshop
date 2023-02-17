@@ -121,7 +121,7 @@ Figure 1: Serial kinematics sketch</p>
 <section id="create-the-tree-structure">
 <h2><span class="section-number">3.3. </span>2. Create the tree structure<a class="headerlink" href="#create-the-tree-structure" title="Permalink to this heading"></a></h2>
 <p>The robot in figure 1 is a tree structure. Let’s start very simple, and create a description of that
-tree structure, without worrying about the dimensions etc. Create a file called workcell.urdf.xacro in the urdf folder of ur5e_cell_description package:</p>
+tree structure, without worrying about the dimensions etc. Create a file called <code class="docutils literal notranslate"><span class="pre">workcell.urdf.xacro</span></code> in the urdf folder of <code class="docutils literal notranslate"><span class="pre">ur5e_cell_description</span> <span class="pre">package</span></code>:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;robot</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;custom_robot&quot;</span><span class="w"> </span><span class="na">xmlns:xacro=</span><span class="s">&quot;http://www.ros.org/wiki/xacro&quot;</span><span class="nt">&gt;</span>
 <span class="nt">&lt;link</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;link1&quot;</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;link</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;link2&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
@@ -158,7 +158,7 @@ syntax with the command shown above.</p>
 <section id="completing-the-kinematics">
 <h2><span class="section-number">3.5. </span>4. Completing the kinematics<a class="headerlink" href="#completing-the-kinematics" title="Permalink to this heading"></a></h2>
 <p>We need to specify around which axis the joints rotate. Once we add that, we actually have a
-full kinematic model of this robot! We need to add the <axis> element to each joint. The axis
+full kinematic model of this robot! We need to add the <code class="docutils literal notranslate"><span class="pre">&lt;axis&gt;</span></code> element to each joint. The axis
 specifies the rotational axis in the local frame.
 Joint1, you see it rotates around the positive Y-axis. So, simply add the following to the joint
 element:</p>

@@ -53,9 +53,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">6. CONNECTING REAL HARDWARE</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#creating-the-real-hardware-launchfile-for-ur5e-robot-cell">6.1. 1. Creating the real hardware launchfile for ur5e_robot_cell</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#connecting-to-the-robot">6.2. 2. Connecting to the robot</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#on-the-robot-gui-you-need-to-activate-the-remote-connection-programm-no-everything-should-be-well-and-you-can-start-planning-and-executing-trajectories-on-the-real-robot">6.3. On the ROBOT GUI you need to activate the remote connection programm.
-No everything should be well and you can start planning and executing trajectories on the real robot.</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#introspection">6.4. 3. Introspection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#introspection">6.3. 3. Introspection</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="3.Simple_pick_n_place.html">7. SIMPLE PICK &amp; PLACE</a></li>
@@ -246,13 +244,16 @@ choose the correct network interface in the <code class="docutils literal notran
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>ur5e_moveit_config<span class="w"> </span>robot.launch.py
 </pre></div>
 </div>
+<p>On the ROBOT GUI you need to activate the remote connection programm.
+No everything should be well and you can start planning and executing trajectories on the real robot.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It might be necessary to restart the docker container so that it picks up the new network configuration. To do this, open the command palette (Ctrl+Shift+P) and type <code class="docutils literal notranslate"><span class="pre">DevContainers:</span> <span class="pre">Reopen</span> <span class="pre">folder</span> <span class="pre">locally</span></code>, then <code class="docutils literal notranslate"><span class="pre">DevContainers:</span> <span class="pre">Reopen</span> <span class="pre">in</span> <span class="pre">Container</span></code>.</p>
+</div>
 </section>
-<section id="on-the-robot-gui-you-need-to-activate-the-remote-connection-programm-no-everything-should-be-well-and-you-can-start-planning-and-executing-trajectories-on-the-real-robot">
-<h2><span class="section-number">6.3. </span>On the ROBOT GUI you need to activate the remote connection programm.
-No everything should be well and you can start planning and executing trajectories on the real robot.<a class="headerlink" href="#on-the-robot-gui-you-need-to-activate-the-remote-connection-programm-no-everything-should-be-well-and-you-can-start-planning-and-executing-trajectories-on-the-real-robot" title="Permalink to this heading"></a></h2>
-</section>
+<hr class="docutils" />
 <section id="introspection">
-<h2><span class="section-number">6.4. </span>3. Introspection<a class="headerlink" href="#introspection" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">6.3. </span>3. Introspection<a class="headerlink" href="#introspection" title="Permalink to this heading"></a></h2>
 <p>Launch the RQT Graph tool again to observe what the computation graph looks like now.</p>
 <p>If you had saved the previous graph, you would notice that the <code class="docutils literal notranslate"><span class="pre">/robot_state_publisher</span></code> came previously from a <code class="docutils literal notranslate"><span class="pre">/move_group/fake_controller_joint_states</span></code> node whereas now it comes from Gazebo/real robot, telling us that the actual robot is being tracked.</p>
 <p>You will also notice a new <code class="docutils literal notranslate"><span class="pre">/arm_controller/follow_joint_trajectory</span></code> action, which now drives the sim/actual robot.</p>

@@ -51,7 +51,7 @@ A graphical user interface comparable to figure 1 should appear.
 Figure 1: MoveIt! Setup Assistant start screen
 
 
-- Select the Create New MoveIt! Configuration Package button and browse for the file called ur_demo_description.urdf.xacro in `~/moveit_ws/src/ur5e_cell/ur5e_cell_description/urdf/` .
+- Select the Create New MoveIt! Configuration Package button and browse for the file called ``ur5e_workcell.urdf.xacro`` in ``~/moveit_ws/src/ur5e_cell/ur5e_cell_description/urdf/``.
 This file includes the URDF file you edited in the URDF tutorial. Your window should look like shown in figure 2.
 - Click on the Load Files button and after a few seconds the Setup Assistant will present
 you a model of the robot on the right side of the window.
@@ -123,7 +123,7 @@ Figure 10.2: Correctly added and named ROS2 controllers
 
 - Chose the **Author information** pane on the left and enter your name and e-mail address
 
-- Click on **Configuration Files**, click **Browse** and select path till "src" inside your workspace and manually name the package "ur5e_demo_moveit_config" (don't confuse with the existing package "ur5e_cell_moveit_config") as shown in figure 6.
+- Click on **Configuration Files**, click **Browse** and select path till "src" inside your workspace and manually name the package ``ur5e_cell_moveit_config``.
 
 - Click "Generate Package"
 - If the process completes successfully you can try out your newly created MoveIt! configuration as described in the next section
@@ -136,9 +136,9 @@ Figure 12: Configuration Files
 
 Sadly, **Moveit Setup Assistant** is not yet feature complete and the generated package does not contain all necessary and correct configuration files.
 
-* You need to setup correct initial positions for the robot. To do so copy the file provided under ``workshop_resources/ur5e_moveit_config/config/initial_positions.yaml`` into the config folder of your ur5e_cell_moveit_config package.
-* Next you need to setup the correct joint limits. To do so copy the contents of ``workshop_resources/ur5e_moveit_config/config/joint_limits.yaml`` into your joint_limits.yaml
-* Then we need to fix the ROS2 controllers configuration. The UR robot has many more controllers than the ones Moveit knows about. Therefore copy the contents `workshop_resources/ur5e_moveit_config/config/ros2_controllers.yaml`` into your ros2_controllers.yaml.
+* You need to setup correct initial positions for the robot. To do so copy the file provided under ``workshop_resources/ur5e_moveit_config/config/initial_positions.yaml`` into the ``config`` folder of your ``ur5e_cell_moveit_config`` package.
+* Next you need to setup the correct joint limits. To do so copy the contents of ``workshop_resources/ur5e_moveit_config/config/joint_limits.yaml`` into your ``joint_limits.yaml``
+* Then we need to fix the ROS2 controllers configuration. The UR robot has many more controllers than the ones Moveit knows about. Therefore copy the contents ``workshop_resources/ur5e_moveit_config/config/ros2_controllers.yaml`` into your ``ros2_controllers.yaml``.
 * Finally we need to add the configuration for the ompl planner. To do so copy ``workshop_resources/ur5e_moveit_config/config/ompl_planning.yaml`` to your config folder.
 * The UR robot comes with a quite complex xacro file that needs many arguments which **Moveit Setup Assistant** does not know about. Replace the contents of ur5e_workcell.urdf.xacro with the following content.
 

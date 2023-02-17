@@ -170,6 +170,10 @@ ros2 launch ur5e_moveit_config robot.launch.py
 ```
 On the ROBOT GUI you need to activate the remote connection programm.
 No everything should be well and you can start planning and executing trajectories on the real robot.
+
+```{note}
+It might be necessary to restart the docker container so that it picks up the new network configuration. To do this, open the command palette (Ctrl+Shift+P) and type ``DevContainers: Reopen folder locally``, then ``DevContainers: Reopen in Container``.
+```
 ---
 
 ## 3. Introspection

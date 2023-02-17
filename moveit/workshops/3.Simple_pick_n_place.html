@@ -111,11 +111,11 @@ git<span class="w"> </span>checkout<span class="w"> </span><span class="m">3</sp
 <span class="w">    </span>--maintainer<span class="w"> </span><span class="s2">&quot;Your Name&quot;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--maintainer-email<span class="w"> </span><span class="s2">&quot;Your Email&quot;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--node-name<span class="w"> </span>pick_n_place_node<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>ur5e_cell_pick_and_place
+<span class="w">    </span>ur5e_cell_pick_n_place
 </pre></div>
 </div>
 <p>No create a config and a launch directory in the created package:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>ur5e_cell_pick_and_place
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>ur5e_cell_pick_n_place
 mkdir<span class="w"> </span>config<span class="w"> </span>launch
 </pre></div>
 </div>
@@ -428,9 +428,10 @@ The <code class="docutils literal notranslate"><span class="pre">PlanSolution</s
  <br/>
  Add a service client to the node to call the ``/io_and_status_controller/set_io`` service. Then add the commands to open and close the gripper to the pick and place sequence.
  <br/>
-<blockquote>
-<div><p><strong>Node</strong>: The <code class="docutils literal notranslate"><span class="pre">SetIO</span></code> service is not available in simulation. Therefore you can only test the full pick and place sequence on the real robot.</p>
-</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">SetIO</span></code> service is not available in simulation. Therefore you can only test the full pick and place sequence on the real robot.</p>
+</div>
 </li>
 </ol>
 </section>
