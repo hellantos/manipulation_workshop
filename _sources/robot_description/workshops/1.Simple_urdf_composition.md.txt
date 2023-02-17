@@ -19,7 +19,7 @@ git fetch --all --tags
 git checkout 2-robot-cell-composition-start
 ```
 
-## 1. Create a URDF file
+## Create a URDF file
 A URDF file is created in the XML format. URDFs contain information about the robot links
 and joints. For detailed information about this format check the following link:
 http://wiki.ros.org/urdf/XML
@@ -31,7 +31,7 @@ Figure 1: Serial kinematics sketch
 
 It is a simple kinematics existing of two links connected via a continuous rotating joint.
 
-## 2. Create the tree structure
+## Create the tree structure
 The robot in figure 1 is a tree structure. Let's start very simple, and create a description of that
 tree structure, without worrying about the dimensions etc. Create a file called ``workcell.urdf.xacro`` in the urdf folder of ``ur5e_cell_description package``:
 
@@ -57,7 +57,7 @@ So, just creating the structure is very simple! Now let's see if we can get this
 ```bash
 check_urdf robot.urdf
 ```
-## 3. Add dimensions
+## Add dimensions
 To add dimensions to our tree, we have to specify the offset from a link to the joint(s) of its
 children. To accomplish this, we will add the feld <origin> to each of the joints.
 Joint1 is offset in the Z-direction from link1. So, we need to add the following <origin> element:
@@ -68,7 +68,7 @@ Joint1 is offset in the Z-direction from link1. So, we need to add the following
 Repeat this for every joint element of the URDF. Now run it through the parser and check for
 syntax with the command shown above.
 
-## 4. Completing the kinematics
+## Completing the kinematics
 We need to specify around which axis the joints rotate. Once we add that, we actually have a
 full kinematic model of this robot! We need to add the ``<axis>`` element to each joint. The axis
 specifies the rotational axis in the local frame.

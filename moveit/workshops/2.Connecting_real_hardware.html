@@ -50,9 +50,9 @@
 <li class="toctree-l1"><a class="reference internal" href="../../robot_description/workshops/2.Robot_workcell_composition.html">3. ROBOT WORKCELL COMPOSITION</a></li>
 <li class="toctree-l1"><a class="reference internal" href="1.Setup_assistant.html">4. MOVEIT SETUP ASSISTANT</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">5. CONNECTING REAL HARDWARE</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#creating-the-real-hardware-launchfile-for-ur5e-robot-cell">5.1. 1. Creating the real hardware launchfile for ur5e_robot_cell</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#connecting-to-the-robot">5.2. 2. Connecting to the robot</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#introspection">5.3. 3. Introspection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#creating-the-real-hardware-launchfile-for-ur5e-robot-cell">5.1. Creating the real hardware launchfile for ur5e_robot_cell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#connecting-to-the-robot">5.2. Connecting to the robot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#introspection">5.3. Introspection</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="3.Simple_pick_n_place.html">6. SIMPLE PICK &amp; PLACE</a></li>
@@ -93,7 +93,7 @@ git<span class="w"> </span>checkout<span class="w"> </span><span class="m">2</sp
 </div>
 <hr class="docutils" />
 <section id="creating-the-real-hardware-launchfile-for-ur5e-robot-cell">
-<h2><span class="section-number">5.1. </span>1. Creating the real hardware launchfile for ur5e_robot_cell<a class="headerlink" href="#creating-the-real-hardware-launchfile-for-ur5e-robot-cell" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">5.1. </span>Creating the real hardware launchfile for ur5e_robot_cell<a class="headerlink" href="#creating-the-real-hardware-launchfile-for-ur5e-robot-cell" title="Permalink to this heading"></a></h2>
 <p>The ur_robot_driver package provides us with a highly configurable launch file to connect to the real robot hardware. We are now going to create a launchfile for our application, that uses launchfiles provided by ur_robot_driver and by moveit setup assistant to launch our robot cell.</p>
 <ol class="arabic simple">
 <li><p>Create a file called <code class="docutils literal notranslate"><span class="pre">robot.launch.py</span></code> in the <code class="docutils literal notranslate"><span class="pre">ur5e_cell_moveit_config/launch</span></code> folder.</p></li>
@@ -215,7 +215,7 @@ git<span class="w"> </span>checkout<span class="w"> </span><span class="m">2</sp
 </section>
 <hr class="docutils" />
 <section id="connecting-to-the-robot">
-<h2><span class="section-number">5.2. </span>2. Connecting to the robot<a class="headerlink" href="#connecting-to-the-robot" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">5.2. </span>Connecting to the robot<a class="headerlink" href="#connecting-to-the-robot" title="Permalink to this heading"></a></h2>
 <p>In order to connect to the real robot, you need to setup your network connection correctly.
 Our robot here at Fraunhofer IPA has the IP address <code class="docutils literal notranslate"><span class="pre">192.168.56.2</span></code>. The ROS PC is directly
 connected to the robot via an ethernet cable. The ROS PC has the IP address <code class="docutils literal notranslate"><span class="pre">192.168.56.1</span></code>.
@@ -252,7 +252,7 @@ No everything should be well and you can start planning and executing trajectori
 </section>
 <hr class="docutils" />
 <section id="introspection">
-<h2><span class="section-number">5.3. </span>3. Introspection<a class="headerlink" href="#introspection" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">5.3. </span>Introspection<a class="headerlink" href="#introspection" title="Permalink to this heading"></a></h2>
 <p>Launch the RQT Graph tool again to observe what the computation graph looks like now.</p>
 <p>If you had saved the previous graph, you would notice that the <code class="docutils literal notranslate"><span class="pre">/robot_state_publisher</span></code> came previously from a <code class="docutils literal notranslate"><span class="pre">/move_group/fake_controller_joint_states</span></code> node whereas now it comes from Gazebo/real robot, telling us that the actual robot is being tracked.</p>
 <p>You will also notice a new <code class="docutils literal notranslate"><span class="pre">/arm_controller/follow_joint_trajectory</span></code> action, which now drives the sim/actual robot.</p>

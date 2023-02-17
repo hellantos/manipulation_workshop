@@ -12,7 +12,7 @@ git checkout 2-connecting-real-hardware-workshop
 
 ---
 
-## 1. Creating the real hardware launchfile for ur5e_robot_cell
+## Creating the real hardware launchfile for ur5e_robot_cell
 
 The ur_robot_driver package provides us with a highly configurable launch file to connect to the real robot hardware. We are now going to create a launchfile for our application, that uses launchfiles provided by ur_robot_driver and by moveit setup assistant to launch our robot cell.
 
@@ -137,7 +137,7 @@ colcon build --packages-select ur5e_cell_moveit_config
 ```
 ---
 
-## 2. Connecting to the robot
+## Connecting to the robot
 
 In order to connect to the real robot, you need to setup your network connection correctly.
 Our robot here at Fraunhofer IPA has the IP address ``192.168.56.2``. The ROS PC is directly
@@ -176,7 +176,7 @@ It might be necessary to restart the docker container so that it picks up the ne
 ```
 ---
 
-## 3. Introspection
+## Introspection
 
 Launch the RQT Graph tool again to observe what the computation graph looks like now.   
 

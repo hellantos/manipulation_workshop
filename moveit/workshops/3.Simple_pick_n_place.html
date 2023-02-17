@@ -50,10 +50,10 @@
 <li class="toctree-l1"><a class="reference internal" href="1.Setup_assistant.html">4. MOVEIT SETUP ASSISTANT</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2.Connecting_real_hardware.html">5. CONNECTING REAL HARDWARE</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">6. SIMPLE PICK &amp; PLACE</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#creating-a-package-that-uses-moveit-cpp">6.1. 1. Creating a package that uses moveit_cpp</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#adding-moveit-cpp-configuration-file">6.2. 2. Adding moveit_cpp configuration file</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#writing-a-launch-file-for-a-moveit-cpp-node">6.3. 3. Writing a launch file for a moveit_cpp node</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#writing-the-pick-n-place-node">6.4. 4. Writing the pick_n_place_node</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#creating-a-package-that-uses-moveit-cpp">6.1. Creating a package that uses moveit_cpp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#adding-moveit-cpp-configuration-file">6.2. Adding moveit_cpp configuration file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#writing-a-launch-file-for-a-moveit-cpp-node">6.3. Writing a launch file for a moveit_cpp node</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#writing-the-pick-n-place-node">6.4. Writing the pick_n_place_node</a></li>
 </ul>
 </li>
 </ul>
@@ -99,7 +99,7 @@ git<span class="w"> </span>checkout<span class="w"> </span><span class="m">3</sp
 </pre></div>
 </div>
 <section id="creating-a-package-that-uses-moveit-cpp">
-<h2><span class="section-number">6.1. </span>1. Creating a package that uses moveit_cpp<a class="headerlink" href="#creating-a-package-that-uses-moveit-cpp" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">6.1. </span>Creating a package that uses moveit_cpp<a class="headerlink" href="#creating-a-package-that-uses-moveit-cpp" title="Permalink to this heading"></a></h2>
 <p>The first step to write an application that leverages moveit_cpp is to create a package with the necessary dependencies and files.</p>
 <p>To do so you should use the following command in your workspace’s src folder:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>pkg<span class="w"> </span>create<span class="w"> </span><span class="se">\</span>
@@ -127,7 +127,7 @@ mkdir<span class="w"> </span>config<span class="w"> </span>launch
 <p>Now your package is ready to be used.</p>
 </section>
 <section id="adding-moveit-cpp-configuration-file">
-<h2><span class="section-number">6.2. </span>2. Adding moveit_cpp configuration file<a class="headerlink" href="#adding-moveit-cpp-configuration-file" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">6.2. </span>Adding moveit_cpp configuration file<a class="headerlink" href="#adding-moveit-cpp-configuration-file" title="Permalink to this heading"></a></h2>
 <p>Before we start with the real development, we’ll already add the configuration file for the moveit_cpp node we are going to create. This file will be used to configure the node and to set up the planning pipeline.</p>
 <p>To do so, create a file called <code class="docutils literal notranslate"><span class="pre">moveitcpp.yaml</span></code> in the config directory and add the following content:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">planning_scene_monitor_options</span><span class="p">:</span>
@@ -154,7 +154,7 @@ mkdir<span class="w"> </span>config<span class="w"> </span>launch
 <p>You can see, that this basically defines where the node will get the robot description from and which planning pipeline to use. You can experiment with it later on.</p>
 </section>
 <section id="writing-a-launch-file-for-a-moveit-cpp-node">
-<h2><span class="section-number">6.3. </span>3. Writing a launch file for a moveit_cpp node<a class="headerlink" href="#writing-a-launch-file-for-a-moveit-cpp-node" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">6.3. </span>Writing a launch file for a moveit_cpp node<a class="headerlink" href="#writing-a-launch-file-for-a-moveit-cpp-node" title="Permalink to this heading"></a></h2>
 <p>Now we are going to write two launch files. One for the ur_robot_driver and one for the moveit_cpp node, which we are going to create.</p>
 <ol class="arabic simple">
 <li><p>Create a file called <code class="docutils literal notranslate"><span class="pre">pick_n_place_driver.launch.py</span></code> in the launch directory. This file will start the ur_robot_driver and an rviz instance, but it will not start a move_group node.</p></li>
@@ -243,7 +243,7 @@ mkdir<span class="w"> </span>config<span class="w"> </span>launch
 </div>
 </section>
 <section id="writing-the-pick-n-place-node">
-<h2><span class="section-number">6.4. </span>4. Writing the pick_n_place_node<a class="headerlink" href="#writing-the-pick-n-place-node" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">6.4. </span>Writing the pick_n_place_node<a class="headerlink" href="#writing-the-pick-n-place-node" title="Permalink to this heading"></a></h2>
 <p>Now we are going to write the pick_n_place_node. This node will be responsible for the pick and place application. It will use the moveit_cpp interface to plan and execute the pick and place motion.</p>
 <ol class="arabic simple">
 <li><p>Open the <code class="docutils literal notranslate"><span class="pre">pick_n_place_node.cpp</span></code> file in the src directory of the ur5e_cell_pick_n_place package. The <code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">pkg</span> <span class="pre">create</span></code> command already created it. Add the following includes to the top of the file:</p></li>

@@ -49,11 +49,11 @@
 <li class="toctree-l1"><a class="reference internal" href="1.Simple_urdf_composition.html">2. SIMPLE COMPOSITION</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">3. ROBOT WORKCELL COMPOSITION</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#introduction">3.1. Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#create-a-workcell-urdf-xacro">3.2. 1. Create a workcell.urdf.xacro</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#include-the-components-the-components">3.3. 2. Include the components the components</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#get-all-necessary-arguments-for-the-components">3.4. 3. Get all necessary arguments for the components</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#instantiate-the-components">3.5. 3. Instantiate the components</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#create-the-joints-between-the-components-and-the-world-frame">3.6. 5. Create the joints between the components and the world frame</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#create-a-workcell-urdf-xacro">3.2. Create a workcell.urdf.xacro</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#include-the-components-the-components">3.3. Include the components the components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#get-all-necessary-arguments-for-the-components">3.4. Get all necessary arguments for the components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#instantiate-the-components">3.5. Instantiate the components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#create-the-joints-between-the-components-and-the-world-frame">3.6. Create the joints between the components and the world frame</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../moveit/workshops/1.Setup_assistant.html">4. MOVEIT SETUP ASSISTANT</a></li>
@@ -114,7 +114,7 @@ colcon<span class="w"> </span>build<span class="w"> </span>--symlink-install<spa
 </section>
 <hr class="docutils" />
 <section id="create-a-workcell-urdf-xacro">
-<h2><span class="section-number">3.2. </span>1. Create a workcell.urdf.xacro<a class="headerlink" href="#create-a-workcell-urdf-xacro" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">3.2. </span>Create a workcell.urdf.xacro<a class="headerlink" href="#create-a-workcell-urdf-xacro" title="Permalink to this heading"></a></h2>
 <p>The first step is to create a new file called <code class="docutils literal notranslate"><span class="pre">workcell.urdf.xacro</span></code> in the <code class="docutils literal notranslate"><span class="pre">ur5e_cell/ur5e_description/urdf</span></code> folder. You can do this in the VS Code file explorer.</p>
 <p>Now open the file and add the following lines:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
@@ -130,7 +130,7 @@ colcon<span class="w"> </span>build<span class="w"> </span>--symlink-install<spa
 </section>
 <hr class="docutils" />
 <section id="include-the-components-the-components">
-<h2><span class="section-number">3.3. </span>2. Include the components the components<a class="headerlink" href="#include-the-components-the-components" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">3.3. </span>Include the components the components<a class="headerlink" href="#include-the-components-the-components" title="Permalink to this heading"></a></h2>
 <p>The next step is to include the components of the robot workcell. To do so, we will use the <code class="docutils literal notranslate"><span class="pre">xacro:include</span></code> tag. The tag has the following syntax:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;xacro:include</span><span class="w"> </span><span class="na">filename=</span><span class="s">&quot;path/to/file&quot;</span><span class="nt">/&gt;</span>
 </pre></div>
@@ -156,9 +156,9 @@ colcon<span class="w"> </span>build<span class="w"> </span>--symlink-install<spa
 </section>
 <hr class="docutils" />
 <section id="get-all-necessary-arguments-for-the-components">
-<h2><span class="section-number">3.4. </span>3. Get all necessary arguments for the components<a class="headerlink" href="#get-all-necessary-arguments-for-the-components" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">3.4. </span>Get all necessary arguments for the components<a class="headerlink" href="#get-all-necessary-arguments-for-the-components" title="Permalink to this heading"></a></h2>
 <p>The next step is to get all necessary arguments for the components. To do so, we will use the <code class="docutils literal notranslate"><span class="pre">xacro:args</span></code> tag. The tag has the following syntax:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span>&lt;xacro:args name1=&quot;default_value1&quot; name2=&quot;default_value2&quot; .../&gt;
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;xacro:args</span><span class="w"> </span><span class="na">name1=</span><span class="s">&quot;default_value1&quot;</span><span class="w"> </span><span class="na">name2=</span><span class="s">&quot;default_value2&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">name</span></code> attribute specifies the name of the argument. The <code class="docutils literal notranslate"><span class="pre">default_value</span></code> attribute specifies the default value of the argument. If the argument is not passed to the macro, the default value will be used.</p>
@@ -257,7 +257,7 @@ colcon<span class="w"> </span>build<span class="w"> </span>--symlink-install<spa
 </section>
 <hr class="docutils" />
 <section id="instantiate-the-components">
-<h2><span class="section-number">3.5. </span>3. Instantiate the components<a class="headerlink" href="#instantiate-the-components" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">3.5. </span>Instantiate the components<a class="headerlink" href="#instantiate-the-components" title="Permalink to this heading"></a></h2>
 <ul>
 <li><p><strong>Instantiate the ur_robot macro:</strong> To instantiate the <code class="docutils literal notranslate"><span class="pre">ur_robot</span></code>-macro, we need to add the following lines to the <code class="docutils literal notranslate"><span class="pre">workcell.urdf.xacro</span></code> file:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cm">&lt;!-- Instantiate the UR robot --&gt;</span>
@@ -320,7 +320,7 @@ colcon<span class="w"> </span>build<span class="w"> </span>--symlink-install<spa
 </section>
 <hr class="docutils" />
 <section id="create-the-joints-between-the-components-and-the-world-frame">
-<h2><span class="section-number">3.6. </span>5. Create the joints between the components and the world frame<a class="headerlink" href="#create-the-joints-between-the-components-and-the-world-frame" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">3.6. </span>Create the joints between the components and the world frame<a class="headerlink" href="#create-the-joints-between-the-components-and-the-world-frame" title="Permalink to this heading"></a></h2>
 <p>Now we need to create the joints between the robot, camera and gripper, so that the gripper and camera are mounted on the robot and follow the movements of the robot.</p>
 <p>First, we need to create the world frame by creating a link with the name <code class="docutils literal notranslate"><span class="pre">world</span></code>. Then we will add a joint between the <code class="docutils literal notranslate"><span class="pre">world</span></code> and the <code class="docutils literal notranslate"><span class="pre">robotcell_base_link</span></code>. In addition we need to create a link between the <code class="docutils literal notranslate"><span class="pre">tool0</span></code>-link of the robot and the <code class="docutils literal notranslate"><span class="pre">shunk_egp50_base_link</span></code> of the gripper.
 Both the robot and the camera are linked through the parent parameter automatically.</p>

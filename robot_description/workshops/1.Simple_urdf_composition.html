@@ -48,10 +48,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../../tech_setup/workshops/0.Setup_Environment.html">1. DEVELOPMENT ENVIRONMENT SETUP</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">2. SIMPLE COMPOSITION</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#introduction">2.1. Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#create-a-urdf-file">2.2. 1. Create a URDF file</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#create-the-tree-structure">2.3. 2. Create the tree structure</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#add-dimensions">2.4. 3. Add dimensions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#completing-the-kinematics">2.5. 4. Completing the kinematics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#create-a-urdf-file">2.2. Create a URDF file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#create-the-tree-structure">2.3. Create the tree structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#add-dimensions">2.4. Add dimensions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#completing-the-kinematics">2.5. Completing the kinematics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#cleanup">2.6. Cleanup</a></li>
 </ul>
 </li>
@@ -108,7 +108,7 @@ git<span class="w"> </span>checkout<span class="w"> </span><span class="m">2</sp
 </div>
 </section>
 <section id="create-a-urdf-file">
-<h2><span class="section-number">2.2. </span>1. Create a URDF file<a class="headerlink" href="#create-a-urdf-file" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">2.2. </span>Create a URDF file<a class="headerlink" href="#create-a-urdf-file" title="Permalink to this heading"></a></h2>
 <p>A URDF file is created in the XML format. URDFs contain information about the robot links
 and joints. For detailed information about this format check the following link:
 http://wiki.ros.org/urdf/XML</p>
@@ -118,7 +118,7 @@ Figure 1: Serial kinematics sketch</p>
 <p>It is a simple kinematics existing of two links connected via a continuous rotating joint.</p>
 </section>
 <section id="create-the-tree-structure">
-<h2><span class="section-number">2.3. </span>2. Create the tree structure<a class="headerlink" href="#create-the-tree-structure" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">2.3. </span>Create the tree structure<a class="headerlink" href="#create-the-tree-structure" title="Permalink to this heading"></a></h2>
 <p>The robot in figure 1 is a tree structure. Let’s start very simple, and create a description of that
 tree structure, without worrying about the dimensions etc. Create a file called <code class="docutils literal notranslate"><span class="pre">workcell.urdf.xacro</span></code> in the urdf folder of <code class="docutils literal notranslate"><span class="pre">ur5e_cell_description</span> <span class="pre">package</span></code>:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;robot</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;custom_robot&quot;</span><span class="w"> </span><span class="na">xmlns:xacro=</span><span class="s">&quot;http://www.ros.org/wiki/xacro&quot;</span><span class="nt">&gt;</span>
@@ -144,7 +144,7 @@ tree structure, without worrying about the dimensions etc. Create a file called 
 </div>
 </section>
 <section id="add-dimensions">
-<h2><span class="section-number">2.4. </span>3. Add dimensions<a class="headerlink" href="#add-dimensions" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">2.4. </span>Add dimensions<a class="headerlink" href="#add-dimensions" title="Permalink to this heading"></a></h2>
 <p>To add dimensions to our tree, we have to specify the offset from a link to the joint(s) of its
 children. To accomplish this, we will add the feld <origin> to each of the joints.
 Joint1 is offset in the Z-direction from link1. So, we need to add the following <origin> element:</p>
@@ -155,7 +155,7 @@ Joint1 is offset in the Z-direction from link1. So, we need to add the following
 syntax with the command shown above.</p>
 </section>
 <section id="completing-the-kinematics">
-<h2><span class="section-number">2.5. </span>4. Completing the kinematics<a class="headerlink" href="#completing-the-kinematics" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">2.5. </span>Completing the kinematics<a class="headerlink" href="#completing-the-kinematics" title="Permalink to this heading"></a></h2>
 <p>We need to specify around which axis the joints rotate. Once we add that, we actually have a
 full kinematic model of this robot! We need to add the <code class="docutils literal notranslate"><span class="pre">&lt;axis&gt;</span></code> element to each joint. The axis
 specifies the rotational axis in the local frame.

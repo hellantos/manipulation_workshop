@@ -8,7 +8,7 @@ Contents
     - demo.launch 
 
 ---
-## 1. Introduction
+## Introduction
 
 This tutorial explains the basics of how to describe industrial robots in ROS and how to use the created kinematic models. You will learn about the Unified Robot Description Format (URDF). The tutorial will inform about how to create a robot model, how to visualize your robot and begin with easy planning for your model.
 - Lines beginning with $ are terminal commands
@@ -22,7 +22,7 @@ git checkout 1-setup-assistant-workshop
 ```
 
 ---
-## 2. Using a URDF file with the setup assistant
+## Using a URDF file with the setup assistant
 
 A URDF file can be used from several ROS tools, e.g. as robot model in
 the Gazebo Simulation environment, as visualization element in rviz or as a kinematic model for MoveIt!.   
@@ -132,7 +132,7 @@ Figure 10.2: Correctly added and named ROS2 controllers
 Figure 12: Configuration Files
 
 ---
-## 3. Adding and adjusting configuration files
+## Adding and adjusting configuration files
 
 Sadly, **Moveit Setup Assistant** is not yet feature complete and the generated package does not contain all necessary and correct configuration files.
 
@@ -165,7 +165,7 @@ Sadly, **Moveit Setup Assistant** is not yet feature complete and the generated 
 Now you are all setup for running the cell in rviz with fake actuators (simulated).
 
 ---
-## 4. MoveIt Usage
+## MoveIt Usage
 
 This section makes actual use of your newly created MoveIt! Package.
 
@@ -202,7 +202,7 @@ HINT: You could use the RQT Graph tool to see what the computational graph looks
 
 ---
 
-## 5. Scene objects
+## Scene objects
 
 After that you are able to use the Plan and Execute commands again.   
 There is also the possibility to add scene objects to your robot model. Change to the **Scene Objects** tab and under `Add/Remove scene object` you will find the option to add geometric shapes and also .stl files. 

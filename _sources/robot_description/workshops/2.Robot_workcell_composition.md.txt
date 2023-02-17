@@ -26,7 +26,7 @@ colcon build --symlink-install
 source /home/ws/install/setup.bash
 ```
 ---
-## 1. Create a workcell.urdf.xacro
+## Create a workcell.urdf.xacro
 The first step is to create a new file called ``workcell.urdf.xacro`` in the ``ur5e_cell/ur5e_description/urdf`` folder. You can do this in the VS Code file explorer.
 
 Now open the file and add the following lines:
@@ -43,7 +43,7 @@ You can use the ´´view_ur_cell.launch.py´´ launch file to visualise the urdf
 ```
 
 ---
-## 2. Include the components the components
+## Include the components the components
 The next step is to include the components of the robot workcell. To do so, we will use the ``xacro:include`` tag. The tag has the following syntax:
 
 ```xml
@@ -76,12 +76,12 @@ Now add the following lines to the ``workcell.urdf.xacro`` file:
 If you look into the robot_cell.xacro file, you will see that it does not contain a ``xacro:macro``. Therefore, its content will be directly copied into this file at runtime. If you look into the other files, you will see that they contain a ``xacro:macro``. Therefore, we will need to instantiate these components individually and pass the necessary arguments.
 
 ---
-## 3. Get all necessary arguments for the components
+## Get all necessary arguments for the components
 
 The next step is to get all necessary arguments for the components. To do so, we will use the ``xacro:args`` tag. The tag has the following syntax:
 
 ```xml
-<xacro:args name1="default_value1" name2="default_value2" .../>
+<xacro:args name1="default_value1" name2="default_value2" />
 ```
 
 The ``name`` attribute specifies the name of the argument. The ``default_value`` attribute specifies the default value of the argument. If the argument is not passed to the macro, the default value will be used.
@@ -182,7 +182,7 @@ The ``name`` attribute specifies the name of the argument. The ``default_value``
 These are all the arguments we want to add to the ``workcell.urdf.xacro`` file. Now we need to instantiate the components.
 
 ---
-## 3. Instantiate the components
+## Instantiate the components
 
 * **Instantiate the ur_robot macro:** To instantiate the ``ur_robot``-macro, we need to add the following lines to the ``workcell.urdf.xacro`` file:
 
@@ -244,7 +244,7 @@ These are all the arguments we want to add to the ``workcell.urdf.xacro`` file. 
     ```
 
 ---
-## 5. Create the joints between the components and the world frame
+## Create the joints between the components and the world frame
 
 Now we need to create the joints between the robot, camera and gripper, so that the gripper and camera are mounted on the robot and follow the movements of the robot.
 

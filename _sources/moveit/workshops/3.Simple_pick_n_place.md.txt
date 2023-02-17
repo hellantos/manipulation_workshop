@@ -14,7 +14,7 @@ git fetch --all --tags
 git checkout 3-pick-n-place-workshop
 ```
 
-## 1. Creating a package that uses moveit_cpp
+## Creating a package that uses moveit_cpp
 The first step to write an application that leverages moveit_cpp is to create a package with the necessary dependencies and files.
 
 To do so you should use the following command in your workspace's src folder:
@@ -48,7 +48,7 @@ install(DIRECTORY launch config
 
 Now your package is ready to be used.
 
-## 2. Adding moveit_cpp configuration file
+## Adding moveit_cpp configuration file
 Before we start with the real development, we'll already add the configuration file for the moveit_cpp node we are going to create. This file will be used to configure the node and to set up the planning pipeline.
 
 To do so, create a file called ``moveitcpp.yaml`` in the config directory and add the following content:
@@ -77,7 +77,7 @@ plan_request_params:
 
 You can see, that this basically defines where the node will get the robot description from and which planning pipeline to use. You can experiment with it later on.
 
-## 3. Writing a launch file for a moveit_cpp node
+## Writing a launch file for a moveit_cpp node
 Now we are going to write two launch files. One for the ur_robot_driver and one for the moveit_cpp node, which we are going to create.
 
 1. Create a file called ``pick_n_place_driver.launch.py`` in the launch directory. This file will start the ur_robot_driver and an rviz instance, but it will not start a move_group node.
@@ -165,7 +165,7 @@ Now you can start the pick_n_place_driver.launch.py. It will start the controlle
 ```bash
 ros2 launch ur5e_cell_pick_n_place pick_n_place_driver.launch.py
 ```
-## 4. Writing the pick_n_place_node
+## Writing the pick_n_place_node
 Now we are going to write the pick_n_place_node. This node will be responsible for the pick and place application. It will use the moveit_cpp interface to plan and execute the pick and place motion.
 
 1. Open the ``pick_n_place_node.cpp`` file in the src directory of the ur5e_cell_pick_n_place package. The ``ros2 pkg create`` command already created it. Add the following includes to the top of the file:

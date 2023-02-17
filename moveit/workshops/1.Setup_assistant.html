@@ -49,15 +49,15 @@
 <li class="toctree-l1"><a class="reference internal" href="../../robot_description/workshops/1.Simple_urdf_composition.html">2. SIMPLE COMPOSITION</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../robot_description/workshops/2.Robot_workcell_composition.html">3. ROBOT WORKCELL COMPOSITION</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">4. MOVEIT SETUP ASSISTANT</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#introduction">4.1. 1. Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#using-a-urdf-file-with-the-setup-assistant">4.2. 2. Using a URDF file with the setup assistant</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">4.1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-a-urdf-file-with-the-setup-assistant">4.2. Using a URDF file with the setup assistant</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#introduction-to-the-moveit-setup-assistant">4.2.1. Introduction to the MoveIt! Setup Assistant</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#configure-your-robot-cell-with-the-moveit-setup-assistant">4.2.2. Configure your robot cell with the MoveIt Setup Assistant</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#adding-and-adjusting-configuration-files">4.3. 3. Adding and adjusting configuration files</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#moveit-usage">4.4. 4. MoveIt Usage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#scene-objects">4.5. 5. Scene objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#adding-and-adjusting-configuration-files">4.3. Adding and adjusting configuration files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#moveit-usage">4.4. MoveIt Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#scene-objects">4.5. Scene objects</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="2.Connecting_real_hardware.html">5. CONNECTING REAL HARDWARE</a></li>
@@ -107,7 +107,7 @@
 </ol>
 <hr class="docutils" />
 <section id="introduction">
-<h2><span class="section-number">4.1. </span>1. Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">4.1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading"></a></h2>
 <p>This tutorial explains the basics of how to describe industrial robots in ROS and how to use the created kinematic models. You will learn about the Unified Robot Description Format (URDF). The tutorial will inform about how to create a robot model, how to visualize your robot and begin with easy planning for your model.</p>
 <ul class="simple">
 <li><p>Lines beginning with $ are terminal commands</p></li>
@@ -122,7 +122,7 @@ git<span class="w"> </span>checkout<span class="w"> </span><span class="m">1</sp
 </section>
 <hr class="docutils" />
 <section id="using-a-urdf-file-with-the-setup-assistant">
-<h2><span class="section-number">4.2. </span>2. Using a URDF file with the setup assistant<a class="headerlink" href="#using-a-urdf-file-with-the-setup-assistant" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">4.2. </span>Using a URDF file with the setup assistant<a class="headerlink" href="#using-a-urdf-file-with-the-setup-assistant" title="Permalink to this heading"></a></h2>
 <p>A URDF file can be used from several ROS tools, e.g. as robot model in
 the Gazebo Simulation environment, as visualization element in rviz or as a kinematic model for MoveIt!.</p>
 <p>MoveIt! is the most widely used Open Source software for motion planning,
@@ -228,7 +228,7 @@ Figure 12: Configuration Files</p>
 </section>
 <hr class="docutils" />
 <section id="adding-and-adjusting-configuration-files">
-<h2><span class="section-number">4.3. </span>3. Adding and adjusting configuration files<a class="headerlink" href="#adding-and-adjusting-configuration-files" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">4.3. </span>Adding and adjusting configuration files<a class="headerlink" href="#adding-and-adjusting-configuration-files" title="Permalink to this heading"></a></h2>
 <p>Sadly, <strong>Moveit Setup Assistant</strong> is not yet feature complete and the generated package does not contain all necessary and correct configuration files.</p>
 <ul class="simple">
 <li><p>You need to setup correct initial positions for the robot. To do so copy the file provided under <code class="docutils literal notranslate"><span class="pre">workshop_resources/ur5e_moveit_config/config/initial_positions.yaml</span></code> into the <code class="docutils literal notranslate"><span class="pre">config</span></code> folder of your <code class="docutils literal notranslate"><span class="pre">ur5e_cell_moveit_config</span></code> package.</p></li>
@@ -262,7 +262,7 @@ Figure 12: Configuration Files</p>
 </section>
 <hr class="docutils" />
 <section id="moveit-usage">
-<h2><span class="section-number">4.4. </span>4. MoveIt Usage<a class="headerlink" href="#moveit-usage" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">4.4. </span>MoveIt Usage<a class="headerlink" href="#moveit-usage" title="Permalink to this heading"></a></h2>
 <p>This section makes actual use of your newly created MoveIt! Package.</p>
 <p>You can try out your newly created MoveIt! package by launching the following:<br />
 <code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">launch</span> <span class="pre">ur5e_cell_moveit_config</span> <span class="pre">demo.launch.py</span></code><br />
@@ -298,7 +298,7 @@ RViz should start and the UR5 should be visualized.</p>
 </section>
 <hr class="docutils" />
 <section id="scene-objects">
-<h2><span class="section-number">4.5. </span>5. Scene objects<a class="headerlink" href="#scene-objects" title="Permalink to this heading"></a></h2>
+<h2><span class="section-number">4.5. </span>Scene objects<a class="headerlink" href="#scene-objects" title="Permalink to this heading"></a></h2>
 <p>After that you are able to use the Plan and Execute commands again.<br />
 There is also the possibility to add scene objects to your robot model. Change to the <strong>Scene Objects</strong> tab and under <code class="docutils literal notranslate"><span class="pre">Add/Remove</span> <span class="pre">scene</span> <span class="pre">object</span></code> you will find the option to add geometric shapes and also .stl files.
 After you load this object a (possibly giant) box appears. Do not be alarmed, the box is friendly. Use the <strong>Scale</strong> slider to make it smaller &amp; move it somewhere next to the robot using the giant interactive markers. Click once the <strong>Publish Scene</strong> button to include the box in the planning environment of the robot.<br />
