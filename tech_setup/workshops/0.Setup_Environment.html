@@ -97,12 +97,12 @@
 <p>Contents</p>
 <ul class="simple">
 <li><p>Install VS Code and docker</p></li>
-<li><p>Fetch training repository and sources</p></li>
+<li><p>Fetch workshop repository and sources</p></li>
 <li><p>Launch Development environment in Docker container</p></li>
 </ul>
 <section id="install-vs-code-and-docker">
 <h2><span class="section-number">2.1. </span>1. Install VS Code and Docker<a class="headerlink" href="#install-vs-code-and-docker" title="Permalink to this heading"></a></h2>
-<p>The training will be conducted using Visual Studio Code and Docker Containers. The ROS2 code used in the training will run in a docker container.</p>
+<p>The workshop will be conducted using Visual Studio Code and Docker Containers. The ROS2 code used in the workshop will run in a docker container.</p>
 <section id="install-docker">
 <h3><span class="section-number">2.1.1. </span>Install Docker<a class="headerlink" href="#install-docker" title="Permalink to this heading"></a></h3>
 <p>To install docker and set the correct user rights please use the following commands.</p>
@@ -149,7 +149,7 @@ You find the extension menu on the left side, click on the following item.</p>
 </section>
 <section id="create-a-ros2-workspace">
 <h2><span class="section-number">2.2. </span>2. Create a ROS2 workspace<a class="headerlink" href="#create-a-ros2-workspace" title="Permalink to this heading"></a></h2>
-<p>A workspace is the folder structure that you use for development. We need to create a workspace for our training. To do so, please execute the following commands in a terminal.</p>
+<p>A workspace is the folder structure that you use for development. We need to create a workspace for our workshop. To do so, please execute the following commands in a terminal.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/
 mkdir<span class="w"> </span>ws_manipulation_workshop
 <span class="nb">cd</span><span class="w"> </span>ws_manipulation_workshop
@@ -159,7 +159,7 @@ mkdir<span class="w"> </span>build<span class="w"> </span>install<span class="w"
 <p>Now we have setup the folder structure and we are ready to download the workshop repositories.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/ipa-cmh/ros2_manipulation_workshop.git<span class="w"> </span>src
 <span class="nb">cd</span><span class="w"> </span>src
-vcs<span class="w"> </span>import<span class="w"> </span>--input<span class="w"> </span>manipulation_training.repos
+vcs<span class="w"> </span>import<span class="w"> </span>--input<span class="w"> </span>manipulation_workshop.repos
 </pre></div>
 </div>
 <p><strong>Now your workspace is setup and we are ready to open the development environment.</strong></p>

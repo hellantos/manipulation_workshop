@@ -1,12 +1,12 @@
 # DEVELOPMENT ENVIRONMENT SETUP
 Contents
 * Install VS Code and docker
-* Fetch training repository and sources
+* Fetch workshop repository and sources
 * Launch Development environment in Docker container
 
 
 ## 1. Install VS Code and Docker
-The training will be conducted using Visual Studio Code and Docker Containers. The ROS2 code used in the training will run in a docker container.
+The workshop will be conducted using Visual Studio Code and Docker Containers. The ROS2 code used in the workshop will run in a docker container.
 
 ### Install Docker
 To install docker and set the correct user rights please use the following commands.
@@ -54,7 +54,7 @@ Then search for ``Remote Development`` and click ``install``.
 **Now you are all setup and we can create your workspace.**
 
 ## 2. Create a ROS2 workspace
-A workspace is the folder structure that you use for development. We need to create a workspace for our training. To do so, please execute the following commands in a terminal.
+A workspace is the folder structure that you use for development. We need to create a workspace for our workshop. To do so, please execute the following commands in a terminal.
 
 ```bash
 cd ~/
@@ -68,7 +68,7 @@ Now we have setup the folder structure and we are ready to download the workshop
 ```bash
 git clone https://github.com/ipa-cmh/ros2_manipulation_workshop.git src
 cd src
-vcs import --input manipulation_training.repos
+vcs import --input manipulation_workshop.repos
 ```
 
 **Now your workspace is setup and we are ready to open the development environment.**
