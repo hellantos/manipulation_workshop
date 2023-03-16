@@ -68,7 +68,7 @@ Now we have setup the folder structure and we are ready to download the workshop
 ```bash
 git clone https://github.com/ipa-cmh/ros2_manipulation_workshop.git src
 cd src
-vcs import --input manipulation_workshop.repos
+vcs import --input manipulation_training.repos
 ```
 
 **Now your workspace is setup and we are ready to open the development environment.**
